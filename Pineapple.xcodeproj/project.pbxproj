@@ -37,7 +37,6 @@
 		4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		4031A3D81E88EC470067D8ED /* PWDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDevice.h; sourceTree = "<group>"; };
 		4031A3D91E88EC470067D8ED /* PWDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDevice.m; sourceTree = "<group>"; };
-		4031A3E91E88EF060067D8ED /* Pineapple iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pineapple iOS copy-Info.plist"; path = "/Users/danjiang/apps/Pineapple/Pineapple iOS copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +66,6 @@
 				4031A3BD1E88EABD0067D8ED /* Pineapple iOS Example */,
 				4031A3AB1E88E8D80067D8ED /* Products */,
 				4031A3D41E88EB610067D8ED /* Frameworks */,
-				4031A3E91E88EF060067D8ED /* Pineapple iOS copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
