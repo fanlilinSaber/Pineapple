@@ -7,9 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PWAbility.h"
+#import "PWCommand.h"
 
 @interface PWDevice : NSObject
 
-- (void)send;
+@property (nonatomic, strong) PWAbility *ability;
+@property (nonatomic, copy) NSString *host;
+@property (nonatomic) int port;
+
+- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(int)port;
+
+- (void)connect;
+- (void)send:(PWCommand *)command;
 
 @end

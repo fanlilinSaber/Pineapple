@@ -18,6 +18,10 @@
 		4031A3D61E88EB610067D8ED /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */; };
 		4031A3DA1E88EC470067D8ED /* PWDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3D81E88EC470067D8ED /* PWDevice.h */; };
 		4031A3DB1E88EC470067D8ED /* PWDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3D91E88EC470067D8ED /* PWDevice.m */; };
+		40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AC06AA1E890CC0004150E2 /* PWCommand.h */; };
+		40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AC06AB1E890CC0004150E2 /* PWCommand.m */; };
+		40AC06B01E890CCB004150E2 /* PWAbility.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AC06AE1E890CCB004150E2 /* PWAbility.h */; };
+		40AC06B11E890CCB004150E2 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AC06AF1E890CCB004150E2 /* PWAbility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		4031A3D81E88EC470067D8ED /* PWDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDevice.h; sourceTree = "<group>"; };
 		4031A3D91E88EC470067D8ED /* PWDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDevice.m; sourceTree = "<group>"; };
+		40AC06AA1E890CC0004150E2 /* PWCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWCommand.h; sourceTree = "<group>"; };
+		40AC06AB1E890CC0004150E2 /* PWCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWCommand.m; sourceTree = "<group>"; };
+		40AC06AE1E890CCB004150E2 /* PWAbility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAbility.h; sourceTree = "<group>"; };
+		40AC06AF1E890CCB004150E2 /* PWAbility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAbility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,10 @@
 				4031A3B51E88E9750067D8ED /* Pineapple.h */,
 				4031A3D81E88EC470067D8ED /* PWDevice.h */,
 				4031A3D91E88EC470067D8ED /* PWDevice.m */,
+				40AC06AA1E890CC0004150E2 /* PWCommand.h */,
+				40AC06AB1E890CC0004150E2 /* PWCommand.m */,
+				40AC06AE1E890CCB004150E2 /* PWAbility.h */,
+				40AC06AF1E890CCB004150E2 /* PWAbility.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -129,6 +141,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */,
+				40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */,
+				40AC06B01E890CCB004150E2 /* PWAbility.h in Headers */,
 				4031A3DA1E88EC470067D8ED /* PWDevice.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,6 +198,7 @@
 					4031A3A91E88E8D80067D8ED = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 3NLD2967N6;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					4031A3BB1E88EABD0067D8ED = {
@@ -254,7 +269,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */,
 				4031A3DB1E88EC470067D8ED /* PWDevice.m in Sources */,
+				40AC06B11E890CCB004150E2 /* PWAbility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +381,8 @@
 				PRODUCT_NAME = Pineapple;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -423,6 +442,7 @@
 				PRODUCT_NAME = Pineapple;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -549,6 +569,7 @@
 				4031A3B21E88E8D80067D8ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4031A3D01E88EABD0067D8ED /* Build configuration list for PBXNativeTarget "Pineapple iOS Example" */ = {
 			isa = XCConfigurationList;
@@ -557,6 +578,7 @@
 				4031A3D21E88EABD0067D8ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
