@@ -11,16 +11,17 @@
 
 @interface PWDevice () <GCDAsyncSocketDelegate>
 
-@property (nonatomic, strong) GCDAsyncSocket *socket;
+@property (strong, nonatomic) GCDAsyncSocket *socket;
 
 @end
 
 @implementation PWDevice
 
-- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(int)port {
+- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port {
     self = [super init];
     if (self) {
         _ability = ability;
+        _name = name;
         _host = host;
         _port = port;
     }
@@ -34,24 +35,29 @@
     if ([self.socket isDisconnected]) {
         NSError *error = nil;
         if (![self.socket connectToHost:self.host onPort:self.port error:&error]) {
-            NSLog(@"Connect to host failed: %@", error);
+            [self.delegate deviceDidConnectFailed:self];
         }
     }
 }
 
 - (void)send:(PWCommand *)command {
-    // TODO: Send Command: RCAsyncSocket
+    [self.socket writeData:command.dataRepresentation withTimeout:-1 tag:0];
+    [self.socket readDataWithTimeout:-1 tag:0];
 }
 
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    NSLog(@"Connected to %@:%d", host, port);
+    [self.delegate deviceDidConnectSuccess:self];
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    // TODO: Tag with Command
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    NSString *message = [[NSString alloc] initWithData:data encoding:NSUnicodeStringEncoding];
-    NSLog(@"%@", message);
+    PWCommand *command = [[PWCommand alloc] initWithData:data];
+    [self.delegate device:self didReceiveCommand:command];
 }
 
 @end
