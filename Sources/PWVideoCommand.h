@@ -1,5 +1,5 @@
 //
-//  PWAbility.h
+//  PWVideoCommand.h
 //  Pineapple
 //
 //  Created by Dan Jiang on 2017/3/29.
@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "PWCommand.h"
 
-@interface PWAbility : NSObject
+@interface PWVideoCommand : PWCommand <PWCommandReceivable>
 
-+ (PWCommand *)commandWithData:(NSData *)data;
+@property (copy, nonatomic) NSString *video;
 
 @end
