@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		402E98681E8B53EE00946178 /* PWBonjourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E98671E8B53EE00946178 /* PWBonjourViewController.m */; };
+		402E986B1E8B550D00946178 /* PWAddDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E986A1E8B550D00946178 /* PWAddDeviceViewController.m */; };
+		402E986D1E8B580900946178 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402E986C1E8B580900946178 /* Masonry.framework */; };
+		402E98701E8B5B8500946178 /* PWDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E986F1E8B5B8500946178 /* PWDeviceCell.m */; };
+		402E98731E8B616C00946178 /* PWDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E98721E8B616C00946178 /* PWDeviceViewController.m */; };
 		4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3B51E88E9750067D8ED /* Pineapple.h */; };
 		4031A3C01E88EABD0067D8ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3BF1E88EABD0067D8ED /* main.m */; };
 		4031A3C31E88EABD0067D8ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3C21E88EABD0067D8ED /* AppDelegate.m */; };
-		4031A3C61E88EABD0067D8ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3C51E88EABD0067D8ED /* ViewController.m */; };
-		4031A3C91E88EABD0067D8ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4031A3C71E88EABD0067D8ED /* Main.storyboard */; };
+		4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3C51E88EABD0067D8ED /* PWHomeViewController.m */; };
 		4031A3CB1E88EABD0067D8ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4031A3CA1E88EABD0067D8ED /* Assets.xcassets */; };
 		4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4031A3CC1E88EABD0067D8ED /* LaunchScreen.storyboard */; };
 		4031A3D31E88EAC20067D8ED /* Pineapple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3AA1E88E8D80067D8ED /* Pineapple.framework */; };
@@ -25,6 +29,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		402E98661E8B53EE00946178 /* PWBonjourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWBonjourViewController.h; sourceTree = "<group>"; };
+		402E98671E8B53EE00946178 /* PWBonjourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWBonjourViewController.m; sourceTree = "<group>"; };
+		402E98691E8B550D00946178 /* PWAddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAddDeviceViewController.h; sourceTree = "<group>"; };
+		402E986A1E8B550D00946178 /* PWAddDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAddDeviceViewController.m; sourceTree = "<group>"; };
+		402E986C1E8B580900946178 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = Carthage/Build/iOS/Masonry.framework; sourceTree = "<group>"; };
+		402E986E1E8B5B8500946178 /* PWDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDeviceCell.h; sourceTree = "<group>"; };
+		402E986F1E8B5B8500946178 /* PWDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDeviceCell.m; sourceTree = "<group>"; };
+		402E98711E8B616C00946178 /* PWDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDeviceViewController.h; sourceTree = "<group>"; };
+		402E98721E8B616C00946178 /* PWDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDeviceViewController.m; sourceTree = "<group>"; };
 		4031A3AA1E88E8D80067D8ED /* Pineapple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pineapple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4031A3B41E88E9750067D8ED /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		4031A3B51E88E9750067D8ED /* Pineapple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pineapple.h; sourceTree = "<group>"; };
@@ -32,9 +45,8 @@
 		4031A3BF1E88EABD0067D8ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4031A3C11E88EABD0067D8ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4031A3C21E88EABD0067D8ED /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4031A3C41E88EABD0067D8ED /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4031A3C51E88EABD0067D8ED /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		4031A3C81E88EABD0067D8ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4031A3C41E88EABD0067D8ED /* PWHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWHomeViewController.h; sourceTree = "<group>"; };
+		4031A3C51E88EABD0067D8ED /* PWHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWHomeViewController.m; sourceTree = "<group>"; };
 		4031A3CA1E88EABD0067D8ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4031A3CD1E88EABD0067D8ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4031A3CF1E88EABD0067D8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4031A3D31E88EAC20067D8ED /* Pineapple.framework in Frameworks */,
+				402E986D1E8B580900946178 /* Masonry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,15 +117,22 @@
 		4031A3BD1E88EABD0067D8ED /* Pineapple iOS Example */ = {
 			isa = PBXGroup;
 			children = (
-				4031A3C11E88EABD0067D8ED /* AppDelegate.h */,
-				4031A3C21E88EABD0067D8ED /* AppDelegate.m */,
-				4031A3C41E88EABD0067D8ED /* ViewController.h */,
-				4031A3C51E88EABD0067D8ED /* ViewController.m */,
-				4031A3C71E88EABD0067D8ED /* Main.storyboard */,
 				4031A3CA1E88EABD0067D8ED /* Assets.xcassets */,
 				4031A3CC1E88EABD0067D8ED /* LaunchScreen.storyboard */,
 				4031A3CF1E88EABD0067D8ED /* Info.plist */,
 				4031A3BE1E88EABD0067D8ED /* Supporting Files */,
+				4031A3C11E88EABD0067D8ED /* AppDelegate.h */,
+				4031A3C21E88EABD0067D8ED /* AppDelegate.m */,
+				4031A3C41E88EABD0067D8ED /* PWHomeViewController.h */,
+				4031A3C51E88EABD0067D8ED /* PWHomeViewController.m */,
+				402E98661E8B53EE00946178 /* PWBonjourViewController.h */,
+				402E98671E8B53EE00946178 /* PWBonjourViewController.m */,
+				402E98691E8B550D00946178 /* PWAddDeviceViewController.h */,
+				402E986A1E8B550D00946178 /* PWAddDeviceViewController.m */,
+				402E98711E8B616C00946178 /* PWDeviceViewController.h */,
+				402E98721E8B616C00946178 /* PWDeviceViewController.m */,
+				402E986E1E8B5B8500946178 /* PWDeviceCell.h */,
+				402E986F1E8B5B8500946178 /* PWDeviceCell.m */,
 			);
 			path = "Pineapple iOS Example";
 			sourceTree = "<group>";
@@ -128,6 +148,7 @@
 		4031A3D41E88EB610067D8ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				402E986C1E8B580900946178 /* Masonry.framework */,
 				4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */,
 			);
 			name = Frameworks;
@@ -241,7 +262,6 @@
 			files = (
 				4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */,
 				4031A3CB1E88EABD0067D8ED /* Assets.xcassets in Resources */,
-				4031A3C91E88EABD0067D8ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +275,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaAsyncSocket.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Masonry.framework",
 			);
 			outputPaths = (
 			);
@@ -279,23 +300,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4031A3C61E88EABD0067D8ED /* ViewController.m in Sources */,
+				4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */,
+				402E98731E8B616C00946178 /* PWDeviceViewController.m in Sources */,
+				402E98681E8B53EE00946178 /* PWBonjourViewController.m in Sources */,
 				4031A3C31E88EABD0067D8ED /* AppDelegate.m in Sources */,
 				4031A3C01E88EABD0067D8ED /* main.m in Sources */,
+				402E98701E8B5B8500946178 /* PWDeviceCell.m in Sources */,
+				402E986B1E8B550D00946178 /* PWAddDeviceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4031A3C71E88EABD0067D8ED /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4031A3C81E88EABD0067D8ED /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4031A3CC1E88EABD0067D8ED /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -478,6 +495,10 @@
 				DEVELOPMENT_TEAM = 3NLD2967N6;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -531,6 +552,10 @@
 				DEVELOPMENT_TEAM = 3NLD2967N6;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

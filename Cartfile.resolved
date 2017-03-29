@@ -1,1 +1,2 @@
-github "robbiehanson/CocoaAsyncSocket" "fa2593d09221628d13c954c03c3db65a7f2abbc6"
+github "robbiehanson/CocoaAsyncSocket" "53a1298f4bbb735a1e7ab235f6e74cf099a1583b"
+github "SnapKit/Masonry" "v1.0.2"
