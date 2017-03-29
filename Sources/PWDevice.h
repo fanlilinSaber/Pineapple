@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PWAbility.h"
 #import "PWCommand.h"
 
 @class PWDevice;
@@ -24,14 +23,13 @@
 @interface PWDevice : NSObject
 
 @property (weak, nonatomic) id<PWDeviceDelegate> delegate;
-@property (strong, nonatomic) PWAbility *ability;
 @property (copy, nonatomic) NSString *name;
 @property (copy, nonatomic) NSString *host;
 @property (nonatomic) int port;
 
-- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port;
+- (instancetype)initWithAbility:(Class)ability name:(NSString *)name host:(NSString *)host port:(int)port;
 
 - (void)connect;
-- (void)send:(PWCommand *)command;
+- (void)send:(PWCommand<PWCommandSendable> *)command;
 
 @end

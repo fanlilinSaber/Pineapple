@@ -48,7 +48,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     
     self.tableView = tableView;
     
-    self.device = [[PWDevice alloc] initWithAbility:[PWAbility new] name:@"Ruby" host:@"127.0.0.1" port:5000];
+    self.device = [[PWDevice alloc] initWithAbility:[PWAbility class] name:@"Ruby" host:@"127.0.0.1" port:5000];
     self.device.delegate = self;
 }
 
@@ -56,7 +56,8 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [super viewDidLoad];
     
     [self.device connect];
-    [self.device send:[[PWCommand alloc] initWithText:@"Go Go Go"]];
+    PWTextCommand *command = [[PWTextCommand alloc] initWithText:@"Go Go Go"];
+    [self.device send:command];
 }
 
 #pragma mark - Action
@@ -99,11 +100,11 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 }
 
 - (void)device:(PWDevice *)device didSendCommand:(PWCommand *)command {
-    
+
 }
 
 - (void)device:(PWDevice *)device didReceiveCommand:(PWCommand *)command {
-    NSLog(@"%@", command.text);
+    NSLog(@"%@", command);
 }
 
 

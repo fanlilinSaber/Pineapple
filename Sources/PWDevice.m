@@ -7,17 +7,19 @@
 //
 
 #import "PWDevice.h"
+#import "PWAbility.h"
 @import CocoaAsyncSocket;
 
 @interface PWDevice () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *socket;
+@property (strong, nonatomic) Class ability;
 
 @end
 
 @implementation PWDevice
 
-- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port {
+- (instancetype)initWithAbility:(Class)ability name:(NSString *)name host:(NSString *)host port:(int)port {
     self = [super init];
     if (self) {
         _ability = ability;
@@ -40,7 +42,7 @@
     }
 }
 
-- (void)send:(PWCommand *)command {
+- (void)send:(PWCommand<PWCommandSendable> *)command {
     [self.socket writeData:command.dataRepresentation withTimeout:-1 tag:0];
     [self.socket readDataWithTimeout:-1 tag:0];
 }
@@ -55,8 +57,8 @@
     // TODO: Tag with Command
 }
 
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    PWCommand *command = [[PWCommand alloc] initWithData:data];
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {    
+    PWCommand *command = [self.ability commandWithData:data];
     [self.delegate device:self didReceiveCommand:command];
 }
 
