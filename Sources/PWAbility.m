@@ -12,7 +12,10 @@
 @implementation PWAbility
 
 + (PWCommand *)commandWithData:(NSData *)data {
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    // Need Design Command Structure
+    NSString *video = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSDictionary *json = @{@"type": @(PWCommandVideo), @"video": video};
+//    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     NSInteger type = ((NSNumber *)[json valueForKey:@"type"]).integerValue;
     PWCommand<PWCommandReceivable> *command = nil;
     switch (type) {

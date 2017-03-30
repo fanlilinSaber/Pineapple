@@ -10,8 +10,8 @@
 
 @implementation PWVideoCommand
 
-- (void)parseData:(NSDictionary *)json {
-    
+- (void)parseData:(NSDictionary *)data {
+    self.video = data[@"video"];
 }
 
 @end

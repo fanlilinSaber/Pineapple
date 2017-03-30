@@ -44,22 +44,21 @@
 
 - (void)send:(PWCommand<PWCommandSendable> *)command {
     [self.socket writeData:command.dataRepresentation withTimeout:-1 tag:0];
-    [self.socket readDataWithTimeout:-1 tag:0];
 }
 
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     [self.delegate deviceDidConnectSuccess:self];
+    [self.socket readDataWithTimeout:-1 tag:0];
 }
 
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    // TODO: Tag with Command
-}
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {}
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {    
     PWCommand *command = [self.ability commandWithData:data];
     [self.delegate device:self didReceiveCommand:command];
+    [self.socket readDataWithTimeout:-1 tag:0];
 }
 
 @end

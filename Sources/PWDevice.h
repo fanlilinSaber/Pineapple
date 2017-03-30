@@ -15,7 +15,6 @@
 
 - (void)deviceDidConnectSuccess:(PWDevice *)device;
 - (void)deviceDidConnectFailed:(PWDevice *)device;
-- (void)device:(PWDevice *)device didSendCommand:(PWCommand *)command;
 - (void)device:(PWDevice *)device didReceiveCommand:(PWCommand *)command;
 
 @end
