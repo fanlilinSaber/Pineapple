@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Pineapple.h"
 
 @interface PWDeviceViewController : UIViewController
+
+- (instancetype)initWithDevice:(PWDevice *)device;
 
 @end

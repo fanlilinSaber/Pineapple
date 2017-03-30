@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4019EF8A1E8CF8E700591E91 /* Pineapple.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3AA1E88E8D80067D8ED /* Pineapple.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		402E98681E8B53EE00946178 /* PWBonjourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E98671E8B53EE00946178 /* PWBonjourViewController.m */; };
 		402E986B1E8B550D00946178 /* PWAddDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E986A1E8B550D00946178 /* PWAddDeviceViewController.m */; };
 		402E986D1E8B580900946178 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402E986C1E8B580900946178 /* Masonry.framework */; };
@@ -28,6 +29,30 @@
 		40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AC06AA1E890CC0004150E2 /* PWCommand.h */; };
 		40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AC06AB1E890CC0004150E2 /* PWCommand.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4019EF8B1E8CF8E700591E91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4031A39F1E88E85A0067D8ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4031A3A91E88E8D80067D8ED;
+			remoteInfo = "Pineapple iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4019EF8D1E8CF8E700591E91 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4019EF8A1E8CF8E700591E91 /* Pineapple.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		402E98661E8B53EE00946178 /* PWBonjourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWBonjourViewController.h; sourceTree = "<group>"; };
@@ -205,10 +230,12 @@
 				4031A3B91E88EABD0067D8ED /* Frameworks */,
 				4031A3BA1E88EABD0067D8ED /* Resources */,
 				4031A3D71E88EB6F0067D8ED /* ShellScript */,
+				4019EF8D1E8CF8E700591E91 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4019EF8C1E8CF8E700591E91 /* PBXTargetDependency */,
 			);
 			name = "Pineapple iOS Example";
 			productName = "Pineapple iOS Example";
@@ -321,6 +348,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4019EF8C1E8CF8E700591E91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4031A3A91E88E8D80067D8ED /* Pineapple iOS */;
+			targetProxy = 4019EF8B1E8CF8E700591E91 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4031A3CC1E88EABD0067D8ED /* LaunchScreen.storyboard */ = {

@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Pineapple.h"
+@class PWAddDeviceViewController;
+
+@protocol PWAddDeviceViewControllerDelegate <NSObject>
+
+- (void)addDeviceViewControllerDidSave:(PWAddDeviceViewController *)addDeviceViewController withDevice:(PWDevice *)device;
+
+@end
 
 @interface PWAddDeviceViewController : UIViewController
+
+@property (weak, nonatomic) id<PWAddDeviceViewControllerDelegate> delegate;
 
 @end

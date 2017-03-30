@@ -16,10 +16,10 @@
 
 static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
-@interface PWHomeViewController () <PWDeviceDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddDeviceViewControllerDelegate>
 
 @property (weak, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) PWDevice *device;
+@property (copy, nonatomic) NSArray *devices;
 
 @end
 
@@ -27,6 +27,8 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
 - (void)loadView {
     [super loadView];
+    
+    self.devices = @[];
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"设备列表";
@@ -47,17 +49,10 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     }];
     
     self.tableView = tableView;
-    
-    self.device = [[PWDevice alloc] initWithAbility:[PWAbility class] name:@"Ruby" host:@"127.0.0.1" port:5000];
-    self.device.delegate = self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.device connect];
-    PWTextCommand *command = [[PWTextCommand alloc] initWithText:@"Go Go Go"];
-    [self.device send:command];
 }
 
 #pragma mark - Action
@@ -68,44 +63,47 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 }
 
 - (void)add {
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[PWAddDeviceViewController new]];
+    PWAddDeviceViewController *addDeviceViewController = [PWAddDeviceViewController new];
+    addDeviceViewController.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addDeviceViewController];
     [self presentViewController:navigationController animated:true completion:nil];
+}
+
+#pragma mark - Helper
+
+- (void)addDevice:(PWDevice *)device {
+    NSMutableArray *devices = [self.devices mutableCopy];
+    [devices addObject:device];
+    self.devices = devices;
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.devices.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PWDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:PWDeviceCellIdentifier];
-    cell.nameLabel.text = @"PC";
-    cell.addressLabel.text = [[NSString alloc] initWithFormat:@"%@:%d", @"192.168.0.1", 2000];
+    PWDevice *device = self.devices[indexPath.row];
+    cell.nameLabel.text = device.name;
+    cell.addressLabel.text = [[NSString alloc] initWithFormat:@"%@:%d", device.host, device.port];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    [self showViewController:[PWDeviceViewController new] sender:nil];
+    PWDevice *device = self.devices[indexPath.row];
+    [self showViewController:[[PWDeviceViewController alloc] initWithDevice:device] sender:nil];
 }
 
-#pragma mark - PWDeviceDelegate
+#pragma mark - PWAddDeviceViewControllerDelegate
 
-- (void)deviceDidConnectSuccess:(PWDevice *)device {
+- (void)addDeviceViewControllerDidSave:(PWAddDeviceViewController *)addDeviceViewController withDevice:(PWDevice *)device {
+    [self dismissViewControllerAnimated:true completion:^{
+        [self addDevice:device];
+    }];
 }
-
-- (void)deviceDidConnectFailed:(PWDevice *)device {
-    
-}
-
-- (void)device:(PWDevice *)device didSendCommand:(PWCommand *)command {
-
-}
-
-- (void)device:(PWDevice *)device didReceiveCommand:(PWCommand *)command {
-    NSLog(@"%@", command);
-}
-
 
 @end

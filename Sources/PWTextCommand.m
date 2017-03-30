@@ -13,8 +13,8 @@
 - (instancetype)initWithText:(NSString *)text {
     self = [super init];
     if (self) {
-        _text = text;
         self.type = PWCommandText;
+        _text = text;
     }
     return self;
 }
