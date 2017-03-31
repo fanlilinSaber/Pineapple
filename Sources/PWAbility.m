@@ -11,7 +11,7 @@
 
 @implementation PWAbility
 
-+ (PWCommand *)commandWithData:(NSData *)data {
+- (PWCommand *)commandWithData:(NSData *)data {
     // Need Design Command Structure
     NSString *video = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSDictionary *json = @{@"type": @(PWCommandVideo), @"video": video};

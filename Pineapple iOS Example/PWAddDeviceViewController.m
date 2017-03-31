@@ -99,7 +99,7 @@
 
 - (void)save {
     if (self.nameTextField.text.length > 0 && self.hostTextField.text.length > 0 && self.portTextField.text.length > 0) {
-        PWDevice *device = [[PWDevice alloc] initWithAbility:[PWAbility class] name:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue];
+        PWDevice *device = [[PWDevice alloc] initWithAbility:[PWAbility new] name:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue];
         [self.delegate addDeviceViewControllerDidSave:self withDevice:device];
     }
 }

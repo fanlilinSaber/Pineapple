@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PWCommand.h"
+#import "PWAbility.h"
 
-@class PWDevice;
+@class PWDevice, GCDAsyncSocket;
 
 @protocol PWDeviceDelegate <NSObject>
 
@@ -26,7 +26,8 @@
 @property (copy, nonatomic) NSString *host;
 @property (nonatomic) int port;
 
-- (instancetype)initWithAbility:(Class)ability name:(NSString *)name host:(NSString *)host port:(int)port;
+- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port;
+- (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket;
 
 - (void)connect;
 - (void)send:(PWCommand<PWCommandSendable> *)command;
