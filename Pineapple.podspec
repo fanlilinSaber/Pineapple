@@ -10,4 +10,5 @@ Pod::Spec.new do |spec|
   spec.source = { git: "https://git.oschina.net/i-focusing-app/Pineapple.git", tag: spec.version, submodules: true }
   spec.source_files = "Sources/**/*.{h,m}"
   spec.resources = "Sources/*.bundle"
+  spec.dependency "CocoaAsyncSocket"
 end
