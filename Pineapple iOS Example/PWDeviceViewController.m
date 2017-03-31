@@ -20,10 +20,9 @@
 
 @implementation PWDeviceViewController
 
-- (instancetype)initWithDevice:(PWDevice *)device index:(NSInteger)index {
+- (instancetype)initWithDevice:(PWDevice *)device {
     self = [super init];
     if (self) {
-        _index = index;
         _device = device;
     }
     return self;
@@ -32,8 +31,12 @@
 - (void)loadView {
     [super loadView];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = self.device.name;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"断开" style:UIBarButtonItemStylePlain target:self action:@selector(disconnect)];
     
     UITextView *textView = [UITextView new];
     textView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
@@ -79,12 +82,6 @@
     [super viewDidLoad];
     
     [self.device connect];
-    [self reloadStatus];
-}
-
-- (void)reloadStatus {
-    NSString *status = [self.device isConnected] ? @"开启" : @"断开";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:status style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 #pragma mark - Actions
@@ -98,6 +95,10 @@
     }
 }
 
+- (void)disconnect {
+    [self.device disconnect];
+}
+
 - (void)meSay:(NSString *)text {
     self.textView.text = [NSString stringWithFormat:@"%@我->%@\n", self.textView.text, text];
 }
@@ -109,23 +110,19 @@
 #pragma mark - PWDeviceDelegate
 
 - (void)deviceDidConnectSuccess:(PWDevice *)device {
-    [self reloadStatus];
-    [self.delegate deviceViewControllerDidChangeStatus:self];
+    [self otherSay:@"开启连接成功"];
 }
 
-- (void)deviceDidConnectFailed:(PWDevice *)device {
-    [self reloadStatus];
-    [self.delegate deviceViewControllerDidChangeStatus:self];
+- (void)device:(PWDevice *)device didConnectFailedMessage:(NSString *)message {
+    [self otherSay:[NSString stringWithFormat:@"开启连接失败:%@", message]];
 }
 
 - (void)deviceDidDisconnectSuccess:(PWDevice *)device {
-    [self reloadStatus];
-    [self.delegate deviceViewControllerDidChangeStatus:self];
+    [self otherSay:@"断开连接成功"];
 }
 
-- (void)deviceDidDisconnectFailed:(PWDevice *)device {
-    [self reloadStatus];
-    [self.delegate deviceViewControllerDidChangeStatus:self];
+- (void)device:(PWDevice *)device didDisconnectFailedMessage:(NSString *)message {
+    [self otherSay:[NSString stringWithFormat:@"断开连接失败:%@", message]];
 }
 
 - (void)device:(PWDevice *)device didReceiveCommand:(PWCommand *)command {
