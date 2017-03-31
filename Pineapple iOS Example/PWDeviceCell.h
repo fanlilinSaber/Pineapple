@@ -12,5 +12,6 @@
 
 @property (nonatomic, weak) UILabel *nameLabel;
 @property (nonatomic, weak) UILabel *addressLabel;
+@property (nonatomic, weak) UILabel *statusLabel;
 
 @end
