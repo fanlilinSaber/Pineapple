@@ -43,6 +43,10 @@
     return self;
 }
 
+- (BOOL)isConnected {
+    return [self.socket isConnected];
+}
+
 - (void)connect {
     if (!self.socket) {
        self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
@@ -57,6 +61,12 @@
     }
 }
 
+- (void)disconnect {
+    self.socket.delegate = nil;
+    [self.socket disconnect];
+    self.socket = nil;
+}
+
 - (void)send:(PWCommand<PWCommandSendable> *)command {
     [self.socket writeData:command.dataRepresentation withTimeout:-1 tag:0];
 }
@@ -68,6 +78,16 @@
         [self.delegate deviceDidConnectSuccess:self];
     });
     [self.socket readDataWithTimeout:-1 tag:0];
+}
+
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (err) {
+            [self.delegate deviceDidDisconnectFailed:self];
+        } else {
+            [self.delegate deviceDidDisconnectSuccess:self];
+        }
+    });
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {}

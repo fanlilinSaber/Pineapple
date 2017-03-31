@@ -20,9 +20,10 @@
 
 @implementation PWDeviceViewController
 
-- (instancetype)initWithDevice:(PWDevice *)device {
+- (instancetype)initWithDevice:(PWDevice *)device index:(NSInteger)index {
     self = [super init];
     if (self) {
+        _index = index;
         _device = device;
     }
     return self;
@@ -78,6 +79,12 @@
     [super viewDidLoad];
     
     [self.device connect];
+    [self reloadStatus];
+}
+
+- (void)reloadStatus {
+    NSString *status = [self.device isConnected] ? @"开启" : @"断开";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:status style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 #pragma mark - Actions
@@ -102,11 +109,23 @@
 #pragma mark - PWDeviceDelegate
 
 - (void)deviceDidConnectSuccess:(PWDevice *)device {
-    [self otherSay:@"连接成功"];
+    [self reloadStatus];
+    [self.delegate deviceViewControllerDidChangeStatus:self];
 }
 
 - (void)deviceDidConnectFailed:(PWDevice *)device {
-    [self otherSay:@"连接失败"];
+    [self reloadStatus];
+    [self.delegate deviceViewControllerDidChangeStatus:self];
+}
+
+- (void)deviceDidDisconnectSuccess:(PWDevice *)device {
+    [self reloadStatus];
+    [self.delegate deviceViewControllerDidChangeStatus:self];
+}
+
+- (void)deviceDidDisconnectFailed:(PWDevice *)device {
+    [self reloadStatus];
+    [self.delegate deviceViewControllerDidChangeStatus:self];
 }
 
 - (void)device:(PWDevice *)device didReceiveCommand:(PWCommand *)command {

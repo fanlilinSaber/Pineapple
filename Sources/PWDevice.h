@@ -15,6 +15,8 @@
 
 - (void)deviceDidConnectSuccess:(PWDevice *)device;
 - (void)deviceDidConnectFailed:(PWDevice *)device;
+- (void)deviceDidDisconnectSuccess:(PWDevice *)device;
+- (void)deviceDidDisconnectFailed:(PWDevice *)device;
 - (void)device:(PWDevice *)device didReceiveCommand:(PWCommand *)command;
 
 @end
@@ -29,7 +31,9 @@
 - (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port;
 - (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket;
 
+- (BOOL)isConnected;
 - (void)connect;
+- (void)disconnect;
 - (void)send:(PWCommand<PWCommandSendable> *)command;
 
 @end
