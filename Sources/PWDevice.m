@@ -7,7 +7,7 @@
 //
 
 #import "PWDevice.h"
-@import CocoaAsyncSocket;
+#import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 @interface PWDevice () <GCDAsyncSocketDelegate>
 
@@ -33,7 +33,7 @@
     self = [super init];
     if (self) {
         _ability = ability;
-        _name = @"Unkown";
+        _name = @"未知";
         _host = socket.connectedHost;
         _port = socket.connectedPort;
         _socket = socket;
