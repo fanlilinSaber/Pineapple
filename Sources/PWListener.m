@@ -7,7 +7,7 @@
 //
 
 #import "PWListener.h"
-@import CocoaAsyncSocket;
+#import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 NSInteger const PWListenerPort = 5000;
 
