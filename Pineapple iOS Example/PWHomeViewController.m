@@ -16,7 +16,7 @@
 
 static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
-@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddDeviceViewControllerDelegate, PWListenerDelegate, PWDeviceViewControllerDelegate>
+@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddDeviceViewControllerDelegate, PWListenerDelegate>
 
 @property (strong, nonatomic) PWListener *listener;
 @property (copy, nonatomic) NSArray *devices;
@@ -35,7 +35,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     self.devices = @[];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"自发现" style:UIBarButtonItemStylePlain target:self action:@selector(bonjour)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发现" style:UIBarButtonItemStylePlain target:self action:@selector(bonjour)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add)];
     
     UITableView *tableView = [UITableView new];
@@ -94,16 +94,13 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     PWDevice *device = self.devices[indexPath.row];
     cell.nameLabel.text = device.name;
     cell.addressLabel.text = [[NSString alloc] initWithFormat:@"%@:%d", device.host, device.port];
-    cell.statusLabel.text = [device isConnected] ? @"开启" : @"断开";
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     PWDevice *device = self.devices[indexPath.row];
-    PWDeviceViewController *deviceViewController = [[PWDeviceViewController alloc] initWithDevice:device index:indexPath.row];
-    deviceViewController.delegate = self;
-    [self showViewController:deviceViewController sender:nil];
+    [self showViewController:[[PWDeviceViewController alloc] initWithDevice:device] sender:nil];
 }
 
 #pragma mark - PWAddDeviceViewControllerDelegate
@@ -112,13 +109,6 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [self dismissViewControllerAnimated:true completion:^{
         [self addDevice:device];
     }];
-}
-
-#pragma mark - PWDeviceViewControllerDelegate
-
-- (void)deviceViewControllerDidChangeStatus:(PWDeviceViewController *)deviceViewController {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:deviceViewController.index inSection:0];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - PWListenerDelegate

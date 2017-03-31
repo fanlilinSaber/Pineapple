@@ -14,9 +14,9 @@
 @protocol PWDeviceDelegate <NSObject>
 
 - (void)deviceDidConnectSuccess:(PWDevice *)device;
-- (void)deviceDidConnectFailed:(PWDevice *)device;
+- (void)device:(PWDevice *)device didConnectFailedMessage:(NSString *)message;
 - (void)deviceDidDisconnectSuccess:(PWDevice *)device;
-- (void)deviceDidDisconnectFailed:(PWDevice *)device;
+- (void)device:(PWDevice *)device didDisconnectFailedMessage:(NSString *)message;
 - (void)device:(PWDevice *)device didReceiveCommand:(PWCommand *)command;
 
 @end

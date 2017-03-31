@@ -54,7 +54,7 @@
     if ([self.socket isDisconnected]) {
         NSError *error = nil;
         if (![self.socket connectToHost:self.host onPort:self.port error:&error]) {
-            [self.delegate deviceDidConnectFailed:self];
+            [self.delegate device:self didConnectFailedMessage:[error localizedDescription]];
         }
     } else {
         [self.socket readDataWithTimeout:-1 tag:0];
@@ -62,9 +62,11 @@
 }
 
 - (void)disconnect {
-    self.socket.delegate = nil;
-    [self.socket disconnect];
-    self.socket = nil;
+    if ([self.socket isConnected]) {
+        self.socket.delegate = nil;
+        [self.socket disconnect];
+        self.socket = nil;
+    }
 }
 
 - (void)send:(PWCommand<PWCommandSendable> *)command {
@@ -80,10 +82,10 @@
     [self.socket readDataWithTimeout:-1 tag:0];
 }
 
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (err) {
-            [self.delegate deviceDidDisconnectFailed:self];
+        if (error) {
+            [self.delegate device:self didDisconnectFailedMessage:[error localizedDescription]];
         } else {
             [self.delegate deviceDidDisconnectSuccess:self];
         }
