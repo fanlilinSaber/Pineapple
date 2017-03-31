@@ -13,10 +13,7 @@
 		402E986D1E8B580900946178 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402E986C1E8B580900946178 /* Masonry.framework */; };
 		402E98701E8B5B8500946178 /* PWDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E986F1E8B5B8500946178 /* PWDeviceCell.m */; };
 		402E98731E8B616C00946178 /* PWDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E98721E8B616C00946178 /* PWDeviceViewController.m */; };
-		402E98761E8BAE7500946178 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E98751E8BAE7500946178 /* PWAbility.m */; };
-		402E987C1E8BBE5A00946178 /* PWTextCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E987B1E8BBE5A00946178 /* PWTextCommand.m */; };
-		402E987F1E8BBE6800946178 /* PWVideoCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E987E1E8BBE6800946178 /* PWVideoCommand.m */; };
-		4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3B51E88E9750067D8ED /* Pineapple.h */; };
+		4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3B51E88E9750067D8ED /* Pineapple.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4031A3C01E88EABD0067D8ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3BF1E88EABD0067D8ED /* main.m */; };
 		4031A3C31E88EABD0067D8ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3C21E88EABD0067D8ED /* AppDelegate.m */; };
 		4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3C51E88EABD0067D8ED /* PWHomeViewController.m */; };
@@ -24,9 +21,17 @@
 		4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4031A3CC1E88EABD0067D8ED /* LaunchScreen.storyboard */; };
 		4031A3D31E88EAC20067D8ED /* Pineapple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3AA1E88E8D80067D8ED /* Pineapple.framework */; };
 		4031A3D61E88EB610067D8ED /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */; };
-		4031A3DA1E88EC470067D8ED /* PWDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3D81E88EC470067D8ED /* PWDevice.h */; };
+		4031A3DA1E88EC470067D8ED /* PWDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3D81E88EC470067D8ED /* PWDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4031A3DB1E88EC470067D8ED /* PWDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3D91E88EC470067D8ED /* PWDevice.m */; };
-		40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AC06AA1E890CC0004150E2 /* PWCommand.h */; };
+		403404151E8DEEC300029235 /* PWListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 403404131E8DEEC300029235 /* PWListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		403404161E8DEEC300029235 /* PWListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 403404141E8DEEC300029235 /* PWListener.m */; };
+		403404171E8DFF7300029235 /* PWAbility.h in Headers */ = {isa = PBXBuildFile; fileRef = 402E98741E8BAE7500946178 /* PWAbility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		403404181E8DFF7500029235 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E98751E8BAE7500946178 /* PWAbility.m */; };
+		403404191E8DFF8000029235 /* PWVideoCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E987E1E8BBE6800946178 /* PWVideoCommand.m */; };
+		4034041A1E8DFF8200029235 /* PWVideoCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 402E987D1E8BBE6800946178 /* PWVideoCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4034041B1E8DFF8500029235 /* PWTextCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E987B1E8BBE5A00946178 /* PWTextCommand.m */; };
+		4034041C1E8DFF8800029235 /* PWTextCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 402E987A1E8BBE5A00946178 /* PWTextCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AC06AA1E890CC0004150E2 /* PWCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AC06AB1E890CC0004150E2 /* PWCommand.m */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +90,8 @@
 		4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		4031A3D81E88EC470067D8ED /* PWDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDevice.h; sourceTree = "<group>"; };
 		4031A3D91E88EC470067D8ED /* PWDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDevice.m; sourceTree = "<group>"; };
+		403404131E8DEEC300029235 /* PWListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWListener.h; sourceTree = "<group>"; };
+		403404141E8DEEC300029235 /* PWListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWListener.m; sourceTree = "<group>"; };
 		40AC06AA1E890CC0004150E2 /* PWCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWCommand.h; sourceTree = "<group>"; };
 		40AC06AB1E890CC0004150E2 /* PWCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,12 +141,14 @@
 			children = (
 				4031A3B41E88E9750067D8ED /* Info-iOS.plist */,
 				4031A3B51E88E9750067D8ED /* Pineapple.h */,
+				403404131E8DEEC300029235 /* PWListener.h */,
+				403404141E8DEEC300029235 /* PWListener.m */,
 				4031A3D81E88EC470067D8ED /* PWDevice.h */,
 				4031A3D91E88EC470067D8ED /* PWDevice.m */,
-				40AC06AA1E890CC0004150E2 /* PWCommand.h */,
-				40AC06AB1E890CC0004150E2 /* PWCommand.m */,
 				402E98741E8BAE7500946178 /* PWAbility.h */,
 				402E98751E8BAE7500946178 /* PWAbility.m */,
+				40AC06AA1E890CC0004150E2 /* PWCommand.h */,
+				40AC06AB1E890CC0004150E2 /* PWCommand.m */,
 				402E987A1E8BBE5A00946178 /* PWTextCommand.h */,
 				402E987B1E8BBE5A00946178 /* PWTextCommand.m */,
 				402E987D1E8BBE6800946178 /* PWVideoCommand.h */,
@@ -196,8 +205,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */,
+				4034041A1E8DFF8200029235 /* PWVideoCommand.h in Headers */,
 				40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */,
 				4031A3DA1E88EC470067D8ED /* PWDevice.h in Headers */,
+				4034041C1E8DFF8800029235 /* PWTextCommand.h in Headers */,
+				403404151E8DEEC300029235 /* PWListener.h in Headers */,
+				403404171E8DFF7300029235 /* PWAbility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,8 +338,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				403404161E8DEEC300029235 /* PWListener.m in Sources */,
 				40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */,
+				403404191E8DFF8000029235 /* PWVideoCommand.m in Sources */,
+				4034041B1E8DFF8500029235 /* PWTextCommand.m in Sources */,
 				4031A3DB1E88EC470067D8ED /* PWDevice.m in Sources */,
+				403404181E8DFF7500029235 /* PWAbility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,9 +353,6 @@
 			files = (
 				4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */,
 				402E98731E8B616C00946178 /* PWDeviceViewController.m in Sources */,
-				402E987F1E8BBE6800946178 /* PWVideoCommand.m in Sources */,
-				402E98761E8BAE7500946178 /* PWAbility.m in Sources */,
-				402E987C1E8BBE5A00946178 /* PWTextCommand.m in Sources */,
 				402E98681E8B53EE00946178 /* PWBonjourViewController.m in Sources */,
 				4031A3C31E88EABD0067D8ED /* AppDelegate.m in Sources */,
 				4031A3C01E88EABD0067D8ED /* main.m in Sources */,
@@ -387,6 +401,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -455,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

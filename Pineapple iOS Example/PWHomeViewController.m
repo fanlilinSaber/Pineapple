@@ -16,10 +16,11 @@
 
 static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
-@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddDeviceViewControllerDelegate>
+@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddDeviceViewControllerDelegate, PWListenerDelegate>
 
-@property (weak, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) PWListener *listener;
 @property (copy, nonatomic) NSArray *devices;
+@property (weak, nonatomic) UITableView *tableView;
 
 @end
 
@@ -27,6 +28,9 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
 - (void)loadView {
     [super loadView];
+    
+    self.listener = [PWListener new];
+    self.listener.delegate = self;
     
     self.devices = @[];
     
@@ -53,6 +57,8 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.listener start];
 }
 
 #pragma mark - Action
@@ -104,6 +110,20 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [self dismissViewControllerAnimated:true completion:^{
         [self addDevice:device];
     }];
+}
+
+#pragma mark - PWListenerDelegate
+
+- (void)listenerDidStartSuccess:(PWListener *)listener {
+    NSLog(@"监听端口成功");
+}
+
+- (void)listenerDidStartFailed:(PWListener *)listener {
+    NSLog(@"监听端口失败");
+}
+
+- (void)listener:(PWListener *)listener didConnectDevice:(PWDevice *)device {
+    [self addDevice:device];
 }
 
 @end
