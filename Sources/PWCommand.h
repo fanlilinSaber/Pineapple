@@ -10,6 +10,9 @@
 
 extern NSString * const PWCommandCRLF;
 
+extern NSString * const PWCommandText;
+extern NSString * const PWCommandVideo;
+
 @protocol PWCommandSendable <NSObject>
 
 - (NSData *)dataRepresentation;
@@ -24,11 +27,7 @@ extern NSString * const PWCommandCRLF;
 
 @interface PWCommand: NSObject
 
-@property (nonatomic) NSInteger type;
+@property (copy, nonatomic) NSString *type;
+@property (copy, nonatomic) NSString *clientId;
 
 @end
-
-typedef NS_ENUM(NSInteger, PWCommandType) {
-    PWCommandText = 1,
-    PWCommandVideo = 2,
-};

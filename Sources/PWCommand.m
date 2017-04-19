@@ -10,6 +10,9 @@
 
 NSString * const PWCommandCRLF = @"\r\n";
 
+NSString * const PWCommandText = @"Text";
+NSString * const PWCommandVideo = @"Video";
+
 @implementation PWCommand
 
 @end

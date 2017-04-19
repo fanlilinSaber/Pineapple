@@ -20,7 +20,11 @@
 }
 
 - (NSData *)dataRepresentation {
-    return [self.text dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableDictionary *json = [NSMutableDictionary new];
+    json[@"type"] = self.type;
+    json[@"clientId"] = self.clientId;
+    json[@"text"] = self.text;
+    return [NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil];
 }
 
 @end
