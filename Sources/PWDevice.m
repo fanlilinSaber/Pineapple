@@ -7,7 +7,11 @@
 //
 
 #import "PWDevice.h"
+#import "PWHeader.h"
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
+
+static NSInteger const TagHeader = 10;
+static NSInteger const TagBody = 11;
 
 @interface PWDevice () <GCDAsyncSocketDelegate>
 
@@ -54,7 +58,7 @@
             [self.delegate device:self didConnectFailedMessage:[error localizedDescription]];
         }
     } else {
-        [self.socket readDataWithTimeout:-1 tag:0];
+        [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:TagHeader];
     }
 }
 
@@ -67,7 +71,11 @@
 }
 
 - (void)send:(PWCommand<PWCommandSendable> *)command {
-    [self.socket writeData:command.dataRepresentation withTimeout:-1 tag:0];
+    NSData *body = command.dataRepresentation;
+    NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
+    NSMutableData *data = [[NSMutableData alloc] initWithData:header];
+    [data appendData:body];
+    [self.socket writeData:data withTimeout:-1 tag:0];
 }
 
 #pragma mark - GCDAsyncSocketDelegate
@@ -76,7 +84,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate deviceDidConnectSuccess:self];
     });
-    [self.socket readDataWithTimeout:-1 tag:0];
+    [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:TagHeader];
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error {
@@ -91,12 +99,17 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {}
 
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {    
-    PWCommand *command = [PWAbility commandWithData:data];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.delegate device:self didReceiveCommand:command];
-    });
-    [self.socket readDataWithTimeout:-1 tag:0];
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    if (tag == TagHeader) {
+        PWHeader *header = [[PWHeader alloc] initWithData:data];
+        [self.socket readDataToLength:header.contentLength withTimeout:-1 tag:TagBody];
+    } else if (tag == TagBody) {
+        PWCommand *command = [PWAbility commandWithData:data];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate device:self didReceiveCommand:command];
+        });
+        [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:TagHeader];
+    }
 }
 
 @end
