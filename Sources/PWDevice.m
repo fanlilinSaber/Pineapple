@@ -12,16 +12,14 @@
 @interface PWDevice () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *socket;
-@property (strong, nonatomic) PWAbility *ability;
 
 @end
 
 @implementation PWDevice
 
-- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port {
+- (instancetype)initWithName:(NSString *)name host:(NSString *)host port:(int)port {
     self = [super init];
     if (self) {
-        _ability = ability;
         _name = name;
         _host = host;
         _port = port;
@@ -29,10 +27,9 @@
     return self;
 }
 
-- (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket {
+- (instancetype)initWithSocket:(GCDAsyncSocket *)socket {
     self = [super init];
     if (self) {
-        _ability = ability;
         _name = @"未知";
         _host = socket.connectedHost;
         _port = socket.connectedPort;
@@ -95,7 +92,7 @@
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {}
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {    
-    PWCommand *command = [self.ability commandWithData:data];
+    PWCommand *command = [PWAbility commandWithData:data];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate device:self didReceiveCommand:command];
     });

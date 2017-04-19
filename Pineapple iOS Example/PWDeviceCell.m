@@ -14,7 +14,8 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        self.selectedBackgroundView = [UIView new];
+        self.selectedBackgroundView.backgroundColor = [UIColor greenColor];
         
         UILabel *nameLabel = [UILabel new];
         UILabel *addressLabel = [UILabel new];

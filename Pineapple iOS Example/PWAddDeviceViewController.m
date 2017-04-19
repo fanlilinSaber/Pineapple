@@ -26,7 +26,7 @@
     [super loadView];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"添加设备";
+    self.title = @"添加 Socket 设备";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)];
     
@@ -41,6 +41,7 @@
     
     UITextField *hostTextField = [UITextField new];
     hostTextField.borderStyle = UITextBorderStyleRoundedRect;
+    hostTextField.text = @"192.168.99.";
     
     UILabel *portLabel = [UILabel new];
     portLabel.text = @"端口";
@@ -99,7 +100,7 @@
 
 - (void)save {
     if (self.nameTextField.text.length > 0 && self.hostTextField.text.length > 0 && self.portTextField.text.length > 0) {
-        PWDevice *device = [[PWDevice alloc] initWithAbility:[PWAbility new] name:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue];
+        PWDevice *device = [[PWDevice alloc] initWithName:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue];
         [self.delegate addDeviceViewControllerDidSave:self withDevice:device];
     }
 }

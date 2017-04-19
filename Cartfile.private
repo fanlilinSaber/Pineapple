@@ -1,2 +1,3 @@
 github "robbiehanson/CocoaAsyncSocket" "master"
+github "ckrey/MQTT-Client-Framework"
 github "SnapKit/Masonry"

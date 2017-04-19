@@ -11,7 +11,9 @@
 @implementation PWVideoCommand
 
 - (void)parseData:(NSDictionary *)data {
-    self.video = data[@"video"];
+    self.type = data[@"type"];
+    self.clientId = data[@"clientId"];
+    self.video = data[@"text"];
 }
 
 @end

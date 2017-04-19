@@ -15,6 +15,8 @@ FOUNDATION_EXPORT double PineappleVersionNumber;
 FOUNDATION_EXPORT const unsigned char PineappleVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Pineapple/PublicHeader.h>
+#import "PWProxy.h"
+#import "PWClient.h"
 #import "PWListener.h"
 #import "PWDevice.h"
 #import "PWAbility.h"

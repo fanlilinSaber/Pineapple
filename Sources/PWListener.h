@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "PWDevice.h"
 
-extern NSInteger const PWListenerPort;
-
 @class PWListener;
 
 @protocol PWListenerDelegate <NSObject>
@@ -24,6 +22,8 @@ extern NSInteger const PWListenerPort;
 @interface PWListener : NSObject
 
 @property (weak, nonatomic) id<PWListenerDelegate> delegate;
+
+- (instancetype)initWithPort:(NSInteger)port;
 
 - (void)start;
 
