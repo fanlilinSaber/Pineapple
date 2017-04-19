@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const PWCommandCRLF;
-
 extern NSString * const PWCommandText;
 extern NSString * const PWCommandVideo;
 
