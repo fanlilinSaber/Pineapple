@@ -1,23 +1,22 @@
 //
-//  PWClient.m
+//  PWRemoteDevice.m
 //  Pineapple
 //
 //  Created by Dan Jiang on 2017/4/18.
 //
 //
 
-#import "PWClient.h"
+#import "PWRemoteDevice.h"
 
-@interface PWClient ()
+@interface PWRemoteDevice ()
 
 @end
 
-@implementation PWClient
+@implementation PWRemoteDevice
 
 - (instancetype)initWithName:(NSString *)name clientId:(NSString *)clientId {
-    self = [super init];
+    self = [super initWithName:name];
     if (self) {
-        _name = name;
         _clientId = clientId;
     }
     return self;

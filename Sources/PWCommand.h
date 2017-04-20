@@ -30,6 +30,6 @@ extern NSString * const PWCommandVideo;
 @property (copy, nonatomic) NSString *clientId;
 
 - (void)fillPropertiesWithData:(NSDictionary *)data;
-- (void)fillDataWithProperties:(NSMutableDictionary *)data;
+- (NSMutableDictionary *)fillDataWithProperties;
 
 @end

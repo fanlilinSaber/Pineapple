@@ -1,15 +1,15 @@
 //
-//  PWAddClientViewController.m
+//  PWAddRemoteDeviceViewController.m
 //  Pineapple
 //
 //  Created by Dan Jiang on 2017/4/18.
 //
 //
 
-#import "PWAddClientViewController.h"
+#import "PWAddRemoteDeviceViewController.h"
 @import Masonry;
 
-@interface PWAddClientViewController ()
+@interface PWAddRemoteDeviceViewController ()
 
 @property (weak, nonatomic) UILabel *nameLabel;
 @property (weak, nonatomic) UITextField *nameTextField;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation PWAddClientViewController
+@implementation PWAddRemoteDeviceViewController
 
 - (void)loadView {
     [super loadView];
@@ -79,8 +79,8 @@
 
 - (void)save {
     if (self.nameTextField.text.length > 0 && self.clientTextField.text.length > 0) {
-        PWClient *client = [[PWClient alloc] initWithName:self.nameTextField.text clientId:self.clientTextField.text];
-        [self.delegate addClientViewControllerDidSave:self withClient:client];
+        PWRemoteDevice *device = [[PWRemoteDevice alloc] initWithName:self.nameTextField.text clientId:self.clientTextField.text];
+        [self.delegate addRemoteDeviceViewControllerDidSave:self withDevice:device];
     }
 }
 

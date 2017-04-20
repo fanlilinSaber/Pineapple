@@ -41,7 +41,7 @@
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sender didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
-    PWDevice *device = [[PWDevice alloc] initWithSocket:newSocket];
+    PWLocalDevice *device = [[PWLocalDevice alloc] initWithSocket:newSocket];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate listener:self didConnectDevice:device];
     });

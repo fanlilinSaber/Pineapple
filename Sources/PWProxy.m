@@ -72,10 +72,10 @@
     [self.sessionManager disconnect];
 }
 
-- (void)send:(PWCommand<PWCommandSendable> *)command toClient:(PWClient *)client {
+- (void)send:(PWCommand<PWCommandSendable> *)command toDevice:(PWRemoteDevice *)device {
     command.clientId = self.clientId;
     [self.sessionManager sendData:command.dataRepresentation
-                     topic:[NSString stringWithFormat:@"%@/p2p/%@", self.rootTopic, client.clientId]
+                     topic:[NSString stringWithFormat:@"%@/p2p/%@", self.rootTopic, device.clientId]
                        qos:0
                     retain:false];
 }

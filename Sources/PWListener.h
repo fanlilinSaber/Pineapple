@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PWDevice.h"
+#import "PWLocalDevice.h"
 
 @class PWListener;
 
@@ -15,7 +15,7 @@
 
 - (void)listenerDidStartSuccess:(PWListener *)listener;
 - (void)listenerDidStartFailed:(PWListener *)listener;
-- (void)listener:(PWListener *)listener didConnectDevice:(PWDevice *)device;
+- (void)listener:(PWListener *)listener didConnectDevice:(PWLocalDevice *)device;
 
 @end
 

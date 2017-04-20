@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PWClient.h"
+#import "PWRemoteDevice.h"
 #import "PWAbility.h"
 
 @class PWProxy;
@@ -33,6 +33,6 @@
 - (void)connect;
 - (void)reconnect;
 - (void)disconnect;
-- (void)send:(PWCommand<PWCommandSendable> *)command toClient:(PWClient *)client;
+- (void)send:(PWCommand<PWCommandSendable> *)command toDevice:(PWRemoteDevice *)device;
 
 @end

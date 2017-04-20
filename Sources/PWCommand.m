@@ -19,9 +19,11 @@ NSString * const PWCommandVideo = @"Video";
     self.clientId = data[@"clientId"];
 }
 
-- (void)fillDataWithProperties:(NSMutableDictionary *)data {
+- (NSMutableDictionary *)fillDataWithProperties {
+    NSMutableDictionary *data = [NSMutableDictionary new];
     data[@"type"] = self.type;
     data[@"clientId"] = self.clientId;
+    return data;
 }
 
 @end

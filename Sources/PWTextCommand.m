@@ -20,8 +20,7 @@
 }
 
 - (NSData *)dataRepresentation {
-    NSMutableDictionary *data = [NSMutableDictionary new];
-    [super fillPropertiesWithData:data];
+    NSMutableDictionary *data = [super fillDataWithProperties];
     data[@"text"] = self.text;
     return [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
 }
