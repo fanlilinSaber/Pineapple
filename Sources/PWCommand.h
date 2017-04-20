@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const PWCommandKeepLive;
 extern NSString * const PWCommandText;
 extern NSString * const PWCommandVideo;
 
@@ -27,5 +28,8 @@ extern NSString * const PWCommandVideo;
 
 @property (copy, nonatomic) NSString *type;
 @property (copy, nonatomic) NSString *clientId;
+
+- (void)fillPropertiesWithData:(NSDictionary *)data;
+- (NSMutableDictionary *)fillDataWithProperties;
 
 @end

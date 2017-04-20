@@ -21,8 +21,8 @@
 		4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4031A3CC1E88EABD0067D8ED /* LaunchScreen.storyboard */; };
 		4031A3D31E88EAC20067D8ED /* Pineapple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3AA1E88E8D80067D8ED /* Pineapple.framework */; };
 		4031A3D61E88EB610067D8ED /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */; };
-		4031A3DA1E88EC470067D8ED /* PWDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3D81E88EC470067D8ED /* PWDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4031A3DB1E88EC470067D8ED /* PWDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3D91E88EC470067D8ED /* PWDevice.m */; };
+		4031A3DA1E88EC470067D8ED /* PWLocalDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3D81E88EC470067D8ED /* PWLocalDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4031A3DB1E88EC470067D8ED /* PWLocalDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3D91E88EC470067D8ED /* PWLocalDevice.m */; };
 		403404151E8DEEC300029235 /* PWListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 403404131E8DEEC300029235 /* PWListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		403404161E8DEEC300029235 /* PWListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 403404141E8DEEC300029235 /* PWListener.m */; };
 		403404191E8DFF8000029235 /* PWVideoCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E987E1E8BBE6800946178 /* PWVideoCommand.m */; };
@@ -33,10 +33,14 @@
 		40A5F84C1EA746DC0078F47C /* PWHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A5F84A1EA746DC0078F47C /* PWHeader.m */; };
 		40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AC06AA1E890CC0004150E2 /* PWCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AC06AB1E890CC0004150E2 /* PWCommand.m */; };
-		40F538191EA5C24E00B1FDC9 /* PWAddClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538181EA5C24E00B1FDC9 /* PWAddClientViewController.m */; };
-		40F538411EA612FC00B1FDC9 /* PWClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F5383E1EA6102500B1FDC9 /* PWClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		40F538421EA612FE00B1FDC9 /* PWClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F5383F1EA6102500B1FDC9 /* PWClient.m */; };
-		40F538451EA613C300B1FDC9 /* PWAddDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538441EA613C300B1FDC9 /* PWAddDeviceViewController.m */; };
+		40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */; };
+		40B2A2251EA864B300A02D96 /* PWKeepLiveCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */; };
+		40B2A2281EA88EB500A02D96 /* PWDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 40B2A2261EA88EB500A02D96 /* PWDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40B2A2291EA88EB500A02D96 /* PWDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B2A2271EA88EB500A02D96 /* PWDevice.m */; };
+		40F538191EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538181EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m */; };
+		40F538411EA612FC00B1FDC9 /* PWRemoteDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F5383E1EA6102500B1FDC9 /* PWRemoteDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40F538421EA612FE00B1FDC9 /* PWRemoteDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F5383F1EA6102500B1FDC9 /* PWRemoteDevice.m */; };
+		40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */; };
 		40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F538461EA6201000B1FDC9 /* PWAbility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40F5384A1EA620B800B1FDC9 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538471EA6201000B1FDC9 /* PWAbility.m */; };
 /* End PBXBuildFile section */
@@ -89,21 +93,25 @@
 		4031A3CD1E88EABD0067D8ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4031A3CF1E88EABD0067D8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
-		4031A3D81E88EC470067D8ED /* PWDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDevice.h; sourceTree = "<group>"; };
-		4031A3D91E88EC470067D8ED /* PWDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDevice.m; sourceTree = "<group>"; };
+		4031A3D81E88EC470067D8ED /* PWLocalDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWLocalDevice.h; sourceTree = "<group>"; };
+		4031A3D91E88EC470067D8ED /* PWLocalDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWLocalDevice.m; sourceTree = "<group>"; };
 		403404131E8DEEC300029235 /* PWListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWListener.h; sourceTree = "<group>"; };
 		403404141E8DEEC300029235 /* PWListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWListener.m; sourceTree = "<group>"; };
 		40A5F8491EA746DC0078F47C /* PWHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWHeader.h; sourceTree = "<group>"; };
 		40A5F84A1EA746DC0078F47C /* PWHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWHeader.m; sourceTree = "<group>"; };
 		40AC06AA1E890CC0004150E2 /* PWCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWCommand.h; sourceTree = "<group>"; };
 		40AC06AB1E890CC0004150E2 /* PWCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWCommand.m; sourceTree = "<group>"; };
-		40F538171EA5C24E00B1FDC9 /* PWAddClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAddClientViewController.h; sourceTree = "<group>"; };
-		40F538181EA5C24E00B1FDC9 /* PWAddClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAddClientViewController.m; sourceTree = "<group>"; };
+		40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWKeepLiveCommand.h; sourceTree = "<group>"; };
+		40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWKeepLiveCommand.m; sourceTree = "<group>"; };
+		40B2A2261EA88EB500A02D96 /* PWDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDevice.h; sourceTree = "<group>"; };
+		40B2A2271EA88EB500A02D96 /* PWDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDevice.m; sourceTree = "<group>"; };
+		40F538171EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAddRemoteDeviceViewController.h; sourceTree = "<group>"; };
+		40F538181EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAddRemoteDeviceViewController.m; sourceTree = "<group>"; };
 		40F5381A1EA5C6F100B1FDC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		40F5383E1EA6102500B1FDC9 /* PWClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWClient.h; sourceTree = "<group>"; };
-		40F5383F1EA6102500B1FDC9 /* PWClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWClient.m; sourceTree = "<group>"; };
-		40F538431EA613C300B1FDC9 /* PWAddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAddDeviceViewController.h; sourceTree = "<group>"; };
-		40F538441EA613C300B1FDC9 /* PWAddDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAddDeviceViewController.m; sourceTree = "<group>"; };
+		40F5383E1EA6102500B1FDC9 /* PWRemoteDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWRemoteDevice.h; sourceTree = "<group>"; };
+		40F5383F1EA6102500B1FDC9 /* PWRemoteDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWRemoteDevice.m; sourceTree = "<group>"; };
+		40F538431EA613C300B1FDC9 /* PWAddLocalDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAddLocalDeviceViewController.h; sourceTree = "<group>"; };
+		40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAddLocalDeviceViewController.m; sourceTree = "<group>"; };
 		40F538461EA6201000B1FDC9 /* PWAbility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAbility.h; sourceTree = "<group>"; };
 		40F538471EA6201000B1FDC9 /* PWAbility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAbility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,20 +162,24 @@
 			children = (
 				4031A3B41E88E9750067D8ED /* Info-iOS.plist */,
 				4031A3B51E88E9750067D8ED /* Pineapple.h */,
+				40B2A2261EA88EB500A02D96 /* PWDevice.h */,
+				40B2A2271EA88EB500A02D96 /* PWDevice.m */,
 				4012FA4F1EA4AAD50080B0DB /* PWProxy.h */,
 				4012FA501EA4AAD50080B0DB /* PWProxy.m */,
-				40F5383E1EA6102500B1FDC9 /* PWClient.h */,
-				40F5383F1EA6102500B1FDC9 /* PWClient.m */,
+				40F5383E1EA6102500B1FDC9 /* PWRemoteDevice.h */,
+				40F5383F1EA6102500B1FDC9 /* PWRemoteDevice.m */,
 				403404131E8DEEC300029235 /* PWListener.h */,
 				403404141E8DEEC300029235 /* PWListener.m */,
-				4031A3D81E88EC470067D8ED /* PWDevice.h */,
-				4031A3D91E88EC470067D8ED /* PWDevice.m */,
+				4031A3D81E88EC470067D8ED /* PWLocalDevice.h */,
+				4031A3D91E88EC470067D8ED /* PWLocalDevice.m */,
 				40F538461EA6201000B1FDC9 /* PWAbility.h */,
 				40F538471EA6201000B1FDC9 /* PWAbility.m */,
 				40A5F8491EA746DC0078F47C /* PWHeader.h */,
 				40A5F84A1EA746DC0078F47C /* PWHeader.m */,
 				40AC06AA1E890CC0004150E2 /* PWCommand.h */,
 				40AC06AB1E890CC0004150E2 /* PWCommand.m */,
+				40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */,
+				40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */,
 				402E987A1E8BBE5A00946178 /* PWTextCommand.h */,
 				402E987B1E8BBE5A00946178 /* PWTextCommand.m */,
 				402E987D1E8BBE6800946178 /* PWVideoCommand.h */,
@@ -187,10 +199,10 @@
 				4031A3C21E88EABD0067D8ED /* AppDelegate.m */,
 				4031A3C41E88EABD0067D8ED /* PWHomeViewController.h */,
 				4031A3C51E88EABD0067D8ED /* PWHomeViewController.m */,
-				40F538431EA613C300B1FDC9 /* PWAddDeviceViewController.h */,
-				40F538441EA613C300B1FDC9 /* PWAddDeviceViewController.m */,
-				40F538171EA5C24E00B1FDC9 /* PWAddClientViewController.h */,
-				40F538181EA5C24E00B1FDC9 /* PWAddClientViewController.m */,
+				40F538431EA613C300B1FDC9 /* PWAddLocalDeviceViewController.h */,
+				40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */,
+				40F538171EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.h */,
+				40F538181EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m */,
 				402E986E1E8B5B8500946178 /* PWDeviceCell.h */,
 				402E986F1E8B5B8500946178 /* PWDeviceCell.m */,
 			);
@@ -227,10 +239,12 @@
 				4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */,
 				4034041A1E8DFF8200029235 /* PWVideoCommand.h in Headers */,
 				40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */,
-				4031A3DA1E88EC470067D8ED /* PWDevice.h in Headers */,
+				4031A3DA1E88EC470067D8ED /* PWLocalDevice.h in Headers */,
 				4034041C1E8DFF8800029235 /* PWTextCommand.h in Headers */,
-				40F538411EA612FC00B1FDC9 /* PWClient.h in Headers */,
+				40B2A2281EA88EB500A02D96 /* PWDevice.h in Headers */,
+				40F538411EA612FC00B1FDC9 /* PWRemoteDevice.h in Headers */,
 				403404151E8DEEC300029235 /* PWListener.h in Headers */,
+				40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */,
 				40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,15 +374,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B2A2291EA88EB500A02D96 /* PWDevice.m in Sources */,
 				403404161E8DEEC300029235 /* PWListener.m in Sources */,
 				40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */,
 				403404191E8DFF8000029235 /* PWVideoCommand.m in Sources */,
 				40F5384A1EA620B800B1FDC9 /* PWAbility.m in Sources */,
-				40F538421EA612FE00B1FDC9 /* PWClient.m in Sources */,
+				40F538421EA612FE00B1FDC9 /* PWRemoteDevice.m in Sources */,
 				4034041B1E8DFF8500029235 /* PWTextCommand.m in Sources */,
-				4031A3DB1E88EC470067D8ED /* PWDevice.m in Sources */,
+				4031A3DB1E88EC470067D8ED /* PWLocalDevice.m in Sources */,
 				4012FA521EA4AAD50080B0DB /* PWProxy.m in Sources */,
 				40A5F84C1EA746DC0078F47C /* PWHeader.m in Sources */,
+				40B2A2251EA864B300A02D96 /* PWKeepLiveCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,8 +393,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */,
-				40F538191EA5C24E00B1FDC9 /* PWAddClientViewController.m in Sources */,
-				40F538451EA613C300B1FDC9 /* PWAddDeviceViewController.m in Sources */,
+				40F538191EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m in Sources */,
+				40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */,
 				4031A3C31E88EABD0067D8ED /* AppDelegate.m in Sources */,
 				4031A3C01E88EABD0067D8ED /* main.m in Sources */,
 				402E98701E8B5B8500946178 /* PWDeviceCell.m in Sources */,

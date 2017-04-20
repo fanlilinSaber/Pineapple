@@ -1,27 +1,26 @@
 //
-//  PWTextCommand.m
+//  PWKeepLiveCommand.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/3/29.
+//  Created by Dan Jiang on 2017/4/20.
 //
 //
 
-#import "PWTextCommand.h"
+#import "PWKeepLiveCommand.h"
 
-@implementation PWTextCommand
+@implementation PWKeepLiveCommand
 
-- (instancetype)initWithText:(NSString *)text {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        self.type = PWCommandText;
-        _text = text;
+        self.type = PWCommandKeepLive;
     }
     return self;
 }
 
 - (NSData *)dataRepresentation {
     NSMutableDictionary *data = [super fillDataWithProperties];
-    data[@"text"] = self.text;
+    data[@"text"] = @"";
     return [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
 }
 

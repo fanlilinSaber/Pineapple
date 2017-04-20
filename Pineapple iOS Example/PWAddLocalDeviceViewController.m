@@ -6,10 +6,10 @@
 //
 //
 
-#import "PWAddDeviceViewController.h"
+#import "PWAddLocalDeviceViewController.h"
 @import Masonry;
 
-@interface PWAddDeviceViewController ()
+@interface PWAddLocalDeviceViewController ()
 
 @property (weak, nonatomic) UILabel *nameLabel;
 @property (weak, nonatomic) UITextField *nameTextField;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation PWAddDeviceViewController
+@implementation PWAddLocalDeviceViewController
 
 - (void)loadView {
     [super loadView];
@@ -100,8 +100,8 @@
 
 - (void)save {
     if (self.nameTextField.text.length > 0 && self.hostTextField.text.length > 0 && self.portTextField.text.length > 0) {
-        PWDevice *device = [[PWDevice alloc] initWithName:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue];
-        [self.delegate addDeviceViewControllerDidSave:self withDevice:device];
+        PWLocalDevice *device = [[PWLocalDevice alloc] initWithName:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue reconnect:true];
+        [self.delegate addLocalDeviceViewControllerDidSave:self withDevice:device];
     }
 }
 

@@ -7,19 +7,19 @@
 //
 
 #import "PWHomeViewController.h"
-#import "PWAddDeviceViewController.h"
-#import "PWAddClientViewController.h"
+#import "PWAddLocalDeviceViewController.h"
+#import "PWAddRemoteDeviceViewController.h"
 #import "PWDeviceCell.h"
 #import "Pineapple.h"
 @import Masonry;
 
 static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
-@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddDeviceViewControllerDelegate, PWAddClientViewControllerDelegate, PWProxyDelegate, PWListenerDelegate, PWDeviceDelegate>
+@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddLocalDeviceViewControllerDelegate, PWAddRemoteDeviceViewControllerDelegate, PWProxyDelegate, PWListenerDelegate, PWLocalDeviceDelegate>
 
 @property (strong, nonatomic) PWProxy *proxy;
 @property (strong, nonatomic) PWListener *listener;
-@property (copy, nonatomic) NSArray *devicesAndClients;
+@property (copy, nonatomic) NSArray *devices;
 @property (weak, nonatomic) UITextField *textField;
 @property (weak, nonatomic) UIButton *sendButton;
 @property (weak, nonatomic) UITableView *tableView;
@@ -40,7 +40,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     self.listener = [[PWListener alloc] initWithPort:5000];
     self.listener.delegate = self;
     
-    self.devicesAndClients = @[];
+    self.devices = @[];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"MQTT" style:UIBarButtonItemStylePlain target:self action:@selector(addMQTT)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Socket" style:UIBarButtonItemStylePlain target:self action:@selector(addSocket)];
@@ -109,14 +109,14 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 #pragma mark - Action
 
 - (void)addMQTT {
-    PWAddClientViewController *addClientViewController = [[PWAddClientViewController alloc] init];
-    addClientViewController.delegate = self;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addClientViewController];
+    PWAddRemoteDeviceViewController *addRemoteDeviceViewController = [[PWAddRemoteDeviceViewController alloc] init];
+    addRemoteDeviceViewController.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addRemoteDeviceViewController];
     [self presentViewController:navigationController animated:true completion:nil];
 }
 
 - (void)addSocket {
-    PWAddDeviceViewController *addDeviceViewController = [PWAddDeviceViewController new];
+    PWAddLocalDeviceViewController *addDeviceViewController = [PWAddLocalDeviceViewController new];
     addDeviceViewController.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addDeviceViewController];
     [self presentViewController:navigationController animated:true completion:nil];
@@ -127,14 +127,14 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     NSString *text = self.textField.text;
     if (indexPath && ![text isEqualToString:@""]) {
         PWTextCommand *comand = [[PWTextCommand alloc] initWithText:text];
-        NSObject *deviceOrClient = self.devicesAndClients[indexPath.row];
-        if ([deviceOrClient isKindOfClass:[PWDevice class]]) {
-            PWDevice *device = (PWDevice *)deviceOrClient;
-            comand.clientId = [[NSString alloc] initWithFormat:@"%@:%d", device.host, device.port];
-            [device send:comand];
+        PWDevice *device = self.devices[indexPath.row];
+        if ([device isKindOfClass:[PWLocalDevice class]]) {
+            PWLocalDevice *localDevice = (PWLocalDevice *)device;
+            comand.clientId = [[NSString alloc] initWithFormat:@"%@:%d", localDevice.host, localDevice.port];
+            [localDevice send:comand];
         } else {
-            PWClient *client = (PWClient *)deviceOrClient;
-            [self.proxy send:comand toClient:client];
+            PWRemoteDevice *remoteDevice = (PWRemoteDevice *)device;
+            [self.proxy send:comand toDevice:remoteDevice];
         }
         self.textField.text = nil;
     }
@@ -142,31 +142,45 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
 #pragma mark - Private
 
-- (void)addDevice:(PWDevice *)device {
+- (void)addLocalDevice:(PWLocalDevice *)device {
     device.delegate = self;
     [device connect];
-    NSMutableArray *devicesAndClients = [self.devicesAndClients mutableCopy];
-    [devicesAndClients addObject:device];
-    self.devicesAndClients = devicesAndClients;
+    NSMutableArray *devices = [self.devices mutableCopy];
+    [devices addObject:device];
+    self.devices = devices;
     [self.tableView reloadData];
 }
 
-- (void)addClient:(PWClient *)client {
+- (void)addRemoteDevice:(PWRemoteDevice *)device {
     BOOL existed = NO;
-    for (NSObject *deviceOrClient in self.devicesAndClients) {
-        if ([deviceOrClient isKindOfClass:[PWClient class]]) {
-            PWClient *eachClient = (PWClient *)deviceOrClient;
-            if ([eachClient.clientId isEqualToString:client.clientId]) {
+    for (PWDevice *eachDevice in self.devices) {
+        if ([eachDevice isKindOfClass:[PWRemoteDevice class]]) {
+            PWRemoteDevice *remoteDevice = (PWRemoteDevice *)eachDevice;
+            if ([remoteDevice.clientId isEqualToString:device.clientId]) {
                 existed = YES;
                 break;
             }
         }
     }
     if (!existed) {
-        NSMutableArray *devicesAndClients = [self.devicesAndClients mutableCopy];
-        [devicesAndClients addObject:client];
-        self.devicesAndClients = devicesAndClients;
+        NSMutableArray *devices = [self.devices mutableCopy];
+        [devices addObject:device];
+        self.devices = devices;
         [self.tableView reloadData];
+    }
+}
+
+- (void)removeLocalDevice:(PWLocalDevice *)device {
+    for (PWDevice *eachDevice in self.devices) {
+        if ([eachDevice isKindOfClass:[PWLocalDevice class]]) {
+            PWLocalDevice *localDevice = (PWLocalDevice *)eachDevice;
+            if ([localDevice.host isEqualToString:device.host] && localDevice.port == device.port) {
+                NSMutableArray *devices = [self.devices mutableCopy];
+                [devices removeObject:device];
+                self.devices = devices;
+                [self.tableView reloadData];
+            }
+        }
     }
 }
 
@@ -177,37 +191,37 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.devicesAndClients.count;
+    return self.devices.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PWDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:PWDeviceCellIdentifier];
-    NSObject *deviceOrClient = self.devicesAndClients[indexPath.row];
-    if ([deviceOrClient isKindOfClass:[PWDevice class]]) {
-        PWDevice *device = (PWDevice *)deviceOrClient;
-        cell.nameLabel.text = device.name;
-        cell.addressLabel.text = [[NSString alloc] initWithFormat:@"%@:%d", device.host, device.port];
+    PWDevice *device = self.devices[indexPath.row];
+    if ([device isKindOfClass:[PWLocalDevice class]]) {
+        PWLocalDevice *localDevice = (PWLocalDevice *)device;
+        cell.nameLabel.text = localDevice.name;
+        cell.addressLabel.text = [[NSString alloc] initWithFormat:@"%@:%d", localDevice.host, localDevice.port];
     } else {
-        PWClient *client = (PWClient *)deviceOrClient;
-        cell.nameLabel.text = client.name;
-        cell.addressLabel.text = client.clientId;
+        PWRemoteDevice *remoteDevice = (PWRemoteDevice *)device;
+        cell.nameLabel.text = remoteDevice.name;
+        cell.addressLabel.text = remoteDevice.clientId;
     }
     return cell;
 }
 
-#pragma mark - PWAddDeviceViewControllerDelegate
+#pragma mark - PWAddLocalDeviceViewControllerDelegate
 
-- (void)addDeviceViewControllerDidSave:(PWAddDeviceViewController *)addDeviceViewController withDevice:(PWDevice *)device {
+- (void)addLocalDeviceViewControllerDidSave:(PWAddLocalDeviceViewController *)addLocalDeviceViewController withDevice:(PWLocalDevice *)device {
     [self dismissViewControllerAnimated:true completion:^{
-        [self addDevice:device];
+        [self addLocalDevice:device];
     }];
 }
 
-#pragma mark - PWAddClientViewControllerDelegate
+#pragma mark - PWAddRemoteDeviceViewControllerDelegate
 
-- (void)addClientViewControllerDidSave:(PWAddClientViewController *)addClientViewController withClient:(PWClient *)client {
+- (void)addRemoteDeviceViewControllerDidSave:(PWAddRemoteDeviceViewController *)addRemoteDeviceViewController withDevice:(PWRemoteDevice *)device {
     [self dismissViewControllerAnimated:true completion:^{
-        [self addClient:client];
+        [self addRemoteDevice:device];
     }];
 }
 
@@ -221,8 +235,8 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [self log:@"Socket 监听失败"];
 }
 
-- (void)listener:(PWListener *)listener didConnectDevice:(PWDevice *)device {
-    [self addDevice:device];
+- (void)listener:(PWListener *)listener didConnectDevice:(PWLocalDevice *)device {
+    [self addLocalDevice:device];
 }
 
 #pragma mark - PWProxyDelegate
@@ -255,30 +269,33 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     if ([command isMemberOfClass:[PWVideoCommand class]]) {
         PWVideoCommand *videoCommand = (PWVideoCommand *)command;
         [self log:[NSString stringWithFormat:@"%@->%@", videoCommand.clientId, videoCommand.video]];
-        PWClient *client = [[PWClient alloc] initWithName:@"未知" clientId:videoCommand.clientId];
-        [self addClient:client];
+        PWRemoteDevice *device = [[PWRemoteDevice alloc] initWithName:@"未知" clientId:videoCommand.clientId];
+        [self addRemoteDevice:device];
     }
 }
 
-#pragma mark - PWDeviceDelegate
+#pragma mark - PWLocalDeviceDelegate
 
-- (void)deviceDidConnectSuccess:(PWDevice *)device {
+- (void)deviceDidConnectSuccess:(PWLocalDevice *)device {
     [self log:[NSString stringWithFormat:@"%@:%d->开启连接成功", device.host, device.port]];
 }
 
-- (void)device:(PWDevice *)device didConnectFailedMessage:(NSString *)message {
+- (void)device:(PWLocalDevice *)device didConnectFailedMessage:(NSString *)message {
     [self log:[NSString stringWithFormat:@"%@:%d->开启连接失败: %@", device.host, device.port, message]];
+    [self removeLocalDevice:device];
 }
 
-- (void)deviceDidDisconnectSuccess:(PWDevice *)device {
+- (void)deviceDidDisconnectSuccess:(PWLocalDevice *)device {
     [self log:[NSString stringWithFormat:@"%@:%d->断开连接成功", device.host, device.port]];
+    [self removeLocalDevice:device];
 }
 
-- (void)device:(PWDevice *)device didDisconnectFailedMessage:(NSString *)message {
+- (void)device:(PWLocalDevice *)device didDisconnectFailedMessage:(NSString *)message {
     [self log:[NSString stringWithFormat:@"%@:%d->断开连接失败: %@", device.host, device.port, message]];
+    [self removeLocalDevice:device];
 }
 
-- (void)device:(PWDevice *)device didReceiveCommand:(PWCommand *)command {
+- (void)device:(PWLocalDevice *)device didReceiveCommand:(PWCommand *)command {
     if ([command isMemberOfClass:[PWVideoCommand class]]) {
         PWVideoCommand *videoCommand = (PWVideoCommand *)command;
         [self log:[NSString stringWithFormat:@"%@:%d->%@", device.host, device.port, videoCommand.video]];

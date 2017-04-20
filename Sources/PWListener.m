@@ -22,6 +22,9 @@
     self = [super init];
     if (self) {
         _port = port;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -38,10 +41,20 @@
     }
 }
 
+#pragma mark - Handle App Life Style
+
+- (void)appWillResignActive {
+    [self.listenSocket disconnect];
+}
+
+- (void)appDidBecomeActive {
+    [self start];
+}
+
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sender didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
-    PWDevice *device = [[PWDevice alloc] initWithSocket:newSocket];
+    PWLocalDevice *device = [[PWLocalDevice alloc] initWithSocket:newSocket];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate listener:self didConnectDevice:device];
     });
