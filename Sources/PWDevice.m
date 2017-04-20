@@ -8,14 +8,17 @@
 
 #import "PWDevice.h"
 #import "PWHeader.h"
+#import "PWKeepLiveCommand.h"
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
-static NSInteger const TagHeader = 10;
-static NSInteger const TagBody = 11;
+static NSInteger const PWTagHeader = 10;
+static NSInteger const PWTagBody = 11;
+static NSTimeInterval const PWKeepLiveTimeInterva = 60;
 
 @interface PWDevice () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *socket;
+@property (strong, nonatomic) NSTimer *keepLiveTimer;
 
 @end
 
@@ -58,8 +61,13 @@ static NSInteger const TagBody = 11;
             [self.delegate device:self didConnectFailedMessage:[error localizedDescription]];
         }
     } else {
-        [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:TagHeader];
+        [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
     }
+    if (self.keepLiveTimer) {
+        [self.keepLiveTimer invalidate];
+        self.keepLiveTimer = nil;
+    }
+    self.keepLiveTimer = [NSTimer scheduledTimerWithTimeInterval:PWKeepLiveTimeInterva target:self selector:@selector(keepLive) userInfo:nil repeats:YES];
 }
 
 - (void)disconnect {
@@ -78,13 +86,24 @@ static NSInteger const TagBody = 11;
     [self.socket writeData:data withTimeout:-1 tag:0];
 }
 
+#pragma mark - Private
+
+- (void)keepLive {
+    if ([self.socket isConnected]) {
+        [self send:[PWKeepLiveCommand new]];
+    } else {
+        [self.keepLiveTimer invalidate];
+        self.keepLiveTimer = nil;
+    }
+}
+
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate deviceDidConnectSuccess:self];
     });
-    [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:TagHeader];
+    [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error {
@@ -100,15 +119,17 @@ static NSInteger const TagBody = 11;
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {}
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    if (tag == TagHeader) {
+    if (tag == PWTagHeader) {
         PWHeader *header = [[PWHeader alloc] initWithData:data];
-        [self.socket readDataToLength:header.contentLength withTimeout:-1 tag:TagBody];
-    } else if (tag == TagBody) {
+        [self.socket readDataToLength:header.contentLength withTimeout:-1 tag:PWTagBody];
+    } else if (tag == PWTagBody) {
         PWCommand *command = [PWAbility commandWithData:data];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate device:self didReceiveCommand:command];
-        });
-        [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:TagHeader];
+        if (command != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate device:self didReceiveCommand:command];
+            });
+        }
+        [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
     }
 }
 

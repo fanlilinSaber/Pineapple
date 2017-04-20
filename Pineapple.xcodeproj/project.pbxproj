@@ -33,6 +33,8 @@
 		40A5F84C1EA746DC0078F47C /* PWHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A5F84A1EA746DC0078F47C /* PWHeader.m */; };
 		40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AC06AA1E890CC0004150E2 /* PWCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AC06AB1E890CC0004150E2 /* PWCommand.m */; };
+		40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */; };
+		40B2A2251EA864B300A02D96 /* PWKeepLiveCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */; };
 		40F538191EA5C24E00B1FDC9 /* PWAddClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538181EA5C24E00B1FDC9 /* PWAddClientViewController.m */; };
 		40F538411EA612FC00B1FDC9 /* PWClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F5383E1EA6102500B1FDC9 /* PWClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40F538421EA612FE00B1FDC9 /* PWClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F5383F1EA6102500B1FDC9 /* PWClient.m */; };
@@ -97,6 +99,8 @@
 		40A5F84A1EA746DC0078F47C /* PWHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWHeader.m; sourceTree = "<group>"; };
 		40AC06AA1E890CC0004150E2 /* PWCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWCommand.h; sourceTree = "<group>"; };
 		40AC06AB1E890CC0004150E2 /* PWCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWCommand.m; sourceTree = "<group>"; };
+		40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWKeepLiveCommand.h; sourceTree = "<group>"; };
+		40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWKeepLiveCommand.m; sourceTree = "<group>"; };
 		40F538171EA5C24E00B1FDC9 /* PWAddClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAddClientViewController.h; sourceTree = "<group>"; };
 		40F538181EA5C24E00B1FDC9 /* PWAddClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAddClientViewController.m; sourceTree = "<group>"; };
 		40F5381A1EA5C6F100B1FDC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 				40A5F84A1EA746DC0078F47C /* PWHeader.m */,
 				40AC06AA1E890CC0004150E2 /* PWCommand.h */,
 				40AC06AB1E890CC0004150E2 /* PWCommand.m */,
+				40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */,
+				40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */,
 				402E987A1E8BBE5A00946178 /* PWTextCommand.h */,
 				402E987B1E8BBE5A00946178 /* PWTextCommand.m */,
 				402E987D1E8BBE6800946178 /* PWVideoCommand.h */,
@@ -231,6 +237,7 @@
 				4034041C1E8DFF8800029235 /* PWTextCommand.h in Headers */,
 				40F538411EA612FC00B1FDC9 /* PWClient.h in Headers */,
 				403404151E8DEEC300029235 /* PWListener.h in Headers */,
+				40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */,
 				40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +376,7 @@
 				4031A3DB1E88EC470067D8ED /* PWDevice.m in Sources */,
 				4012FA521EA4AAD50080B0DB /* PWProxy.m in Sources */,
 				40A5F84C1EA746DC0078F47C /* PWHeader.m in Sources */,
+				40B2A2251EA864B300A02D96 /* PWKeepLiveCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
