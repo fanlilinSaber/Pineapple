@@ -6,7 +6,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "PWDevice.h"
 #import "PWAbility.h"
 
@@ -28,7 +28,7 @@
 @property (copy, nonatomic) NSString *host;
 @property (nonatomic) int port;
 
-- (instancetype)initWithName:(NSString *)name host:(NSString *)host port:(int)port;
+- (instancetype)initWithName:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect;
 - (instancetype)initWithSocket:(GCDAsyncSocket *)socket;
 
 - (BOOL)isConnected;

@@ -100,7 +100,7 @@
 
 - (void)save {
     if (self.nameTextField.text.length > 0 && self.hostTextField.text.length > 0 && self.portTextField.text.length > 0) {
-        PWLocalDevice *device = [[PWLocalDevice alloc] initWithName:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue];
+        PWLocalDevice *device = [[PWLocalDevice alloc] initWithName:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue reconnect:true];
         [self.delegate addLocalDeviceViewControllerDidSave:self withDevice:device];
     }
 }

@@ -34,7 +34,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     
     self.title = @"设备列表";
     
-    self.proxy = [[PWProxy alloc] initWithHost:@"mqf-er9w0k6ntu.mqtt.aliyuncs.com" port:1883 user:@"aEACwHFvAqv1A3eK" pass:@"LC4uWeVKgBiG9QigL3cP+estMYQ=" groupId:@"GID_equipment001" deviceId:@"Banana" rootTopic:@"topic_equipment001"];
+    self.proxy = [[PWProxy alloc] initWithHost:@"mqf-er9w0k6ntu.mqtt.aliyuncs.com" port:1883 user:@"aEACwHFvAqv1A3eK" pass:@"LC4uWeVKgBiG9QigL3cP+estMYQ=" groupId:@"GID_equipment001" deviceId:@"Apple" rootTopic:@"topic_equipment001"];
     self.proxy.delegate = self;
     
     self.listener = [[PWListener alloc] initWithPort:5000];
@@ -170,6 +170,20 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     }
 }
 
+- (void)removeLocalDevice:(PWLocalDevice *)device {
+    for (PWDevice *eachDevice in self.devices) {
+        if ([eachDevice isKindOfClass:[PWLocalDevice class]]) {
+            PWLocalDevice *localDevice = (PWLocalDevice *)eachDevice;
+            if ([localDevice.host isEqualToString:device.host] && localDevice.port == device.port) {
+                NSMutableArray *devices = [self.devices mutableCopy];
+                [devices removeObject:device];
+                self.devices = devices;
+                [self.tableView reloadData];
+            }
+        }
+    }
+}
+
 - (void)log:(NSString *)text {
     self.textView.text = [NSString stringWithFormat:@"%@%@\n", self.textView.text, text];
 }
@@ -268,14 +282,17 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
 - (void)device:(PWLocalDevice *)device didConnectFailedMessage:(NSString *)message {
     [self log:[NSString stringWithFormat:@"%@:%d->开启连接失败: %@", device.host, device.port, message]];
+    [self removeLocalDevice:device];
 }
 
 - (void)deviceDidDisconnectSuccess:(PWLocalDevice *)device {
     [self log:[NSString stringWithFormat:@"%@:%d->断开连接成功", device.host, device.port]];
+    [self removeLocalDevice:device];
 }
 
 - (void)device:(PWLocalDevice *)device didDisconnectFailedMessage:(NSString *)message {
     [self log:[NSString stringWithFormat:@"%@:%d->断开连接失败: %@", device.host, device.port, message]];
+    [self removeLocalDevice:device];
 }
 
 - (void)device:(PWLocalDevice *)device didReceiveCommand:(PWCommand *)command {

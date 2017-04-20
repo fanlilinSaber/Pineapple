@@ -24,11 +24,14 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 
 @implementation PWLocalDevice
 
-- (instancetype)initWithName:(NSString *)name host:(NSString *)host port:(int)port {
+- (instancetype)initWithName:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
     self = [super initWithName:name];
     if (self) {
         _host = host;
         _port = port;
+        if (reconnect) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        }
     }
     return self;
 }
@@ -50,22 +53,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 }
 
 - (void)connect {
-    if (!self.socket) {
-       self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
-    }
-    if ([self.socket isDisconnected]) {
-        NSError *error = nil;
-        if (![self.socket connectToHost:self.host onPort:self.port error:&error]) {
-            [self.delegate device:self didConnectFailedMessage:[error localizedDescription]];
-        }
-    } else {
-        [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
-    }
-    if (self.keepLiveTimer) {
-        [self.keepLiveTimer invalidate];
-        self.keepLiveTimer = nil;
-    }
-    self.keepLiveTimer = [NSTimer scheduledTimerWithTimeInterval:PWKeepLiveTimeInterval target:self selector:@selector(keepLive) userInfo:nil repeats:YES];
+    [self connectWithRead:true];
 }
 
 - (void)disconnect {
@@ -84,7 +72,32 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     [self.socket writeData:data withTimeout:-1 tag:0];
 }
 
+#pragma mark - Handle App Life Style
+
+- (void)appDidBecomeActive {
+    [self connectWithRead:false];
+}
+
 #pragma mark - Private
+
+- (void)connectWithRead:(BOOL)read {
+    if (!self.socket) {
+        self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    }
+    if ([self.socket isDisconnected]) {
+        NSError *error = nil;
+        if (![self.socket connectToHost:self.host onPort:self.port error:&error]) {
+            [self.delegate device:self didConnectFailedMessage:[error localizedDescription]];
+        }
+    } else if (read) {
+        [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
+    }
+    if (self.keepLiveTimer) {
+        [self.keepLiveTimer invalidate];
+        self.keepLiveTimer = nil;
+    }
+    self.keepLiveTimer = [NSTimer scheduledTimerWithTimeInterval:PWKeepLiveTimeInterval target:self selector:@selector(keepLive) userInfo:nil repeats:YES];
+}
 
 - (void)keepLive {
     if ([self.socket isConnected]) {

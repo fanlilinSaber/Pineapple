@@ -22,6 +22,9 @@
     self = [super init];
     if (self) {
         _port = port;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -36,6 +39,16 @@
     } else {
         [self.delegate listenerDidStartSuccess:self];
     }
+}
+
+#pragma mark - Handle App Life Style
+
+- (void)appWillResignActive {
+    [self.listenSocket disconnect];
+}
+
+- (void)appDidBecomeActive {
+    [self start];
 }
 
 #pragma mark - GCDAsyncSocketDelegate
