@@ -17,6 +17,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 
 @interface PWLocalDevice () <GCDAsyncSocketDelegate>
 
+@property (strong, nonatomic) PWAbility *ability;
 @property (strong, nonatomic) GCDAsyncSocket *socket;
 @property (strong, nonatomic) NSTimer *keepLiveTimer;
 
@@ -24,9 +25,10 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 
 @implementation PWLocalDevice
 
-- (instancetype)initWithName:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
+- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
     self = [super initWithName:name];
     if (self) {
+        _ability = ability;
         _host = host;
         _port = port;
         if (reconnect) {
@@ -36,9 +38,10 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     return self;
 }
 
-- (instancetype)initWithSocket:(GCDAsyncSocket *)socket {
+- (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket {
     self = [super initWithName:@"未知"];
     if (self) {
+        _ability = ability;
         _host = socket.connectedHost;
         _port = socket.connectedPort;
         _socket = socket;
@@ -134,7 +137,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
         PWHeader *header = [[PWHeader alloc] initWithData:data];
         [self.socket readDataToLength:header.contentLength withTimeout:-1 tag:PWTagBody];
     } else if (tag == PWTagBody) {
-        PWCommand *command = [PWAbility commandWithData:data];
+        PWCommand *command = [self.ability commandWithData:data];
         if (command != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate device:self didReceiveCommand:command];

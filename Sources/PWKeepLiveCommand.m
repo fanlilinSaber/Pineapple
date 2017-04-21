@@ -10,10 +10,14 @@
 
 @implementation PWKeepLiveCommand
 
++ (NSString *)type {
+    return @"Keep Live";
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.type = PWCommandKeepLive;
+        self.type = PWKeepLiveCommand.type;
     }
     return self;
 }

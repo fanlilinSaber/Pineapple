@@ -8,18 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const PWCommandKeepLive;
-extern NSString * const PWCommandText;
-extern NSString * const PWCommandVideo;
-
 @protocol PWCommandSendable <NSObject>
 
++ (NSString *)type;
 - (NSData *)dataRepresentation;
 
 @end
 
 @protocol PWCommandReceivable <NSObject>
 
++ (NSString *)type;
 - (void)parseData:(NSDictionary *)data;
 
 @end

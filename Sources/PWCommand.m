@@ -8,10 +8,6 @@
 
 #import "PWCommand.h"
 
-NSString * const PWCommandKeepLive = @"Keep Live";
-NSString * const PWCommandText = @"Text";
-NSString * const PWCommandVideo = @"Video";
-
 @implementation PWCommand
 
 - (void)fillPropertiesWithData:(NSDictionary *)data {

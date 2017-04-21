@@ -11,6 +11,7 @@
 
 @interface PWAddLocalDeviceViewController ()
 
+@property (strong, nonatomic) PWAbility *ability;
 @property (weak, nonatomic) UILabel *nameLabel;
 @property (weak, nonatomic) UITextField *nameTextField;
 @property (weak, nonatomic) UILabel *hostLabel;
@@ -21,6 +22,14 @@
 @end
 
 @implementation PWAddLocalDeviceViewController
+
+- (instancetype)initWithAbility:(PWAbility *)ability {
+    self = [super init];
+    if (self) {
+        _ability = ability;
+    }
+    return self;
+}
 
 - (void)loadView {
     [super loadView];
@@ -100,7 +109,7 @@
 
 - (void)save {
     if (self.nameTextField.text.length > 0 && self.hostTextField.text.length > 0 && self.portTextField.text.length > 0) {
-        PWLocalDevice *device = [[PWLocalDevice alloc] initWithName:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue reconnect:true];
+        PWLocalDevice *device = [[PWLocalDevice alloc] initWithAbility:self.ability name:self.nameTextField.text host:self.hostTextField.text port:self.portTextField.text.intValue reconnect:true];
         [self.delegate addLocalDeviceViewControllerDidSave:self withDevice:device];
     }
 }

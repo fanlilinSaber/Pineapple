@@ -28,7 +28,7 @@
 
 @property (weak, nonatomic) id<PWProxyDelegate> delegate;
 
-- (instancetype)initWithHost:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass groupId:(NSString *)groupId deviceId:(NSString *)deviceId rootTopic:(NSString *)rootTopic;
+- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass groupId:(NSString *)groupId deviceId:(NSString *)deviceId rootTopic:(NSString *)rootTopic;
 
 - (void)connect;
 - (void)reconnect;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PWCommand.h"
 
-@interface PWTextCommand : PWCommand <PWCommandSendable>
+@interface PWTextCommand : PWCommand <PWCommandSendable, PWCommandReceivable>
 
 @property (copy, nonatomic) NSString *text;
 
