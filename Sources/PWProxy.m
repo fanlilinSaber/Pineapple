@@ -12,6 +12,7 @@
 @interface PWProxy () <MQTTSessionManagerDelegate>
 
 @property (strong, nonatomic) MQTTSessionManager *sessionManager;
+@property (strong, nonatomic) PWAbility *ability;
 @property (copy, nonatomic) NSString *host;
 @property (nonatomic) NSInteger port;
 @property (copy, nonatomic) NSString *user;
@@ -25,9 +26,10 @@
 
 @implementation PWProxy
 
-- (instancetype)initWithHost:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass groupId:(NSString *)groupId deviceId:(NSString *)deviceId rootTopic:(NSString *)rootTopic {
+- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass groupId:(NSString *)groupId deviceId:(NSString *)deviceId rootTopic:(NSString *)rootTopic {
     self = [super init];
     if (self) {
+        _ability = ability;
         _host = host;
         _port = port;
         _user = user;
@@ -108,7 +110,7 @@
 #pragma mark - MQTTSessionManagerDelegate
 
 - (void)handleMessage:(NSData *)data onTopic:(NSString *)topic retained:(BOOL)retained {
-    PWCommand *command = [PWAbility commandWithData:data];
+    PWCommand *command = [self.ability commandWithData:data];
     [self.delegate proxy:self didReceiveCommand:command];    
 }
 

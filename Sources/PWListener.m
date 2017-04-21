@@ -12,15 +12,17 @@
 @interface PWListener () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *listenSocket;
+@property (strong, nonatomic) PWAbility *ability;
 @property (nonatomic) NSInteger port;
 
 @end
 
 @implementation PWListener
 
-- (instancetype)initWithPort:(NSInteger)port {
+- (instancetype)initWithAbility:(PWAbility *)ability port:(NSInteger)port {
     self = [super init];
     if (self) {
+        _ability = ability;
         _port = port;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
@@ -54,7 +56,7 @@
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sender didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
-    PWLocalDevice *device = [[PWLocalDevice alloc] initWithSocket:newSocket];
+    PWLocalDevice *device = [[PWLocalDevice alloc] initWithAbility:self.ability socket:newSocket];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate listener:self didConnectDevice:device];
     });

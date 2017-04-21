@@ -17,6 +17,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
 @interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddLocalDeviceViewControllerDelegate, PWAddRemoteDeviceViewControllerDelegate, PWProxyDelegate, PWListenerDelegate, PWLocalDeviceDelegate>
 
+@property (strong, nonatomic) PWAbility *ability;
 @property (strong, nonatomic) PWProxy *proxy;
 @property (strong, nonatomic) PWListener *listener;
 @property (copy, nonatomic) NSArray *devices;
@@ -34,10 +35,12 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     
     self.title = @"设备列表";
     
-    self.proxy = [[PWProxy alloc] initWithHost:@"mqf-er9w0k6ntu.mqtt.aliyuncs.com" port:1883 user:@"aEACwHFvAqv1A3eK" pass:@"LC4uWeVKgBiG9QigL3cP+estMYQ=" groupId:@"GID_equipment001" deviceId:@"Apple" rootTopic:@"topic_equipment001"];
+    self.ability = [PWAbility new];
+    
+    self.proxy = [[PWProxy alloc] initWithAbility:self.ability host:@"mqf-er9w0k6ntu.mqtt.aliyuncs.com" port:1883 user:@"aEACwHFvAqv1A3eK" pass:@"LC4uWeVKgBiG9QigL3cP+estMYQ=" groupId:@"GID_equipment001" deviceId:@"Apple" rootTopic:@"topic_equipment001"];
     self.proxy.delegate = self;
     
-    self.listener = [[PWListener alloc] initWithPort:5000];
+    self.listener = [[PWListener alloc] initWithAbility:self.ability port:5000];
     self.listener.delegate = self;
     
     self.devices = @[];
@@ -116,7 +119,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 }
 
 - (void)addSocket {
-    PWAddLocalDeviceViewController *addDeviceViewController = [PWAddLocalDeviceViewController new];
+    PWAddLocalDeviceViewController *addDeviceViewController = [[PWAddLocalDeviceViewController alloc] initWithAbility:self.ability];
     addDeviceViewController.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addDeviceViewController];
     [self presentViewController:navigationController animated:true completion:nil];
@@ -266,10 +269,10 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 }
 
 - (void)proxy:(PWProxy *)proxy didReceiveCommand:(PWCommand *)command {
-    if ([command isMemberOfClass:[PWVideoCommand class]]) {
-        PWVideoCommand *videoCommand = (PWVideoCommand *)command;
-        [self log:[NSString stringWithFormat:@"%@->%@", videoCommand.clientId, videoCommand.video]];
-        PWRemoteDevice *device = [[PWRemoteDevice alloc] initWithName:@"未知" clientId:videoCommand.clientId];
+    if ([command.type isEqualToString:PWTextCommand.type]) {
+        PWTextCommand *textCommand = (PWTextCommand *)command;
+        [self log:[NSString stringWithFormat:@"%@->%@", textCommand.clientId, textCommand.text]];
+        PWRemoteDevice *device = [[PWRemoteDevice alloc] initWithName:@"未知" clientId:textCommand.clientId];
         [self addRemoteDevice:device];
     }
 }
@@ -296,9 +299,9 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 }
 
 - (void)device:(PWLocalDevice *)device didReceiveCommand:(PWCommand *)command {
-    if ([command isMemberOfClass:[PWVideoCommand class]]) {
-        PWVideoCommand *videoCommand = (PWVideoCommand *)command;
-        [self log:[NSString stringWithFormat:@"%@:%d->%@", device.host, device.port, videoCommand.video]];
+    if ([command.type isEqualToString:PWTextCommand.type]) {
+        PWTextCommand *textCommand = (PWTextCommand *)command;
+        [self log:[NSString stringWithFormat:@"%@:%d->%@", device.host, device.port, textCommand.text]];
     }
 }
 

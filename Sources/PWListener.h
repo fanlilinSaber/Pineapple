@@ -23,7 +23,7 @@
 
 @property (weak, nonatomic) id<PWListenerDelegate> delegate;
 
-- (instancetype)initWithPort:(NSInteger)port;
+- (instancetype)initWithAbility:(PWAbility *)ability port:(NSInteger)port;
 
 - (void)start;
 

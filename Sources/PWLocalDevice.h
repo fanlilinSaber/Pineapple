@@ -28,8 +28,8 @@
 @property (copy, nonatomic) NSString *host;
 @property (nonatomic) int port;
 
-- (instancetype)initWithName:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect;
-- (instancetype)initWithSocket:(GCDAsyncSocket *)socket;
+- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect;
+- (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket;
 
 - (BOOL)isConnected;
 - (void)connect;

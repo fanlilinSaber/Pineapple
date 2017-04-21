@@ -20,4 +20,6 @@
 
 @property (weak, nonatomic) id<PWAddLocalDeviceViewControllerDelegate> delegate;
 
+- (instancetype)initWithAbility:(PWAbility *)ability;
+
 @end
