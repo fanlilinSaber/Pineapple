@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   spec.name = "Pineapple"
   spec.version = "1.0.0"
-  spec.summary = "Simplify TCP Socket"
+  spec.summary = "Simplify TCP Socket & MQTT"
   spec.homepage = "http://git.oschina.net/i-focusing-app/Pineapple"
   spec.license = { type: 'MIT', file: 'LICENSE' }
   spec.authors = { "Dan Jiang" => 'danjiang@i-focusing.com' }
@@ -11,4 +11,5 @@ Pod::Spec.new do |spec|
   spec.source_files = "Sources/**/*.{h,m}"
   spec.resources = "Sources/*.bundle"
   spec.dependency "CocoaAsyncSocket"
+  spec.dependency "MQTTClient"
 end
