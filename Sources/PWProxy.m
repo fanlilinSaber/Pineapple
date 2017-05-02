@@ -7,7 +7,7 @@
 //
 
 #import "PWProxy.h"
-#import <MQTTFramework/MQTTSessionManager.h>
+#import <MQTTClient/MQTTSessionManager.h>
 
 @interface PWProxy () <MQTTSessionManagerDelegate>
 

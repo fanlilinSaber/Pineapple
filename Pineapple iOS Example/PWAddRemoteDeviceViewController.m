@@ -7,7 +7,7 @@
 //
 
 #import "PWAddRemoteDeviceViewController.h"
-@import Masonry;
+#import <Masonry/Masonry.h>
 
 @interface PWAddRemoteDeviceViewController ()
 

@@ -11,7 +11,7 @@
 #import "PWAddRemoteDeviceViewController.h"
 #import "PWDeviceCell.h"
 #import "Pineapple.h"
-@import Masonry;
+#import <Masonry/Masonry.h>
 
 static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 

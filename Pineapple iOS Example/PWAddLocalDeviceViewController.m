@@ -7,7 +7,7 @@
 //
 
 #import "PWAddLocalDeviceViewController.h"
-@import Masonry;
+#import <Masonry/Masonry.h>
 
 @interface PWAddLocalDeviceViewController ()
 
