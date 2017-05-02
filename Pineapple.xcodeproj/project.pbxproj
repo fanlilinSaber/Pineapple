@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4012FA4A1EA4A6510080B0DB /* MQTTFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4012FA491EA4A6510080B0DB /* MQTTFramework.framework */; };
+		0EF993C9804BE793B8A8E6F8 /* libPods-Pineapple iOS Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 055F9F89856BCA1CCADE819E /* libPods-Pineapple iOS Example.a */; };
 		4012FA511EA4AAD50080B0DB /* PWProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 4012FA4F1EA4AAD50080B0DB /* PWProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4012FA521EA4AAD50080B0DB /* PWProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4012FA501EA4AAD50080B0DB /* PWProxy.m */; };
 		4019EF8A1E8CF8E700591E91 /* Pineapple.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3AA1E88E8D80067D8ED /* Pineapple.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		402E986D1E8B580900946178 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402E986C1E8B580900946178 /* Masonry.framework */; };
 		402E98701E8B5B8500946178 /* PWDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E986F1E8B5B8500946178 /* PWDeviceCell.m */; };
 		4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3B51E88E9750067D8ED /* Pineapple.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4031A3C01E88EABD0067D8ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3BF1E88EABD0067D8ED /* main.m */; };
@@ -20,18 +19,17 @@
 		4031A3CB1E88EABD0067D8ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4031A3CA1E88EABD0067D8ED /* Assets.xcassets */; };
 		4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4031A3CC1E88EABD0067D8ED /* LaunchScreen.storyboard */; };
 		4031A3D31E88EAC20067D8ED /* Pineapple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3AA1E88E8D80067D8ED /* Pineapple.framework */; };
-		4031A3D61E88EB610067D8ED /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */; };
 		4031A3DA1E88EC470067D8ED /* PWLocalDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3D81E88EC470067D8ED /* PWLocalDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4031A3DB1E88EC470067D8ED /* PWLocalDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3D91E88EC470067D8ED /* PWLocalDevice.m */; };
 		403404151E8DEEC300029235 /* PWListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 403404131E8DEEC300029235 /* PWListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		403404161E8DEEC300029235 /* PWListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 403404141E8DEEC300029235 /* PWListener.m */; };
 		4034041B1E8DFF8500029235 /* PWTextCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E987B1E8BBE5A00946178 /* PWTextCommand.m */; };
 		4034041C1E8DFF8800029235 /* PWTextCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 402E987A1E8BBE5A00946178 /* PWTextCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		40A5F84B1EA746DC0078F47C /* PWHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 40A5F8491EA746DC0078F47C /* PWHeader.h */; };
+		40A5F84B1EA746DC0078F47C /* PWHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 40A5F8491EA746DC0078F47C /* PWHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40A5F84C1EA746DC0078F47C /* PWHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A5F84A1EA746DC0078F47C /* PWHeader.m */; };
 		40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AC06AA1E890CC0004150E2 /* PWCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AC06AB1E890CC0004150E2 /* PWCommand.m */; };
-		40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */; };
+		40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40B2A2251EA864B300A02D96 /* PWKeepLiveCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */; };
 		40B2A2281EA88EB500A02D96 /* PWDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 40B2A2261EA88EB500A02D96 /* PWDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40B2A2291EA88EB500A02D96 /* PWDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B2A2271EA88EB500A02D96 /* PWDevice.m */; };
@@ -41,6 +39,7 @@
 		40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */; };
 		40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F538461EA6201000B1FDC9 /* PWAbility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40F5384A1EA620B800B1FDC9 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538471EA6201000B1FDC9 /* PWAbility.m */; };
+		BC90E28B5A0AC3C0E510D975 /* libPods-Pineapple iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,10 +67,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4012FA491EA4A6510080B0DB /* MQTTFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MQTTFramework.framework; path = Carthage/Build/iOS/MQTTFramework.framework; sourceTree = "<group>"; };
+		055F9F89856BCA1CCADE819E /* libPods-Pineapple iOS Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pineapple iOS Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4012FA4F1EA4AAD50080B0DB /* PWProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWProxy.h; sourceTree = "<group>"; };
 		4012FA501EA4AAD50080B0DB /* PWProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWProxy.m; sourceTree = "<group>"; };
-		402E986C1E8B580900946178 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = Carthage/Build/iOS/Masonry.framework; sourceTree = "<group>"; };
 		402E986E1E8B5B8500946178 /* PWDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDeviceCell.h; sourceTree = "<group>"; };
 		402E986F1E8B5B8500946178 /* PWDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDeviceCell.m; sourceTree = "<group>"; };
 		402E987A1E8BBE5A00946178 /* PWTextCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWTextCommand.h; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 		4031A3CA1E88EABD0067D8ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4031A3CD1E88EABD0067D8ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4031A3CF1E88EABD0067D8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		4031A3D81E88EC470067D8ED /* PWLocalDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWLocalDevice.h; sourceTree = "<group>"; };
 		4031A3D91E88EC470067D8ED /* PWLocalDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWLocalDevice.m; sourceTree = "<group>"; };
 		403404131E8DEEC300029235 /* PWListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWListener.h; sourceTree = "<group>"; };
@@ -110,6 +107,11 @@
 		40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAddLocalDeviceViewController.m; sourceTree = "<group>"; };
 		40F538461EA6201000B1FDC9 /* PWAbility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAbility.h; sourceTree = "<group>"; };
 		40F538471EA6201000B1FDC9 /* PWAbility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAbility.m; sourceTree = "<group>"; };
+		43414782D074D3F96B8BE168 /* Pods-Pineapple iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pineapple iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		572600FDB7B746AEE9C343C3 /* Pods-Pineapple iOS Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS Example/Pods-Pineapple iOS Example.debug.xcconfig"; sourceTree = "<group>"; };
+		99EDD59D9CCE27C154047902 /* Pods-Pineapple iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS.release.xcconfig"; sourceTree = "<group>"; };
+		D115B6B9F81A2F6BA747022F /* Pods-Pineapple iOS Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS Example/Pods-Pineapple iOS Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4031A3D61E88EB610067D8ED /* CocoaAsyncSocket.framework in Frameworks */,
-				4012FA4A1EA4A6510080B0DB /* MQTTFramework.framework in Frameworks */,
+				BC90E28B5A0AC3C0E510D975 /* libPods-Pineapple iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4031A3D31E88EAC20067D8ED /* Pineapple.framework in Frameworks */,
-				402E986D1E8B580900946178 /* Masonry.framework in Frameworks */,
+				0EF993C9804BE793B8A8E6F8 /* libPods-Pineapple iOS Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +142,7 @@
 				4031A3BD1E88EABD0067D8ED /* Pineapple iOS Example */,
 				4031A3AB1E88E8D80067D8ED /* Products */,
 				4031A3D41E88EB610067D8ED /* Frameworks */,
+				77A25E7AAF82DA44EC137F30 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,11 +216,21 @@
 		4031A3D41E88EB610067D8ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4012FA491EA4A6510080B0DB /* MQTTFramework.framework */,
-				402E986C1E8B580900946178 /* Masonry.framework */,
-				4031A3D51E88EB610067D8ED /* CocoaAsyncSocket.framework */,
+				54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */,
+				055F9F89856BCA1CCADE819E /* libPods-Pineapple iOS Example.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		77A25E7AAF82DA44EC137F30 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				43414782D074D3F96B8BE168 /* Pods-Pineapple iOS.debug.xcconfig */,
+				99EDD59D9CCE27C154047902 /* Pods-Pineapple iOS.release.xcconfig */,
+				572600FDB7B746AEE9C343C3 /* Pods-Pineapple iOS Example.debug.xcconfig */,
+				D115B6B9F81A2F6BA747022F /* Pods-Pineapple iOS Example.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,10 +261,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4031A3B01E88E8D80067D8ED /* Build configuration list for PBXNativeTarget "Pineapple iOS" */;
 			buildPhases = (
+				4B99DDB5FBAC687225CCDA38 /* [CP] Check Pods Manifest.lock */,
 				4031A3A51E88E8D80067D8ED /* Sources */,
 				4031A3A61E88E8D80067D8ED /* Frameworks */,
 				4031A3A71E88E8D80067D8ED /* Headers */,
 				4031A3A81E88E8D80067D8ED /* Resources */,
+				19B249F10BBD73F18AFFF05B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,11 +281,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4031A3D01E88EABD0067D8ED /* Build configuration list for PBXNativeTarget "Pineapple iOS Example" */;
 			buildPhases = (
+				6C99C4928CD2516DAE72CA98 /* [CP] Check Pods Manifest.lock */,
 				4031A3B81E88EABD0067D8ED /* Sources */,
 				4031A3B91E88EABD0067D8ED /* Frameworks */,
 				4031A3BA1E88EABD0067D8ED /* Resources */,
-				4031A3D71E88EB6F0067D8ED /* ShellScript */,
 				4019EF8D1E8CF8E700591E91 /* Embed Frameworks */,
+				09B263083F6DF57C9A936D24 /* [CP] Embed Pods Frameworks */,
+				44780EAF9BD34EFBAC5DC318 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -344,21 +360,80 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4031A3D71E88EB6F0067D8ED /* ShellScript */ = {
+		09B263083F6DF57C9A936D24 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/CocoaAsyncSocket.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Masonry.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/MQTTFramework.framework",
 			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pineapple iOS Example/Pods-Pineapple iOS Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		19B249F10BBD73F18AFFF05B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44780EAF9BD34EFBAC5DC318 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pineapple iOS Example/Pods-Pineapple iOS Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4B99DDB5FBAC687225CCDA38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6C99C4928CD2516DAE72CA98 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -470,6 +545,7 @@
 		};
 		4031A3B11E88E8D80067D8ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43414782D074D3F96B8BE168 /* Pods-Pineapple iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
@@ -502,10 +578,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -539,6 +612,7 @@
 		};
 		4031A3B21E88E8D80067D8ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99EDD59D9CCE27C154047902 /* Pods-Pineapple iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
@@ -571,10 +645,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -601,6 +672,7 @@
 		};
 		4031A3D11E88EABD0067D8ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 572600FDB7B746AEE9C343C3 /* Pods-Pineapple iOS Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -627,10 +699,7 @@
 				DEVELOPMENT_TEAM = 3NLD2967N6;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -658,6 +727,7 @@
 		};
 		4031A3D21E88EABD0067D8ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D115B6B9F81A2F6BA747022F /* Pods-Pineapple iOS Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -684,10 +754,7 @@
 				DEVELOPMENT_TEAM = 3NLD2967N6;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -7,7 +7,7 @@
 //
 
 #import "PWDeviceCell.h"
-@import Masonry;
+#import <Masonry/Masonry.h>
 
 @implementation PWDeviceCell
 
