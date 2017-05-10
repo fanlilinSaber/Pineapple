@@ -10,28 +10,28 @@
 
 @implementation PWTextCommand
 
-+ (NSString *)type {
++ (NSString *)msgType {
     return @"Text";
 }
 
 - (instancetype)initWithText:(NSString *)text {
     self = [super init];
     if (self) {
-        self.type = PWTextCommand.type;
+        self.msgType = PWTextCommand.msgType;
         _text = text;
     }
     return self;
 }
 
 - (NSData *)dataRepresentation {
+    self.params = @{@"text": self.text};
     NSMutableDictionary *data = [super fillDataWithProperties];
-    data[@"text"] = self.text;
     return [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
 }
 
 - (void)parseData:(NSDictionary *)data {
     [super fillPropertiesWithData:data];
-    self.text = data[@"text"];
+    self.text = self.params[@"text"];
 }
 
 @end

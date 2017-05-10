@@ -26,7 +26,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 @implementation PWLocalDevice
 
 - (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
-    self = [super initWithName:name];
+    self = [super initWithName:name clientId:nil];
     if (self) {
         _ability = ability;
         _host = host;
@@ -39,7 +39,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 }
 
 - (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket {
-    self = [super initWithName:@"未知"];
+    self = [super initWithName:@"未知" clientId:nil];
     if (self) {
         _ability = ability;
         _host = socket.connectedHost;

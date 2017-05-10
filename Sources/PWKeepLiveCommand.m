@@ -10,21 +10,20 @@
 
 @implementation PWKeepLiveCommand
 
-+ (NSString *)type {
++ (NSString *)msgType {
     return @"Keep Live";
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.type = PWKeepLiveCommand.type;
+        self.msgType = PWKeepLiveCommand.msgType;
     }
     return self;
 }
 
 - (NSData *)dataRepresentation {
-    NSMutableDictionary *data = [super fillDataWithProperties];
-    data[@"text"] = @"";
+    NSDictionary *data = [NSDictionary new];
     return [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
 }
 

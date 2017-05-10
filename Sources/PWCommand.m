@@ -11,14 +11,18 @@
 @implementation PWCommand
 
 - (void)fillPropertiesWithData:(NSDictionary *)data {
-    self.type = data[@"type"];
-    self.clientId = data[@"clientId"];
+    self.msgType = data[@"msgType"];
+    self.fromId = data[@"fromId"];
+    self.toId = data[@"toId"];
+    self.params = data[@"params"];
 }
 
 - (NSMutableDictionary *)fillDataWithProperties {
     NSMutableDictionary *data = [NSMutableDictionary new];
-    data[@"type"] = self.type;
-    data[@"clientId"] = self.clientId;
+    data[@"msgType"] = self.msgType;
+    data[@"fromId"] = self.fromId;
+    data[@"toId"] = self.toId;
+    data[@"params"] = self.params;
     return data;
 }
 

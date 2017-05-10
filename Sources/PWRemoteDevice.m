@@ -14,12 +14,4 @@
 
 @implementation PWRemoteDevice
 
-- (instancetype)initWithName:(NSString *)name clientId:(NSString *)clientId {
-    self = [super initWithName:name];
-    if (self) {
-        _clientId = clientId;
-    }
-    return self;
-}
-
 @end

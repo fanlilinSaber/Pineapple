@@ -26,7 +26,7 @@
 
 @implementation PWProxy
 
-- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass groupId:(NSString *)groupId deviceId:(NSString *)deviceId rootTopic:(NSString *)rootTopic {
+- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic {
     self = [super init];
     if (self) {
         _ability = ability;
@@ -34,9 +34,7 @@
         _port = port;
         _user = user;
         _pass = pass;
-        _groupId = groupId;
-        _deviceId = deviceId;
-        _clientId = [NSString stringWithFormat:@"%@@@@%@", self.groupId, self.deviceId];
+        _clientId = clientId;
         _rootTopic = rootTopic;
         _sessionManager = [MQTTSessionManager new];
         _sessionManager.delegate = self;
@@ -75,7 +73,8 @@
 }
 
 - (void)send:(PWCommand<PWCommandSendable> *)command toDevice:(PWRemoteDevice *)device {
-    command.clientId = self.clientId;
+    command.fromId = self.clientId;
+    command.toId = device.clientId;
     [self.sessionManager sendData:command.dataRepresentation
                      topic:[NSString stringWithFormat:@"%@/p2p/%@", self.rootTopic, device.clientId]
                        qos:0
