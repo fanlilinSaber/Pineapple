@@ -37,7 +37,8 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     
     self.ability = [PWAbility new];
     
-    self.proxy = [[PWProxy alloc] initWithAbility:self.ability host:@"mqf-er9w0k6ntu.mqtt.aliyuncs.com" port:1883 user:@"aEACwHFvAqv1A3eK" pass:@"LC4uWeVKgBiG9QigL3cP+estMYQ=" groupId:@"GID_equipment001" deviceId:@"Apple" rootTopic:@"topic_equipment001"];
+    self.proxy = [[PWProxy alloc] initWithAbility:self.ability host:@"mqf-er9w0k6ntu.mqtt.aliyuncs.com" port:1883 user:@"aEACwHFvAqv1A3eK" pass:@"LC4uWeVKgBiG9QigL3cP+estMYQ=" clientId:@"GID_equipment001@@@Banana" rootTopic:@"topic_equipment001"];
+    
     self.proxy.delegate = self;
     
     self.listener = [[PWListener alloc] initWithAbility:self.ability port:5000];
@@ -133,7 +134,6 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
         PWDevice *device = self.devices[indexPath.row];
         if ([device isKindOfClass:[PWLocalDevice class]]) {
             PWLocalDevice *localDevice = (PWLocalDevice *)device;
-            comand.clientId = [[NSString alloc] initWithFormat:@"%@:%d", localDevice.host, localDevice.port];
             [localDevice send:comand];
         } else {
             PWRemoteDevice *remoteDevice = (PWRemoteDevice *)device;
@@ -269,10 +269,10 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 }
 
 - (void)proxy:(PWProxy *)proxy didReceiveCommand:(PWCommand *)command {
-    if ([command.type isEqualToString:PWTextCommand.type]) {
+    if ([command.msgType isEqualToString:PWTextCommand.msgType]) {
         PWTextCommand *textCommand = (PWTextCommand *)command;
-        [self log:[NSString stringWithFormat:@"%@->%@", textCommand.clientId, textCommand.text]];
-        PWRemoteDevice *device = [[PWRemoteDevice alloc] initWithName:@"未知" clientId:textCommand.clientId];
+        [self log:[NSString stringWithFormat:@"%@->%@", textCommand.fromId, textCommand.text]];
+        PWRemoteDevice *device = [[PWRemoteDevice alloc] initWithName:@"未知" clientId:textCommand.fromId];
         [self addRemoteDevice:device];
     }
 }
@@ -299,7 +299,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 }
 
 - (void)device:(PWLocalDevice *)device didReceiveCommand:(PWCommand *)command {
-    if ([command.type isEqualToString:PWTextCommand.type]) {
+    if ([command.msgType isEqualToString:PWTextCommand.msgType]) {
         PWTextCommand *textCommand = (PWTextCommand *)command;
         [self log:[NSString stringWithFormat:@"%@:%d->%@", device.host, device.port, textCommand.text]];
     }

@@ -11,8 +11,4 @@
 
 @interface PWRemoteDevice : PWDevice
 
-@property (copy, nonatomic) NSString *clientId;
-
-- (instancetype)initWithName:(NSString *)name clientId:(NSString *)clientId;
-
 @end

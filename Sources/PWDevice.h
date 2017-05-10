@@ -11,7 +11,8 @@
 @interface PWDevice : NSObject
 
 @property (copy, nonatomic) NSString *name;
+@property (copy, nonatomic) NSString *clientId;
 
-- (instancetype)initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name clientId:(NSString *)clientId;
 
 @end

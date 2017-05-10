@@ -10,10 +10,11 @@
 
 @implementation PWDevice
 
-- (instancetype)initWithName:(NSString *)name {
+- (instancetype)initWithName:(NSString *)name clientId:(NSString *)clientId {
     self = [super init];
     if (self) {
         _name = name;
+        _clientId = clientId;
     }
     return self;
 }

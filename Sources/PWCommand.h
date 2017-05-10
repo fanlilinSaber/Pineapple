@@ -10,22 +10,25 @@
 
 @protocol PWCommandSendable <NSObject>
 
-+ (NSString *)type;
++ (NSString *)msgType;
 - (NSData *)dataRepresentation;
 
 @end
 
 @protocol PWCommandReceivable <NSObject>
 
-+ (NSString *)type;
++ (NSString *)msgType;
 - (void)parseData:(NSDictionary *)data;
 
 @end
 
 @interface PWCommand: NSObject
 
-@property (copy, nonatomic) NSString *type;
-@property (copy, nonatomic) NSString *clientId;
+@property (copy, nonatomic) NSString *msgType;
+@property (copy, nonatomic) NSString *fromId;
+@property (copy, nonatomic) NSString *toId;
+@property (copy, nonatomic) NSDictionary *params;
+@property (copy, nonatomic) NSString *msgId;
 
 - (void)fillPropertiesWithData:(NSDictionary *)data;
 - (NSMutableDictionary *)fillDataWithProperties;
