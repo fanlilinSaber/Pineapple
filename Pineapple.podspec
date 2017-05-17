@@ -11,5 +11,5 @@ Pod::Spec.new do |spec|
   spec.source_files = "Sources/**/*.{h,m}"
   spec.resources = "Sources/*.bundle"
   spec.dependency "CocoaAsyncSocket"
-  spec.dependency "MQTTClient" "0.8.8"
+  spec.dependency "MQTTClient", "0.8.8"
 end
