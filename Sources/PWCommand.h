@@ -29,6 +29,7 @@
 @property (copy, nonatomic) NSString *toId;
 @property (copy, nonatomic) NSDictionary *params;
 @property (copy, nonatomic) NSString *msgId;
+@property (copy, nonatomic) NSString *ack;
 
 - (void)fillPropertiesWithData:(NSDictionary *)data;
 - (NSMutableDictionary *)fillDataWithProperties;
