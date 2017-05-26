@@ -26,7 +26,7 @@
 - (NSData *)dataRepresentation {
     self.params = @{@"text": self.text};
     NSMutableDictionary *data = [super fillDataWithProperties];
-    return [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+    return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
 }
 
 - (void)parseData:(NSDictionary *)data {

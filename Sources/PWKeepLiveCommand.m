@@ -24,7 +24,7 @@
 
 - (NSData *)dataRepresentation {
     NSDictionary *data = [NSDictionary new];
-    return [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+    return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
 }
 
 @end
