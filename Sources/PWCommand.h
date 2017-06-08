@@ -28,6 +28,7 @@
 @property (copy, nonatomic) NSString *fromId;
 @property (copy, nonatomic) NSString *toId;
 @property (copy, nonatomic) NSDictionary *params;
+@property (copy, nonatomic) NSArray *paramsArray;
 @property (copy, nonatomic) NSString *msgId;
 @property (copy, nonatomic) NSString *ack;
 
