@@ -14,7 +14,11 @@
     self.msgType = data[@"msgType"];
     self.fromId = data[@"fromId"];
     self.toId = data[@"toId"];
-    self.params = data[@"params"];
+    if ([data[@"params"] isKindOfClass:[NSDictionary class]]) {
+        self.params = data[@"params"];
+    } else {
+        self.paramsArray = data[@"params"];
+    }
     if (data[@"msgId"] && ![data[@"msgId"] isEqualToString:@""]) {
         self.msgId = data[@"msgId"];
     }
@@ -28,7 +32,11 @@
     data[@"msgType"] = self.msgType;
     data[@"fromId"] = self.fromId;
     data[@"toId"] = self.toId;
-    data[@"params"] = self.params;
+    if (self.params) {
+        data[@"params"] = self.params;
+    } else {
+        data[@"params"] = self.paramsArray;
+    }
     if (self.msgId && ![self.msgId isEqualToString:@""]) {
         data[@"msgId"] = self.msgId;
     }
