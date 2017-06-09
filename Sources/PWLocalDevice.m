@@ -20,6 +20,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 @property (strong, nonatomic) PWAbility *ability;
 @property (strong, nonatomic) GCDAsyncSocket *socket;
 @property (strong, nonatomic) NSTimer *keepLiveTimer;
+@property (nonatomic, getter=isOwner) BOOL owner;
 
 @end
 
@@ -28,6 +29,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 - (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
     self = [super initWithName:name clientId:nil];
     if (self) {
+        _owner = YES;
         _ability = ability;
         _host = host;
         _port = port;
@@ -41,6 +43,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 - (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket {
     self = [super initWithName:@"未知" clientId:nil];
     if (self) {
+        _owner = NO;
         _ability = ability;
         _host = socket.connectedHost;
         _port = socket.connectedPort;
@@ -56,7 +59,11 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 }
 
 - (void)connect {
-    [self connectWithRead:true];
+    if (self.owner) {
+        [self connectWithRead:NO];
+    } else {
+        [self connectWithRead:YES];
+    }
 }
 
 - (void)disconnect {
@@ -78,7 +85,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 #pragma mark - Handle App Life Style
 
 - (void)appDidBecomeActive {
-    [self connectWithRead:false];
+    [self connectWithRead:NO];
 }
 
 #pragma mark - Private
