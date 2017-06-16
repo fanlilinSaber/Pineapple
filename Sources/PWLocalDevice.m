@@ -94,7 +94,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     }
     if ([self.socket isDisconnected]) {
         NSError *error = nil;
-        if (![self.socket connectToHost:self.host onPort:self.port error:&error]) {
+        if (![self.socket connectToHost:self.host onPort:self.port withTimeout:5 error:&error]) {
             [self.delegate device:self didConnectFailedMessage:[error localizedDescription]];
         }
     } else if (read) {
