@@ -68,9 +68,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 
 - (void)disconnect {
     if ([self.socket isConnected]) {
-        self.socket.delegate = nil;
         [self.socket disconnect];
-        self.socket = nil;
     }
 }
 
@@ -128,6 +126,8 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error {
+    self.socket.delegate = nil;
+    self.socket = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (error) {
             [self.delegate device:self didDisconnectFailedMessage:[error localizedDescription]];
