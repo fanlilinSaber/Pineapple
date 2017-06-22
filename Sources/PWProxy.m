@@ -59,7 +59,7 @@
                               will:false
                          willTopic:nil
                            willMsg:nil
-                           willQos:0
+                           willQos:1
                     willRetainFlag:FALSE
                       withClientId:self.clientId];
 }
@@ -77,7 +77,7 @@
     command.toId = device.clientId;
     [self.sessionManager sendData:command.dataRepresentation
                      topic:[NSString stringWithFormat:@"%@/p2p/%@", self.rootTopic, device.clientId]
-                       qos:0
+                       qos:1
                     retain:false];
 }
 
