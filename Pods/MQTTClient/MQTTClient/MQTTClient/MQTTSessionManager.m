@@ -447,7 +447,7 @@
             [self updateState:MQTTSessionManagerStateClosed];
             [self endBackgroundTask];
             if (self.state != MQTTSessionManagerStateClosing) {
-                [self triggerDelayedReconnect];
+                //[self triggerDelayedReconnect];
             }
             [self updateState:MQTTSessionManagerStateStarting];
             break;
