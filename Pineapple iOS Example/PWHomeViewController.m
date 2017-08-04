@@ -41,7 +41,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     
     self.proxy.delegate = self;
     
-    self.listener = [[PWListener alloc] initWithAbility:self.ability port:5000];
+    self.listener = [[PWListener alloc] initWithAbility:self.ability port:50015];
     self.listener.delegate = self;
     
     self.devices = @[];

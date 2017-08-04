@@ -50,7 +50,7 @@
     
     UITextField *hostTextField = [UITextField new];
     hostTextField.borderStyle = UITextBorderStyleRoundedRect;
-    hostTextField.text = @"192.168.99.";
+    hostTextField.text = @"192.168.100.";
     
     UILabel *portLabel = [UILabel new];
     portLabel.text = @"端口";

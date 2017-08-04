@@ -316,7 +316,7 @@
 					};
 					4031A3BB1E88EABD0067D8ED = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 3NLD2967N6;
+						DevelopmentTeam = KJ4FWJLGUU;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -696,7 +696,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 3NLD2967N6;
+				DEVELOPMENT_TEAM = KJ4FWJLGUU;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -752,7 +752,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 3NLD2967N6;
+				DEVELOPMENT_TEAM = KJ4FWJLGUU;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
