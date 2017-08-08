@@ -11,6 +11,7 @@
 		4012FA511EA4AAD50080B0DB /* PWProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 4012FA4F1EA4AAD50080B0DB /* PWProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4012FA521EA4AAD50080B0DB /* PWProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4012FA501EA4AAD50080B0DB /* PWProxy.m */; };
 		4019EF8A1E8CF8E700591E91 /* Pineapple.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4031A3AA1E88E8D80067D8ED /* Pineapple.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		40286E9B1F395A1F00F513C7 /* PWSendUDPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40286E9A1F395A1F00F513C7 /* PWSendUDPViewController.m */; };
 		402E98701E8B5B8500946178 /* PWDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 402E986F1E8B5B8500946178 /* PWDeviceCell.m */; };
 		4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */ = {isa = PBXBuildFile; fileRef = 4031A3B51E88E9750067D8ED /* Pineapple.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4031A3C01E88EABD0067D8ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4031A3BF1E88EABD0067D8ED /* main.m */; };
@@ -70,6 +71,8 @@
 		055F9F89856BCA1CCADE819E /* libPods-Pineapple iOS Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pineapple iOS Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4012FA4F1EA4AAD50080B0DB /* PWProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWProxy.h; sourceTree = "<group>"; };
 		4012FA501EA4AAD50080B0DB /* PWProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWProxy.m; sourceTree = "<group>"; };
+		40286E991F395A1F00F513C7 /* PWSendUDPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWSendUDPViewController.h; sourceTree = "<group>"; };
+		40286E9A1F395A1F00F513C7 /* PWSendUDPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWSendUDPViewController.m; sourceTree = "<group>"; };
 		402E986E1E8B5B8500946178 /* PWDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDeviceCell.h; sourceTree = "<group>"; };
 		402E986F1E8B5B8500946178 /* PWDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDeviceCell.m; sourceTree = "<group>"; };
 		402E987A1E8BBE5A00946178 /* PWTextCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWTextCommand.h; sourceTree = "<group>"; };
@@ -199,6 +202,8 @@
 				40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */,
 				40F538171EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.h */,
 				40F538181EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m */,
+				40286E991F395A1F00F513C7 /* PWSendUDPViewController.h */,
+				40286E9A1F395A1F00F513C7 /* PWSendUDPViewController.m */,
 				402E986E1E8B5B8500946178 /* PWDeviceCell.h */,
 				402E986F1E8B5B8500946178 /* PWDeviceCell.m */,
 			);
@@ -310,7 +315,7 @@
 				TargetAttributes = {
 					4031A3A91E88E8D80067D8ED = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 3NLD2967N6;
+						DevelopmentTeam = KJ4FWJLGUU;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -459,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40286E9B1F395A1F00F513C7 /* PWSendUDPViewController.m in Sources */,
 				4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */,
 				40F538191EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m in Sources */,
 				40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */,
@@ -572,7 +578,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3NLD2967N6;
+				DEVELOPMENT_TEAM = KJ4FWJLGUU;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -639,7 +645,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3NLD2967N6;
+				DEVELOPMENT_TEAM = KJ4FWJLGUU;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
