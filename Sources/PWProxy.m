@@ -21,12 +21,13 @@
 @property (copy, nonatomic) NSString *deviceId;
 @property (copy, nonatomic) NSString *clientId;
 @property (copy, nonatomic) NSString *rootTopic;
+@property (copy, nonatomic) NSString *nodeId;
 
 @end
 
 @implementation PWProxy
 
-- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic {
+- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId {
     self = [super init];
     if (self) {
         _ability = ability;
@@ -36,9 +37,10 @@
         _pass = pass;
         _clientId = clientId;
         _rootTopic = rootTopic;
+        _nodeId = nodeId;
         _sessionManager = [MQTTSessionManager new];
         _sessionManager.delegate = self;
-        _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/p2p", self.rootTopic]: @0};
+        _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, self.clientId]: @0};
         [_sessionManager addObserver:self
                           forKeyPath:@"state"
                              options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -76,7 +78,7 @@
     command.fromId = self.clientId;
     command.toId = device.clientId;
     [self.sessionManager sendData:command.dataRepresentation
-                     topic:[NSString stringWithFormat:@"%@/p2p/%@", self.rootTopic, device.clientId]
+                     topic:[NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, device.clientId]
                        qos:1
                     retain:false];
 }
