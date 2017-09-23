@@ -40,7 +40,8 @@
         _nodeId = nodeId;
         _sessionManager = [MQTTSessionManager new];
         _sessionManager.delegate = self;
-        _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, self.clientId]: @0};
+        _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@", self.rootTopic, self.nodeId]: @0,
+                                          [NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, self.clientId]: @0};
         [_sessionManager addObserver:self
                           forKeyPath:@"state"
                              options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
