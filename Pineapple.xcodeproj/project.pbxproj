@@ -40,9 +40,12 @@
 		40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */; };
 		40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F538461EA6201000B1FDC9 /* PWAbility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40F5384A1EA620B800B1FDC9 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538471EA6201000B1FDC9 /* PWAbility.m */; };
+		489FEED21F94537700453009 /* PWBluetooth.h in Sources */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; };
+		489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489FEED51F945A5A00453009 /* PWConnectViewController.m */; };
+		489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489FEED61F945A5A00453009 /* PWConnectViewController.xib */; };
 		48AE65BA1F90A39900A4D44C /* PWCodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AE65B91F90A39900A4D44C /* PWCodeListViewController.m */; };
 		48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */; };
-		48C122281F90CABD00664192 /* PWBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; };
+		48C122281F90CABD00664192 /* PWBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48C122291F90CABD00664192 /* PWBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C122271F90CABD00664192 /* PWBluetooth.m */; };
 		BC90E28B5A0AC3C0E510D975 /* libPods-Pineapple iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */; };
 /* End PBXBuildFile section */
@@ -115,6 +118,9 @@
 		40F538461EA6201000B1FDC9 /* PWAbility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAbility.h; sourceTree = "<group>"; };
 		40F538471EA6201000B1FDC9 /* PWAbility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAbility.m; sourceTree = "<group>"; };
 		43414782D074D3F96B8BE168 /* Pods-Pineapple iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		489FEED41F945A5A00453009 /* PWConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWConnectViewController.h; sourceTree = "<group>"; };
+		489FEED51F945A5A00453009 /* PWConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWConnectViewController.m; sourceTree = "<group>"; };
+		489FEED61F945A5A00453009 /* PWConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWConnectViewController.xib; sourceTree = "<group>"; };
 		48AE65B81F90A39900A4D44C /* PWCodeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWCodeListViewController.h; sourceTree = "<group>"; };
 		48AE65B91F90A39900A4D44C /* PWCodeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWCodeListViewController.m; sourceTree = "<group>"; };
 		48BF35801F90BE400088B7ED /* PWBluetoothViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWBluetoothViewController.h; sourceTree = "<group>"; };
@@ -247,6 +253,9 @@
 			children = (
 				48BF35801F90BE400088B7ED /* PWBluetoothViewController.h */,
 				48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */,
+				489FEED41F945A5A00453009 /* PWConnectViewController.h */,
+				489FEED51F945A5A00453009 /* PWConnectViewController.m */,
+				489FEED61F945A5A00453009 /* PWConnectViewController.xib */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -269,11 +278,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48C122281F90CABD00664192 /* PWBluetooth.h in Headers */,
 				40A5F84B1EA746DC0078F47C /* PWHeader.h in Headers */,
 				4012FA511EA4AAD50080B0DB /* PWProxy.h in Headers */,
 				4031A3B71E88E9750067D8ED /* Pineapple.h in Headers */,
 				40AC06AC1E890CC0004150E2 /* PWCommand.h in Headers */,
+				48C122281F90CABD00664192 /* PWBluetooth.h in Headers */,
 				4031A3DA1E88EC470067D8ED /* PWLocalDevice.h in Headers */,
 				4034041C1E8DFF8800029235 /* PWTextCommand.h in Headers */,
 				40B2A2281EA88EB500A02D96 /* PWDevice.h in Headers */,
@@ -383,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */,
+				489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */,
 				4031A3CB1E88EABD0067D8ED /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				489FEED21F94537700453009 /* PWBluetooth.h in Sources */,
 				40B2A2291EA88EB500A02D96 /* PWDevice.m in Sources */,
 				403404161E8DEEC300029235 /* PWListener.m in Sources */,
 				40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */,
@@ -490,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */,
 				40286E9B1F395A1F00F513C7 /* PWSendUDPViewController.m in Sources */,
 				4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */,
 				48AE65BA1F90A39900A4D44C /* PWCodeListViewController.m in Sources */,

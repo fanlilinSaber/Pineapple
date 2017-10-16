@@ -23,3 +23,4 @@ FOUNDATION_EXPORT const unsigned char PineappleVersionString[];
 #import "PWAbility.h"
 #import "PWCommand.h"
 #import "PWTextCommand.h"
+#import "PWBluetooth.h"

@@ -8,9 +8,42 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol PWBluetoothClientDelegate;
 
 @protocol PWBluetoothClientDelegate <NSObject>
+@optional;
+/**
+ *  *&* 发现设备*
+ */
+- (void)bluetoothCentralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI;
+/**
+ *  *&* 连接到Peripherals-成功*
+ */
+- (void)bluetoothCentralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral;
+/**
+ *  *&* 连接失败*
+ */
+-(void)bluetoothCentralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
+/**
+ *  *&* 断开连接*
+ */
+- (void)bluetoothCentralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
+/**
+ *  *&* 扫描到服务*
+ */
+-(void)bluetoothPeripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error;
+/**
+ *  *&* 扫描到特征*
+ */
+- (void)bluetoothPeripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error;
+/**
+ *  *&* 扫描到information*
+ */
+- (void)bluetoothPeripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error;
+
+- (void)bluetoothPeripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error;
 
 @end
 
@@ -24,6 +57,12 @@
 @property (nonatomic, assign, readonly, getter = isConnection)  BOOL connection;
 /*&* delecgate*/
 @property (nonatomic, weak) id <PWBluetoothClientDelegate>delecgate;
+/*&* services 如果设置了 默认内部 执行 discoverCharacteristics*/
+@property (nonatomic, strong) NSArray *services_uuid;
+/*&* 订阅广播 (一般实时心率) 对订阅的特征值uuid 若支持notfiy setNotifyValue*/
+@property (nonatomic, strong) NSArray *subscibe_uuid;
+
+
 
 /**
  *  *&* 开始扫描*
@@ -43,3 +82,5 @@
 - (void)cancelPeripheralConnection:(CBPeripheral *)peripheral;
 
 @end
+
+NS_ASSUME_NONNULL_END
