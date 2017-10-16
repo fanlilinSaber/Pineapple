@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PWConnectViewController">
+            <connections>
+                <outlet property="input_tf" destination="521-Ic-xuf" id="2sp-xD-YbN"/>
+                <outlet property="show_tv" destination="A6o-jM-5ja" id="6LW-Te-Y00"/>
+                <outlet property="tableView" destination="Vp5-Cb-JJK" id="wew-Ch-VsC"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="521-Ic-xuf">
+                    <rect key="frame" x="20" y="20" width="335" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="M8k-gR-Lsx"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vp5-Cb-JJK">
+                    <rect key="frame" x="20" y="75" width="148" height="572"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="A6o-jM-5ja">
+                    <rect key="frame" x="207.5" y="75" width="147.5" height="572"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="Vp5-Cb-JJK" secondAttribute="trailing" constant="20" id="7nG-pW-g8C"/>
+                <constraint firstItem="A6o-jM-5ja" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="20" id="Bli-2C-Ve0"/>
+                <constraint firstItem="521-Ic-xuf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="K3o-ML-iC0"/>
+                <constraint firstAttribute="trailing" secondItem="521-Ic-xuf" secondAttribute="trailing" constant="20" id="XQ8-PW-fOh"/>
+                <constraint firstItem="Vp5-Cb-JJK" firstAttribute="top" secondItem="521-Ic-xuf" secondAttribute="bottom" constant="20" id="ZAB-gp-4Y1"/>
+                <constraint firstItem="521-Ic-xuf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="aY4-3y-XvO"/>
+                <constraint firstItem="Vp5-Cb-JJK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="asW-jp-7FE"/>
+                <constraint firstAttribute="trailing" secondItem="A6o-jM-5ja" secondAttribute="trailing" constant="20" id="c6B-hQ-cXh"/>
+                <constraint firstAttribute="bottom" secondItem="A6o-jM-5ja" secondAttribute="bottom" constant="20" id="cFD-2V-2vm"/>
+                <constraint firstAttribute="bottom" secondItem="Vp5-Cb-JJK" secondAttribute="bottom" constant="20" id="k3y-GO-LG4"/>
+                <constraint firstItem="A6o-jM-5ja" firstAttribute="top" secondItem="521-Ic-xuf" secondAttribute="bottom" constant="20" id="nR1-IR-FjW"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="59.5"/>
+        </view>
+    </objects>
+</document>

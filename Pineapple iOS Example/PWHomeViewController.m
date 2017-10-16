@@ -42,8 +42,11 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     
     self.devices = @[];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"开启" style:UIBarButtonItemStylePlain target:self action:@selector(start)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"连接" style:UIBarButtonItemStylePlain target:self action:@selector(connect)];
+    UIBarButtonItem *start = [[UIBarButtonItem alloc] initWithTitle:@"开启" style:UIBarButtonItemStylePlain target:self action:@selector(start)];
+    UIBarButtonItem *connect = [[UIBarButtonItem alloc] initWithTitle:@"连接" style:UIBarButtonItemStylePlain target:self action:@selector(connect)];
+    self.navigationItem.rightBarButtonItems = @[start, connect];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"开启" style:UIBarButtonItemStylePlain target:self action:@selector(start)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"连接" style:UIBarButtonItemStylePlain target:self action:@selector(connect)];
     
     UITextField *textField = [UITextField new];
     textField.borderStyle = UITextBorderStyleRoundedRect;
@@ -123,6 +126,11 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [alert addAction:mqttAction];
     [alert addAction:socketAction];
     [alert addAction:udpAction];
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        alert.popoverPresentationController.sourceView = self.view;
+        alert.popoverPresentationController.sourceRect = CGRectMake(0,0,1.0,1.0);;
+
+    }
     [self presentViewController:alert animated:YES completion:nil];
 }
 
