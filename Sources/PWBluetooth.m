@@ -64,6 +64,9 @@
 #pragma mark - CBCentralManagerDelegate
 #pragma mark - 当前蓝牙主设备状态
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
+    if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManagerState:)]) {
+        [self.delecgate bluetoothCentralManagerState:central.state];
+    }
     if (central.state == CBCentralManagerStatePoweredOn) {
         // 搜索外设
 //        [self.manager scanForPeripheralsWithServices:nil // 通过某些服务筛选外设
@@ -178,7 +181,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothPeripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
         });
-        
     }
 }
 

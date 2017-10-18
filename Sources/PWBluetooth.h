@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol PWBluetoothClientDelegate <NSObject>
 @optional;
+- (void)bluetoothCentralManagerState:(CBManagerState)state;
 /**
  *  *&* 发现设备*
  */
