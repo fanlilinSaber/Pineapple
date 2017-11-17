@@ -105,6 +105,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
         self.keepLiveTimer = nil;
     }
     self.keepLiveTimer = [NSTimer scheduledTimerWithTimeInterval:PWKeepLiveTimeInterval target:self selector:@selector(keepLive) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.keepLiveTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)keepLive {
