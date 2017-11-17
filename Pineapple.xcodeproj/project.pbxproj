@@ -47,6 +47,8 @@
 		48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */; };
 		48C122281F90CABD00664192 /* PWBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48C122291F90CABD00664192 /* PWBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C122271F90CABD00664192 /* PWBluetooth.m */; };
+		48DC71271FAC06E400118869 /* PWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DC71261FAC06E400118869 /* PWDrawViewController.m */; };
+		48DC712A1FAC07BE00118869 /* PWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DC71291FAC07BE00118869 /* PWDrawView.m */; };
 		BC90E28B5A0AC3C0E510D975 /* libPods-Pineapple iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +129,10 @@
 		48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWBluetoothViewController.m; sourceTree = "<group>"; };
 		48C122261F90CABD00664192 /* PWBluetooth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWBluetooth.h; sourceTree = "<group>"; };
 		48C122271F90CABD00664192 /* PWBluetooth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWBluetooth.m; sourceTree = "<group>"; };
+		48DC71251FAC06E400118869 /* PWDrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDrawViewController.h; sourceTree = "<group>"; };
+		48DC71261FAC06E400118869 /* PWDrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDrawViewController.m; sourceTree = "<group>"; };
+		48DC71281FAC07BE00118869 /* PWDrawView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDrawView.h; sourceTree = "<group>"; };
+		48DC71291FAC07BE00118869 /* PWDrawView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDrawView.m; sourceTree = "<group>"; };
 		54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pineapple iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		572600FDB7B746AEE9C343C3 /* Pods-Pineapple iOS Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS Example/Pods-Pineapple iOS Example.debug.xcconfig"; sourceTree = "<group>"; };
 		99EDD59D9CCE27C154047902 /* Pods-Pineapple iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 		4031A3BD1E88EABD0067D8ED /* Pineapple iOS Example */ = {
 			isa = PBXGroup;
 			children = (
+				48DC71241FAC06AE00118869 /* 画线 */,
 				48BF357F1F90BE080088B7ED /* Bluetooth */,
 				4031A3CA1E88EABD0067D8ED /* Assets.xcassets */,
 				4031A3CC1E88EABD0067D8ED /* LaunchScreen.storyboard */,
@@ -258,6 +265,17 @@
 				489FEED61F945A5A00453009 /* PWConnectViewController.xib */,
 			);
 			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		48DC71241FAC06AE00118869 /* 画线 */ = {
+			isa = PBXGroup;
+			children = (
+				48DC71251FAC06E400118869 /* PWDrawViewController.h */,
+				48DC71261FAC06E400118869 /* PWDrawViewController.m */,
+				48DC71281FAC07BE00118869 /* PWDrawView.h */,
+				48DC71291FAC07BE00118869 /* PWDrawView.m */,
+			);
+			path = "画线";
 			sourceTree = "<group>";
 		};
 		77A25E7AAF82DA44EC137F30 /* Pods */ = {
@@ -509,8 +527,10 @@
 				40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */,
 				4031A3C31E88EABD0067D8ED /* AppDelegate.m in Sources */,
 				4031A3C01E88EABD0067D8ED /* main.m in Sources */,
+				48DC71271FAC06E400118869 /* PWDrawViewController.m in Sources */,
 				402E98701E8B5B8500946178 /* PWDeviceCell.m in Sources */,
 				48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */,
+				48DC712A1FAC07BE00118869 /* PWDrawView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,7 +633,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -646,6 +667,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.i-focusing.Pineapple-iOS";
 				PRODUCT_NAME = Pineapple;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -680,7 +702,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -706,6 +729,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.i-focusing.Pineapple-iOS";
 				PRODUCT_NAME = Pineapple;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -740,6 +764,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = KJ4FWJLGUU;
@@ -761,14 +786,16 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Pineapple iOS Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.i-focusing.Pineapple-iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -796,6 +823,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = KJ4FWJLGUU;
@@ -811,13 +839,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Pineapple iOS Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.i-focusing.Pineapple-iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
