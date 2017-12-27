@@ -12,6 +12,6 @@
 @interface PWAbility : NSObject
 
 - (PWCommand *)commandWithData:(NSData *)data;
-- (void)addCommand:(Class)class withMsgType:(NSString *)msgType;
+- (void)addCommand:(Class)aClass withMsgType:(NSString *)msgType;
 
 @end

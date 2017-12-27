@@ -39,12 +39,12 @@
     }
 }
 
-- (void)addCommand:(Class)class withMsgType:(NSString *)msgType {
-    NSAssert([class isSubclassOfClass:PWCommand.class], @"Command Must Inherited From PWCommand");
-    NSAssert([class conformsToProtocol:@protocol(PWCommandReceivable)], @"Command Must Conform To PWCommandReceivable");
+- (void)addCommand:(Class)aClass withMsgType:(NSString *)msgType {
+    NSAssert([aClass isSubclassOfClass:PWCommand.class], @"Command Must Inherited From PWCommand");
+    NSAssert([aClass conformsToProtocol:@protocol(PWCommandReceivable)], @"Command Must Conform To PWCommandReceivable");
     NSAssert(self.commands[msgType] == nil, @"Command Already Existed");
     NSMutableDictionary *commands = [self.commands mutableCopy];
-    commands[msgType] = class;
+    commands[msgType] = aClass;
     self.commands = commands;
 }
 

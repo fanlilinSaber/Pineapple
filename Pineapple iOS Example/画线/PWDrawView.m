@@ -15,6 +15,9 @@
 /*&* timer*/
 @property (nonatomic, strong) NSTimer *timer;
 
+/*&* <##>*/
+@property (nonatomic, strong) CAShapeLayer *drawLayer;
+
 @end
 
 @implementation PWDrawView
@@ -34,6 +37,21 @@
         self.strokeColor = [UIColor redColor];
         self.interval = 3.0;
         self.isClearAnim = NO;
+        
+        CAShapeLayer *layer = [CAShapeLayer layer];
+        layer.backgroundColor = [UIColor clearColor].CGColor;
+//        layer.path = path.CGPath;
+        layer.lineWidth = self.lineWidth;
+        layer.strokeColor = self.strokeColor.CGColor;
+        layer.miterLimit = 2.;
+        layer.lineDashPhase = 10;
+        layer.lineDashPattern = @[@1,@0];
+        layer.fillColor = [UIColor clearColor].CGColor;
+        layer.fillRule = kCAFillRuleEvenOdd;
+        layer.lineCap = kCALineCapRound;
+        layer.lineJoin = kCALineJoinRound;
+        [self.layer addSublayer:layer];
+        self.drawLayer = layer;
     }
     return self;
 }
@@ -72,35 +90,44 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
     [self stopTimer];
-    UIBezierPath *path = [UIBezierPath bezierPath];
+    UIBezierPath *path;
+    if (self.drawPaths.count) {
+        path = self.drawPaths.lastObject;
+    }else{
+        path = [UIBezierPath bezierPath];
+    }
+//    UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:[[touches anyObject] locationInView:self]];
-    CAShapeLayer *layer = [CAShapeLayer layer];
-    layer.backgroundColor = [UIColor clearColor].CGColor;
-    layer.path = path.CGPath;
-    layer.lineWidth = self.lineWidth;
-    layer.strokeColor = self.strokeColor.CGColor;
-    layer.miterLimit = 2.;
-    layer.lineDashPhase = 10;
-    layer.lineDashPattern = @[@1,@0];
-    layer.fillColor = [UIColor clearColor].CGColor;
-    layer.fillRule = kCAFillRuleEvenOdd;
-    layer.lineCap = kCALineCapRound;
-    layer.lineJoin = kCALineJoinRound;
+    self.drawLayer.path = path.CGPath;
+//    CAShapeLayer *layer = [CAShapeLayer layer];
+//    layer.backgroundColor = [UIColor clearColor].CGColor;
+//    layer.path = path.CGPath;
+//    layer.lineWidth = self.lineWidth;
+//    layer.strokeColor = self.strokeColor.CGColor;
+//    layer.miterLimit = 2.;
+//    layer.lineDashPhase = 10;
+//    layer.lineDashPattern = @[@1,@0];
+//    layer.fillColor = [UIColor clearColor].CGColor;
+//    layer.fillRule = kCAFillRuleEvenOdd;
+//    layer.lineCap = kCALineCapRound;
+//    layer.lineJoin = kCALineJoinRound;
     
-    [self.layer addSublayer:layer];
+//    [self.layer addSublayer:layer];
     [self.drawPaths addObject:path];
-    [self.drawLayers addObject:layer];
+//    [self.drawLayers addObject:layer];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesMoved:touches withEvent:event];
     UIBezierPath *path = self.drawPaths.lastObject;
-    CAShapeLayer *layer = self.drawLayers.lastObject;
+//    CAShapeLayer *layer = self.drawLayers.lastObject;
     [path addLineToPoint:[[touches anyObject] locationInView:self]];
-    layer.path = path.CGPath;
+    self.drawLayer.path = path.CGPath;
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UIBezierPath *path = self.drawPaths.lastObject;
+    [path closePath];
     [self startTimer];
 }
 

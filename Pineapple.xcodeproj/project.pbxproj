@@ -43,6 +43,7 @@
 		489FEED21F94537700453009 /* PWBluetooth.h in Sources */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; };
 		489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489FEED51F945A5A00453009 /* PWConnectViewController.m */; };
 		489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489FEED61F945A5A00453009 /* PWConnectViewController.xib */; };
+		48AB0F1F1FBECD060047F51C /* PWASRStatusCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0F1D1FBECD050047F51C /* PWASRStatusCommand.m */; };
 		48AE65BA1F90A39900A4D44C /* PWCodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AE65B91F90A39900A4D44C /* PWCodeListViewController.m */; };
 		48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */; };
 		48C122281F90CABD00664192 /* PWBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -123,6 +124,8 @@
 		489FEED41F945A5A00453009 /* PWConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWConnectViewController.h; sourceTree = "<group>"; };
 		489FEED51F945A5A00453009 /* PWConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWConnectViewController.m; sourceTree = "<group>"; };
 		489FEED61F945A5A00453009 /* PWConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWConnectViewController.xib; sourceTree = "<group>"; };
+		48AB0F1D1FBECD050047F51C /* PWASRStatusCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWASRStatusCommand.m; sourceTree = "<group>"; };
+		48AB0F1E1FBECD050047F51C /* PWASRStatusCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWASRStatusCommand.h; sourceTree = "<group>"; };
 		48AE65B81F90A39900A4D44C /* PWCodeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWCodeListViewController.h; sourceTree = "<group>"; };
 		48AE65B91F90A39900A4D44C /* PWCodeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWCodeListViewController.m; sourceTree = "<group>"; };
 		48BF35801F90BE400088B7ED /* PWBluetoothViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWBluetoothViewController.h; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				40286E9A1F395A1F00F513C7 /* PWSendUDPViewController.m */,
 				402E986E1E8B5B8500946178 /* PWDeviceCell.h */,
 				402E986F1E8B5B8500946178 /* PWDeviceCell.m */,
+				48AB0F1E1FBECD050047F51C /* PWASRStatusCommand.h */,
+				48AB0F1D1FBECD050047F51C /* PWASRStatusCommand.m */,
 			);
 			path = "Pineapple iOS Example";
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 			files = (
 				489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */,
 				40286E9B1F395A1F00F513C7 /* PWSendUDPViewController.m in Sources */,
+				48AB0F1F1FBECD060047F51C /* PWASRStatusCommand.m in Sources */,
 				4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */,
 				48AE65BA1F90A39900A4D44C /* PWCodeListViewController.m in Sources */,
 				40F538191EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m in Sources */,

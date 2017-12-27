@@ -14,6 +14,7 @@
 #import "Pineapple.h"
 #import <Masonry/Masonry.h>
 #import <CocoaAsyncSocket/GCDAsyncUdpSocket.h>
+#import "PWASRStatusCommand.h"
 
 static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
@@ -250,7 +251,11 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
     NSString *text = self.textField.text;
     if (indexPath && ![text isEqualToString:@""]) {
-        PWTextCommand *comand = [[PWTextCommand alloc] initWithText:text];
+//        PWTextCommand *comand = [[PWTextCommand alloc] initWithText:text];
+        NSArray *strs = [text componentsSeparatedByString:@","];
+        PWASRStatusCommand *comand = [[PWASRStatusCommand alloc] initWithParams:@{@"operType" : strs.firstObject,
+                                                                                  @"topicNumber" : strs.lastObject
+                                                                                  }];
         PWDevice *device = self.devices[indexPath.row];
         if ([device isKindOfClass:[PWLocalDevice class]]) {
             PWLocalDevice *localDevice = (PWLocalDevice *)device;
