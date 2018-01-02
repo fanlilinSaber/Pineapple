@@ -408,8 +408,8 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [self log:[NSString stringWithFormat:@"%@:%d->开启连接成功", device.host, device.port]];
 }
 
-- (void)device:(PWLocalDevice *)device didConnectFailedMessage:(NSString *)message {
-    [self log:[NSString stringWithFormat:@"%@:%d->开启连接失败: %@", device.host, device.port, message]];
+- (void)device:(PWLocalDevice *)device didConnectFailedError:(NSError *)error {
+    [self log:[NSString stringWithFormat:@"%@:%d->开启连接失败: %@", device.host, device.port, [error localizedDescription]]];
     [self removeLocalDevice:device];
 }
 
@@ -418,10 +418,17 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [self removeLocalDevice:device];
 }
 
-- (void)device:(PWLocalDevice *)device didDisconnectFailedMessage:(NSString *)message {
-    [self log:[NSString stringWithFormat:@"%@:%d->断开连接失败: %@", device.host, device.port, message]];
+//- (void)device:(PWLocalDevice *)device didDisconnectFailedMessage:(NSString *)message {
+//    [self log:[NSString stringWithFormat:@"%@:%d->断开连接失败: %@", device.host, device.port, message]];
+//    [self removeLocalDevice:device];
+//}
+
+- (void)device:(PWLocalDevice *)device remoteDidDisconnectError:(NSError *)error{
+    [self log:[NSString stringWithFormat:@"%@:%d->远端断开连接: %@", device.host, device.port, [error localizedDescription]]];
     [self removeLocalDevice:device];
 }
+
+
 
 - (void)device:(PWLocalDevice *)device didReceiveCommand:(PWCommand *)command {
     if ([command.msgType isEqualToString:PWTextCommand.msgType]) {
