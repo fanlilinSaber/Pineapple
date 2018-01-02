@@ -15,9 +15,9 @@
 @protocol PWLocalDeviceDelegate <NSObject>
 
 - (void)deviceDidConnectSuccess:(PWLocalDevice *)device;
-- (void)device:(PWLocalDevice *)device didConnectFailedMessage:(NSString *)message;
+- (void)device:(PWLocalDevice *)device didConnectFailedError:(NSError *)error;
 - (void)deviceDidDisconnectSuccess:(PWLocalDevice *)device;
-- (void)device:(PWLocalDevice *)device didDisconnectFailedMessage:(NSString *)message;
+- (void)device:(PWLocalDevice *)device remoteDidDisconnectError:(NSError *)error;
 - (void)device:(PWLocalDevice *)device didReceiveCommand:(PWCommand *)command;
 
 @end

@@ -95,7 +95,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     if ([self.socket isDisconnected]) {
         NSError *error = nil;
         if (![self.socket connectToHost:self.host onPort:self.port withTimeout:5 error:&error]) {
-            [self.delegate device:self didConnectFailedMessage:[error localizedDescription]];
+            [self.delegate device:self didConnectFailedError:error];
         }
     } else if (read) {
         [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
@@ -104,8 +104,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
         [self.keepLiveTimer invalidate];
         self.keepLiveTimer = nil;
     }
-    self.keepLiveTimer = [NSTimer scheduledTimerWithTimeInterval:PWKeepLiveTimeInterval target:self selector:@selector(keepLive) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.keepLiveTimer forMode:NSRunLoopCommonModes];
+    [self startKeepLiveTimer];
 }
 
 - (void)keepLive {
@@ -117,10 +116,18 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     }
 }
 
+- (void)startKeepLiveTimer{
+    self.keepLiveTimer = [NSTimer scheduledTimerWithTimeInterval:PWKeepLiveTimeInterval target:self selector:@selector(keepLive) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.keepLiveTimer forMode:NSRunLoopCommonModes];
+}
+
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.keepLiveTimer == nil) {
+            [self keepLiveTimer];
+        }
         [self.delegate deviceDidConnectSuccess:self];
     });
     [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
@@ -131,7 +138,12 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     self.socket = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (error) {
-            [self.delegate device:self didDisconnectFailedMessage:[error localizedDescription]];
+            /*&* socket serve closed*/
+            if (error.code == 7) {
+                [self.delegate device:self remoteDidDisconnectError:error];
+            }else{
+                [self.delegate device:self didConnectFailedError:error];
+            }
         } else {
             [self.delegate deviceDidDisconnectSuccess:self];
         }
