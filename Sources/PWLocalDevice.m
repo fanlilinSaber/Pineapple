@@ -15,6 +15,7 @@ static NSInteger const PWTagHeader = 10;
 static NSInteger const PWTagBody = 11;
 static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 
+
 @interface PWLocalDevice () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) PWAbility *ability;
@@ -91,6 +92,7 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 - (void)connectWithRead:(BOOL)read {
     if (!self.socket) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+        [self.socket setIPv4PreferredOverIPv6:NO]; /*&* 设置支持IPV6 默认情况下,首选协议IPV6*/
     }
     if ([self.socket isDisconnected]) {
         NSError *error = nil;

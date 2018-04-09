@@ -40,6 +40,21 @@
 		40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */; };
 		40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F538461EA6201000B1FDC9 /* PWAbility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40F5384A1EA620B800B1FDC9 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538471EA6201000B1FDC9 /* PWAbility.m */; };
+		485550522050CB4500007291 /* PWAddRMQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550512050CB4500007291 /* PWAddRMQViewController.m */; };
+		485550782050D93C00007291 /* IQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550552050D93C00007291 /* IQTextView.m */; };
+		485550792050D93C00007291 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550592050D93C00007291 /* IQToolbar.m */; };
+		4855507A2050D93C00007291 /* IQTitleBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4855505A2050D93C00007291 /* IQTitleBarButtonItem.m */; };
+		4855507B2050D93C00007291 /* IQBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4855505B2050D93C00007291 /* IQBarButtonItem.m */; };
+		4855507C2050D93C00007291 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4855505C2050D93C00007291 /* IQUIView+IQKeyboardToolbar.m */; };
+		4855507D2050D93C00007291 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 485550642050D93C00007291 /* IQKeyboardManager.bundle */; };
+		4855507E2050D93C00007291 /* IQSegmentedNextPrevious.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550682050D93C00007291 /* IQSegmentedNextPrevious.m */; };
+		4855507F2050D93C00007291 /* IQKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4855506B2050D93C00007291 /* IQKeyboardManager.m */; };
+		485550802050D93C00007291 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4855506D2050D93C00007291 /* IQNSArray+Sort.m */; };
+		485550812050D93C00007291 /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4855506E2050D93C00007291 /* IQUIWindow+Hierarchy.m */; };
+		485550822050D93C00007291 /* IQUITextFieldView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550702050D93C00007291 /* IQUITextFieldView+Additions.m */; };
+		485550832050D93C00007291 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550712050D93C00007291 /* IQUIView+Hierarchy.m */; };
+		485550842050D93C00007291 /* IQUIViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550752050D93C00007291 /* IQUIViewController+Additions.m */; };
+		485550852050D93C00007291 /* IQKeyboardReturnKeyHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550772050D93C00007291 /* IQKeyboardReturnKeyHandler.m */; };
 		489FEED21F94537700453009 /* PWBluetooth.h in Sources */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; };
 		489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489FEED51F945A5A00453009 /* PWConnectViewController.m */; };
 		489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489FEED61F945A5A00453009 /* PWConnectViewController.xib */; };
@@ -48,6 +63,8 @@
 		48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */; };
 		48C122281F90CABD00664192 /* PWBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48C122291F90CABD00664192 /* PWBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C122271F90CABD00664192 /* PWBluetooth.m */; };
+		48D7495020562A5C0027BA50 /* PWMQDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D7494E20562A5C0027BA50 /* PWMQDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48D7495120562A5C0027BA50 /* PWMQDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7494F20562A5C0027BA50 /* PWMQDevice.m */; };
 		48DC71271FAC06E400118869 /* PWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DC71261FAC06E400118869 /* PWDrawViewController.m */; };
 		48DC712A1FAC07BE00118869 /* PWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DC71291FAC07BE00118869 /* PWDrawView.m */; };
 		BC90E28B5A0AC3C0E510D975 /* libPods-Pineapple iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */; };
@@ -121,6 +138,38 @@
 		40F538461EA6201000B1FDC9 /* PWAbility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAbility.h; sourceTree = "<group>"; };
 		40F538471EA6201000B1FDC9 /* PWAbility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAbility.m; sourceTree = "<group>"; };
 		43414782D074D3F96B8BE168 /* Pods-Pineapple iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		485550502050CB4500007291 /* PWAddRMQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWAddRMQViewController.h; sourceTree = "<group>"; };
+		485550512050CB4500007291 /* PWAddRMQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWAddRMQViewController.m; sourceTree = "<group>"; };
+		485550552050D93C00007291 /* IQTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTextView.m; sourceTree = "<group>"; };
+		485550562050D93C00007291 /* IQTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQTextView.h; sourceTree = "<group>"; };
+		485550582050D93C00007291 /* IQUIView+IQKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+IQKeyboardToolbar.h"; sourceTree = "<group>"; };
+		485550592050D93C00007291 /* IQToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToolbar.m; sourceTree = "<group>"; };
+		4855505A2050D93C00007291 /* IQTitleBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTitleBarButtonItem.m; sourceTree = "<group>"; };
+		4855505B2050D93C00007291 /* IQBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQBarButtonItem.m; sourceTree = "<group>"; };
+		4855505C2050D93C00007291 /* IQUIView+IQKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIView+IQKeyboardToolbar.m"; sourceTree = "<group>"; };
+		4855505D2050D93C00007291 /* IQToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToolbar.h; sourceTree = "<group>"; };
+		4855505E2050D93C00007291 /* IQBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQBarButtonItem.h; sourceTree = "<group>"; };
+		4855505F2050D93C00007291 /* IQTitleBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQTitleBarButtonItem.h; sourceTree = "<group>"; };
+		485550612050D93C00007291 /* IQKeyboardManagerConstantsInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQKeyboardManagerConstantsInternal.h; sourceTree = "<group>"; };
+		485550622050D93C00007291 /* IQKeyboardManagerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQKeyboardManagerConstants.h; sourceTree = "<group>"; };
+		485550642050D93C00007291 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		485550652050D93C00007291 /* IQKeyboardReturnKeyHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQKeyboardReturnKeyHandler.h; sourceTree = "<group>"; };
+		485550662050D93C00007291 /* IQKeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQKeyboardManager.h; sourceTree = "<group>"; };
+		485550682050D93C00007291 /* IQSegmentedNextPrevious.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQSegmentedNextPrevious.m; sourceTree = "<group>"; };
+		485550692050D93C00007291 /* IQSegmentedNextPrevious.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQSegmentedNextPrevious.h; sourceTree = "<group>"; };
+		4855506A2050D93C00007291 /* KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardManager.h; sourceTree = "<group>"; };
+		4855506B2050D93C00007291 /* IQKeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardManager.m; sourceTree = "<group>"; };
+		4855506D2050D93C00007291 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
+		4855506E2050D93C00007291 /* IQUIWindow+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIWindow+Hierarchy.m"; sourceTree = "<group>"; };
+		4855506F2050D93C00007291 /* IQUIViewController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIViewController+Additions.h"; sourceTree = "<group>"; };
+		485550702050D93C00007291 /* IQUITextFieldView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUITextFieldView+Additions.m"; sourceTree = "<group>"; };
+		485550712050D93C00007291 /* IQUIView+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIView+Hierarchy.m"; sourceTree = "<group>"; };
+		485550722050D93C00007291 /* IQUIWindow+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIWindow+Hierarchy.h"; sourceTree = "<group>"; };
+		485550732050D93C00007291 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
+		485550742050D93C00007291 /* IQUITextFieldView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUITextFieldView+Additions.h"; sourceTree = "<group>"; };
+		485550752050D93C00007291 /* IQUIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIViewController+Additions.m"; sourceTree = "<group>"; };
+		485550762050D93C00007291 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
+		485550772050D93C00007291 /* IQKeyboardReturnKeyHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardReturnKeyHandler.m; sourceTree = "<group>"; };
 		489FEED41F945A5A00453009 /* PWConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWConnectViewController.h; sourceTree = "<group>"; };
 		489FEED51F945A5A00453009 /* PWConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWConnectViewController.m; sourceTree = "<group>"; };
 		489FEED61F945A5A00453009 /* PWConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWConnectViewController.xib; sourceTree = "<group>"; };
@@ -132,6 +181,8 @@
 		48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWBluetoothViewController.m; sourceTree = "<group>"; };
 		48C122261F90CABD00664192 /* PWBluetooth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWBluetooth.h; sourceTree = "<group>"; };
 		48C122271F90CABD00664192 /* PWBluetooth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWBluetooth.m; sourceTree = "<group>"; };
+		48D7494E20562A5C0027BA50 /* PWMQDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWMQDevice.h; sourceTree = "<group>"; };
+		48D7494F20562A5C0027BA50 /* PWMQDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWMQDevice.m; sourceTree = "<group>"; };
 		48DC71251FAC06E400118869 /* PWDrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDrawViewController.h; sourceTree = "<group>"; };
 		48DC71261FAC06E400118869 /* PWDrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDrawViewController.m; sourceTree = "<group>"; };
 		48DC71281FAC07BE00118869 /* PWDrawView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDrawView.h; sourceTree = "<group>"; };
@@ -198,6 +249,8 @@
 				403404141E8DEEC300029235 /* PWListener.m */,
 				4031A3D81E88EC470067D8ED /* PWLocalDevice.h */,
 				4031A3D91E88EC470067D8ED /* PWLocalDevice.m */,
+				48D7494E20562A5C0027BA50 /* PWMQDevice.h */,
+				48D7494F20562A5C0027BA50 /* PWMQDevice.m */,
 				40F538461EA6201000B1FDC9 /* PWAbility.h */,
 				40F538471EA6201000B1FDC9 /* PWAbility.m */,
 				40A5F8491EA746DC0078F47C /* PWHeader.h */,
@@ -217,6 +270,7 @@
 		4031A3BD1E88EABD0067D8ED /* Pineapple iOS Example */ = {
 			isa = PBXGroup;
 			children = (
+				485550532050D93C00007291 /* IQKeyBoardManager */,
 				48DC71241FAC06AE00118869 /* 画线 */,
 				48BF357F1F90BE080088B7ED /* Bluetooth */,
 				4031A3CA1E88EABD0067D8ED /* Assets.xcassets */,
@@ -235,6 +289,8 @@
 				40F538181EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m */,
 				40286E991F395A1F00F513C7 /* PWSendUDPViewController.h */,
 				40286E9A1F395A1F00F513C7 /* PWSendUDPViewController.m */,
+				485550502050CB4500007291 /* PWAddRMQViewController.h */,
+				485550512050CB4500007291 /* PWAddRMQViewController.m */,
 				402E986E1E8B5B8500946178 /* PWDeviceCell.h */,
 				402E986F1E8B5B8500946178 /* PWDeviceCell.m */,
 				48AB0F1E1FBECD050047F51C /* PWASRStatusCommand.h */,
@@ -258,6 +314,91 @@
 				055F9F89856BCA1CCADE819E /* libPods-Pineapple iOS Example.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		485550532050D93C00007291 /* IQKeyBoardManager */ = {
+			isa = PBXGroup;
+			children = (
+				485550542050D93C00007291 /* IQTextView */,
+				485550572050D93C00007291 /* IQToolbar */,
+				485550602050D93C00007291 /* Constants */,
+				485550632050D93C00007291 /* Resources */,
+				485550652050D93C00007291 /* IQKeyboardReturnKeyHandler.h */,
+				485550662050D93C00007291 /* IQKeyboardManager.h */,
+				485550672050D93C00007291 /* IQSegmentedNextPrevious */,
+				4855506A2050D93C00007291 /* KeyboardManager.h */,
+				4855506B2050D93C00007291 /* IQKeyboardManager.m */,
+				4855506C2050D93C00007291 /* Categories */,
+				485550772050D93C00007291 /* IQKeyboardReturnKeyHandler.m */,
+			);
+			path = IQKeyBoardManager;
+			sourceTree = "<group>";
+		};
+		485550542050D93C00007291 /* IQTextView */ = {
+			isa = PBXGroup;
+			children = (
+				485550552050D93C00007291 /* IQTextView.m */,
+				485550562050D93C00007291 /* IQTextView.h */,
+			);
+			path = IQTextView;
+			sourceTree = "<group>";
+		};
+		485550572050D93C00007291 /* IQToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				485550582050D93C00007291 /* IQUIView+IQKeyboardToolbar.h */,
+				485550592050D93C00007291 /* IQToolbar.m */,
+				4855505A2050D93C00007291 /* IQTitleBarButtonItem.m */,
+				4855505B2050D93C00007291 /* IQBarButtonItem.m */,
+				4855505C2050D93C00007291 /* IQUIView+IQKeyboardToolbar.m */,
+				4855505D2050D93C00007291 /* IQToolbar.h */,
+				4855505E2050D93C00007291 /* IQBarButtonItem.h */,
+				4855505F2050D93C00007291 /* IQTitleBarButtonItem.h */,
+			);
+			path = IQToolbar;
+			sourceTree = "<group>";
+		};
+		485550602050D93C00007291 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				485550612050D93C00007291 /* IQKeyboardManagerConstantsInternal.h */,
+				485550622050D93C00007291 /* IQKeyboardManagerConstants.h */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		485550632050D93C00007291 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				485550642050D93C00007291 /* IQKeyboardManager.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		485550672050D93C00007291 /* IQSegmentedNextPrevious */ = {
+			isa = PBXGroup;
+			children = (
+				485550682050D93C00007291 /* IQSegmentedNextPrevious.m */,
+				485550692050D93C00007291 /* IQSegmentedNextPrevious.h */,
+			);
+			path = IQSegmentedNextPrevious;
+			sourceTree = "<group>";
+		};
+		4855506C2050D93C00007291 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4855506D2050D93C00007291 /* IQNSArray+Sort.m */,
+				4855506E2050D93C00007291 /* IQUIWindow+Hierarchy.m */,
+				4855506F2050D93C00007291 /* IQUIViewController+Additions.h */,
+				485550702050D93C00007291 /* IQUITextFieldView+Additions.m */,
+				485550712050D93C00007291 /* IQUIView+Hierarchy.m */,
+				485550722050D93C00007291 /* IQUIWindow+Hierarchy.h */,
+				485550732050D93C00007291 /* IQNSArray+Sort.h */,
+				485550742050D93C00007291 /* IQUITextFieldView+Additions.h */,
+				485550752050D93C00007291 /* IQUIViewController+Additions.m */,
+				485550762050D93C00007291 /* IQUIView+Hierarchy.h */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		48BF357F1F90BE080088B7ED /* Bluetooth */ = {
@@ -311,6 +452,7 @@
 				40B2A2281EA88EB500A02D96 /* PWDevice.h in Headers */,
 				40F538411EA612FC00B1FDC9 /* PWRemoteDevice.h in Headers */,
 				403404151E8DEEC300029235 /* PWListener.h in Headers */,
+				48D7495020562A5C0027BA50 /* PWMQDevice.h in Headers */,
 				40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */,
 				40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */,
 			);
@@ -416,6 +558,7 @@
 			files = (
 				4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */,
 				489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */,
+				4855507D2050D93C00007291 /* IQKeyboardManager.bundle in Resources */,
 				4031A3CB1E88EABD0067D8ED /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,7 +623,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		6C99C4928CD2516DAE72CA98 /* [CP] Check Pods Manifest.lock */ = {
@@ -495,7 +638,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -506,6 +649,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				489FEED21F94537700453009 /* PWBluetooth.h in Sources */,
+				48D7495120562A5C0027BA50 /* PWMQDevice.m in Sources */,
 				40B2A2291EA88EB500A02D96 /* PWDevice.m in Sources */,
 				403404161E8DEEC300029235 /* PWListener.m in Sources */,
 				40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */,
@@ -526,16 +670,30 @@
 			files = (
 				489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */,
 				40286E9B1F395A1F00F513C7 /* PWSendUDPViewController.m in Sources */,
+				485550522050CB4500007291 /* PWAddRMQViewController.m in Sources */,
+				485550792050D93C00007291 /* IQToolbar.m in Sources */,
 				48AB0F1F1FBECD060047F51C /* PWASRStatusCommand.m in Sources */,
 				4031A3C61E88EABD0067D8ED /* PWHomeViewController.m in Sources */,
+				485550822050D93C00007291 /* IQUITextFieldView+Additions.m in Sources */,
 				48AE65BA1F90A39900A4D44C /* PWCodeListViewController.m in Sources */,
 				40F538191EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m in Sources */,
+				485550832050D93C00007291 /* IQUIView+Hierarchy.m in Sources */,
+				4855507B2050D93C00007291 /* IQBarButtonItem.m in Sources */,
 				40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */,
+				485550802050D93C00007291 /* IQNSArray+Sort.m in Sources */,
+				485550852050D93C00007291 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				4031A3C31E88EABD0067D8ED /* AppDelegate.m in Sources */,
+				485550842050D93C00007291 /* IQUIViewController+Additions.m in Sources */,
 				4031A3C01E88EABD0067D8ED /* main.m in Sources */,
+				4855507A2050D93C00007291 /* IQTitleBarButtonItem.m in Sources */,
 				48DC71271FAC06E400118869 /* PWDrawViewController.m in Sources */,
 				402E98701E8B5B8500946178 /* PWDeviceCell.m in Sources */,
+				4855507F2050D93C00007291 /* IQKeyboardManager.m in Sources */,
+				485550812050D93C00007291 /* IQUIWindow+Hierarchy.m in Sources */,
 				48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */,
+				485550782050D93C00007291 /* IQTextView.m in Sources */,
+				4855507C2050D93C00007291 /* IQUIView+IQKeyboardToolbar.m in Sources */,
+				4855507E2050D93C00007291 /* IQSegmentedNextPrevious.m in Sources */,
 				48DC712A1FAC07BE00118869 /* PWDrawView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
