@@ -58,7 +58,7 @@
 		489FEED21F94537700453009 /* PWBluetooth.h in Sources */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; };
 		489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489FEED51F945A5A00453009 /* PWConnectViewController.m */; };
 		489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489FEED61F945A5A00453009 /* PWConnectViewController.xib */; };
-		48A3550F207CD00100E89BB0 /* PWAckCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 48A3550D207CD00100E89BB0 /* PWAckCommand.h */; };
+		48A3550F207CD00100E89BB0 /* PWAckCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 48A3550D207CD00100E89BB0 /* PWAckCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48A35510207CD00100E89BB0 /* PWAckCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A3550E207CD00100E89BB0 /* PWAckCommand.m */; };
 		48AB0F1F1FBECD060047F51C /* PWASRStatusCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0F1D1FBECD050047F51C /* PWASRStatusCommand.m */; };
 		48AE65BA1F90A39900A4D44C /* PWCodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AE65B91F90A39900A4D44C /* PWCodeListViewController.m */; };
@@ -461,8 +461,8 @@
 				4031A3DA1E88EC470067D8ED /* PWLocalDevice.h in Headers */,
 				4034041C1E8DFF8800029235 /* PWTextCommand.h in Headers */,
 				40B2A2281EA88EB500A02D96 /* PWDevice.h in Headers */,
-				40F538411EA612FC00B1FDC9 /* PWRemoteDevice.h in Headers */,
 				48A3550F207CD00100E89BB0 /* PWAckCommand.h in Headers */,
+				40F538411EA612FC00B1FDC9 /* PWRemoteDevice.h in Headers */,
 				403404151E8DEEC300029235 /* PWListener.h in Headers */,
 				48D7495020562A5C0027BA50 /* PWMQDevice.h in Headers */,
 				40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */,
