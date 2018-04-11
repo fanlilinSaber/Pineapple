@@ -15,10 +15,12 @@
 #import <Masonry/Masonry.h>
 #import <CocoaAsyncSocket/GCDAsyncUdpSocket.h>
 #import "PWASRStatusCommand.h"
+#import "PWAddRMQViewController.h"
+#import "PWUserLoginStatusCommand.h"
 
 static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
-@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddLocalDeviceViewControllerDelegate, PWAddRemoteDeviceViewControllerDelegate, PWProxyDelegate, PWListenerDelegate, PWLocalDeviceDelegate, GCDAsyncUdpSocketDelegate>
+@interface PWHomeViewController () <UITableViewDelegate, UITableViewDataSource, PWAddLocalDeviceViewControllerDelegate, PWAddRemoteDeviceViewControllerDelegate, PWProxyDelegate, PWListenerDelegate, PWLocalDeviceDelegate, GCDAsyncUdpSocketDelegate, PWAddRMQViewControllerDelegate>
 
 @property (strong, nonatomic) PWAbility *ability;
 @property (strong, nonatomic) PWProxy *proxy;
@@ -34,12 +36,17 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
 @implementation PWHomeViewController
 
+- (void)dealloc {
+    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+}
+
 - (void)loadView {
     [super loadView];
     
     self.title = @"设备列表";
     
     self.ability = [PWAbility new];
+    [self.ability addCommand:[PWUserLoginStatusCommand class] withMsgType:[PWUserLoginStatusCommand msgType]];
     
     self.devices = @[];
     
@@ -220,10 +227,16 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
                                                        handler:^(UIAlertAction * _Nonnull action) {
                                                            [self addUDP];
                                                        }];
+    
+    UIAlertAction* rmqAction = [UIAlertAction actionWithTitle:@"RMQ" style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                          [self addRMQ];
+                                                      }];
     [alert addAction:defaultAction];
     [alert addAction:mqttAction];
     [alert addAction:socketAction];
     [alert addAction:udpAction];
+    [alert addAction:rmqAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -247,20 +260,44 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [self presentViewController:navigationController animated:true completion:nil];
 }
 
+- (void)addRMQ {
+    PWAddRMQViewController *vc = [[PWAddRMQViewController alloc] initWithAbility:self.ability];
+    vc.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:navigationController animated:true completion:nil];
+}
+
 - (void)send {
     NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
     NSString *text = self.textField.text;
     if (indexPath && ![text isEqualToString:@""]) {
-//        PWTextCommand *comand = [[PWTextCommand alloc] initWithText:text];
-        NSArray *strs = [text componentsSeparatedByString:@","];
-        PWASRStatusCommand *comand = [[PWASRStatusCommand alloc] initWithParams:@{@"operType" : strs.firstObject,
-                                                                                  @"topicNumber" : strs.lastObject
-                                                                                  }];
+        PWTextCommand *comand = [[PWTextCommand alloc] initWithText:text];
+//        NSArray *strs = [text componentsSeparatedByString:@"."];
+//        PWASRStatusCommand *comand = [[PWASRStatusCommand alloc] initWithParams:@{@"operType" : strs.firstObject,
+//                                                                                  @"topicNumber" : strs.lastObject
+//                                                                                  }];
+        
+//        PWUserLoginStatusCommand *comand = [[PWUserLoginStatusCommand alloc] initWithUserToken:text];
+        
         PWDevice *device = self.devices[indexPath.row];
+        
         if ([device isKindOfClass:[PWLocalDevice class]]) {
             PWLocalDevice *localDevice = (PWLocalDevice *)device;
-            [localDevice send:comand];
-        } else {
+//            // 测试
+            for (int i = 0; i < 30; i ++) {
+//                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:[NSString stringWithFormat:@"%d",i]];
+                PWUserLoginStatusCommand *comandNew = [[PWUserLoginStatusCommand alloc] initWithUserToken:[NSString stringWithFormat:@"%d",i]];
+//                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:@"2"];
+                [localDevice send:comandNew];
+
+            }
+//            [localDevice send:comand];
+        }
+        else if ([device isKindOfClass:[PWMQDevice class]]) {
+            PWMQDevice *mqDevice = (PWMQDevice *)device;
+            [mqDevice send:text];
+        }
+        else {
             PWRemoteDevice *remoteDevice = (PWRemoteDevice *)device;
             [self.proxy send:comand toDevice:remoteDevice];
         }
@@ -271,6 +308,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 #pragma mark - Private
 
 - (void)addLocalDevice:(PWLocalDevice *)device {
+    device.enabledAck = YES;
     device.delegate = self;
     [device connect];
     NSMutableArray *devices = [self.devices mutableCopy];
@@ -296,6 +334,14 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
         self.devices = devices;
         [self.tableView reloadData];
     }
+}
+
+- (void)addMQDevice:(PWMQDevice *)device {
+    [device connect];
+    NSMutableArray *devices = [self.devices mutableCopy];
+    [devices addObject:device];
+    self.devices = devices;
+    [self.tableView reloadData];
 }
 
 - (void)removeLocalDevice:(PWLocalDevice *)device {
@@ -350,6 +396,14 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 - (void)addRemoteDeviceViewControllerDidSave:(PWAddRemoteDeviceViewController *)addRemoteDeviceViewController withDevice:(PWRemoteDevice *)device {
     [self dismissViewControllerAnimated:true completion:^{
         [self addRemoteDevice:device];
+    }];
+}
+
+#pragma mark - PWAddRMQViewControllerDelegate
+
+- (void)addMQDeviceViewControllerDidSave:(PWAddRMQViewController *)addMQDeviceViewController withDevice:(PWMQDevice *)device {
+    [self dismissViewControllerAnimated:true completion:^{
+        [self addMQDevice:device];
     }];
 }
 
@@ -429,11 +483,13 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 }
 
 
-
 - (void)device:(PWLocalDevice *)device didReceiveCommand:(PWCommand *)command {
     if ([command.msgType isEqualToString:PWTextCommand.msgType]) {
         PWTextCommand *textCommand = (PWTextCommand *)command;
         [self log:[NSString stringWithFormat:@"%@:%d->%@", device.host, device.port, textCommand.text]];
+    }else if ([command.msgType isEqualToString:PWUserLoginStatusCommand.msgType]) {
+        PWUserLoginStatusCommand *userCommand = (PWUserLoginStatusCommand *)command;
+        [self log:[NSString stringWithFormat:@"%@:%d->%@", device.host, device.port, userCommand.userToken]];
     }
 }
 

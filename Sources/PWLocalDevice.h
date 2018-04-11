@@ -27,6 +27,7 @@
 @property (weak, nonatomic) id<PWLocalDeviceDelegate> delegate;
 @property (copy, nonatomic) NSString *host;
 @property (nonatomic) int port;
+@property (nonatomic, assign, getter=isEnabledAck) BOOL enabledAck;
 
 - (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect;
 - (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket;

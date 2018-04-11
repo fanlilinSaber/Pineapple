@@ -27,6 +27,11 @@
 
 @implementation PWProxy
 
+- (void)dealloc {
+    [_sessionManager disconnect];
+    [_sessionManager removeObserver:self forKeyPath:@"state"];
+}
+
 - (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId {
     self = [super init];
     if (self) {

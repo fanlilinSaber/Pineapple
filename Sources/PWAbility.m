@@ -9,6 +9,7 @@
 #import "PWAbility.h"
 #import "PWKeepLiveCommand.h"
 #import "PWTextCommand.h"
+#import "PWAckCommand.h"
 
 @interface PWAbility ()
 
@@ -21,7 +22,9 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _commands = @{PWTextCommand.msgType: PWTextCommand.class};
+        _commands = @{PWTextCommand.msgType: PWTextCommand.class,
+                      PWAckCommand.msgType: PWAckCommand.class
+                      };
     }
     return self;
 }
@@ -30,6 +33,10 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     NSString *msgType = (NSString *)[json valueForKey:@"msgType"];
     if (!msgType) {
+        if ([json isKindOfClass:[NSDictionary class]] && json.count == 0) {
+            
+            return [PWKeepLiveCommand new];
+        }
         return nil;
     } else {
         Class class = (Class)self.commands[msgType];

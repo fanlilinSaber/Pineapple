@@ -31,6 +31,7 @@
 @property (copy, nonatomic) NSArray *paramsArray;
 @property (copy, nonatomic) NSString *msgId;
 @property (copy, nonatomic) NSString *ack;
+@property (nonatomic, assign, getter=isEnabledAck) BOOL enabledAck;
 
 - (void)fillPropertiesWithData:(NSDictionary *)data;
 - (NSMutableDictionary *)fillDataWithProperties;
