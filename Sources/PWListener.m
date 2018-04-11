@@ -19,6 +19,10 @@
 
 @implementation PWListener
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype)initWithAbility:(PWAbility *)ability port:(NSInteger)port {
     self = [super init];
     if (self) {
