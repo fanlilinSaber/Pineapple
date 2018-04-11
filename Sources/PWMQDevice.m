@@ -33,7 +33,6 @@
 - (void)connect {
     if (!self.conn) {
         self.conn = [[RMQConnection alloc] initWithUri:self.uri delegate:[RMQConnectionDelegateLogger new]];
-//        self.conn = [[RMQConnection alloc] initWithDelegate:[RMQConnectionDelegateLogger new]];
     }
     [self.conn start];
     

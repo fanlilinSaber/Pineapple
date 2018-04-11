@@ -9,23 +9,47 @@
 #import "PWLocalDevice.h"
 #import "PWHeader.h"
 #import "PWKeepLiveCommand.h"
+#import "PWAckCommand.h"
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 static NSInteger const PWTagHeader = 10;
 static NSInteger const PWTagBody = 11;
 static NSTimeInterval const PWKeepLiveTimeInterval = 60;
-
+static NSTimeInterval const PWAckQueueTimeInterval = 3;
 
 @interface PWLocalDevice () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) PWAbility *ability;
 @property (strong, nonatomic) GCDAsyncSocket *socket;
-@property (strong, nonatomic) NSTimer *keepLiveTimer;
 @property (nonatomic, getter=isOwner) BOOL owner;
+/*&* 无序的 key拿字典来存储*/
+@property (nonatomic, strong) NSMutableDictionary *ackQueueSource;
+/*&* <##>*/
+@property (nonatomic, strong) NSMutableArray *ackQueueSourceKey;
+/*&* <##>*/
+@property (nonatomic) dispatch_source_t keepLive_source_t;
+/*&* <##>*/
+@property (nonatomic) dispatch_source_t ackQueue_source_t;
+/*&* */
+@property (nonatomic, strong) NSMutableArray *ackMsgIdSource;
+/*&* <##>*/
+@property (nonatomic, copy) NSString *currentAckMsgId;
 
 @end
 
 @implementation PWLocalDevice
+
+- (void)dealloc {
+    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    if (self.keepLive_source_t) {
+        dispatch_source_cancel(self.keepLive_source_t);
+        self.keepLive_source_t = NULL;
+    }
+    if (self.ackQueue_source_t) {
+        dispatch_source_cancel(self.ackQueue_source_t);
+        self.ackQueue_source_t = NULL;
+    }
+}
 
 - (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
     self = [super initWithName:name clientId:nil];
@@ -55,6 +79,15 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     return self;
 }
 
+- (void)setEnabledAck:(BOOL)enabledAck {
+    _enabledAck = enabledAck;
+    if (enabledAck) {
+        _ackQueueSource = [NSMutableDictionary dictionary];
+        _ackMsgIdSource = [NSMutableArray array];
+        _ackQueueSourceKey = [NSMutableArray array];
+    }
+}
+
 - (BOOL)isConnected {
     return [self.socket isConnected];
 }
@@ -71,14 +104,54 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     if ([self.socket isConnected]) {
         [self.socket disconnect];
     }
+    if (self.isEnabledAck) {
+        [self.ackQueueSource removeAllObjects];
+        [self.ackMsgIdSource removeAllObjects];
+        [self.ackQueueSourceKey removeAllObjects];
+    }
 }
 
 - (void)send:(PWCommand<PWCommandSendable> *)command {
-    NSData *body = command.dataRepresentation;
-    NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
-    NSMutableData *data = [[NSMutableData alloc] initWithData:header];
-    [data appendData:body];
-    [self.socket writeData:data withTimeout:-1 tag:0];
+    if (command.isEnabledAck && self.isEnabledAck) {
+        NSString *uuidString = [self uuidString];
+        command.msgId = uuidString;
+        NSData *body = command.dataRepresentation;
+        NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
+        NSMutableData *data = [[NSMutableData alloc] initWithData:header];
+        [data appendData:body];
+        [self.ackQueueSource setValue:data forKey:command.msgId];
+        [self.ackQueueSourceKey addObject:command.msgId];
+        [self ackMaybeDequeueWrite];
+    }else {
+        NSData *body = command.dataRepresentation;
+        NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
+        NSMutableData *data = [[NSMutableData alloc] initWithData:header];
+        [data appendData:body];
+        [self.socket writeData:data withTimeout:-1 tag:0];
+    }
+}
+
+- (void)ackMaybeDequeueWrite {
+     if ([self.socket isConnected]) {
+         if (self.ackQueueSourceKey.count > 0 && self.currentAckMsgId == nil) {
+             self.currentAckMsgId = self.ackQueueSourceKey.firstObject;
+             NSData *writeData = [self.ackQueueSource valueForKey:self.currentAckMsgId];
+             [self sendData:writeData];
+         }
+     }else {
+         if (self.ackQueue_source_t) {
+             dispatch_source_cancel(self.ackQueue_source_t);
+             self.ackQueue_source_t = NULL;
+         }
+     }
+}
+
+#pragma mark - uuidString
+- (NSString *)uuidString {
+    CFUUIDRef uuidObj = CFUUIDCreate(nil);
+    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
+    CFRelease(uuidObj);
+    return uuidString ;
 }
 
 #pragma mark - Handle App Life Style
@@ -88,6 +161,17 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 }
 
 #pragma mark - Private
+
+- (void)addReceiveMsgId:(NSString *)msgId {
+    [self.ackMsgIdSource addObject:msgId];
+    if (self.ackMsgIdSource.count == 20) {
+        [self.ackMsgIdSource removeObjectsInRange:NSMakeRange(0, 10)];
+    }
+}
+
+- (void)sendData:(NSData *)data {
+    [self.socket writeData:data withTimeout:-1 tag:0];
+}
 
 - (void)connectWithRead:(BOOL)read {
     if (!self.socket) {
@@ -102,33 +186,82 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     } else if (read) {
         [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
     }
-    if (self.keepLiveTimer) {
-        [self.keepLiveTimer invalidate];
-        self.keepLiveTimer = nil;
+    /*&* 作为服务端不主动发送心跳包 由客户端发送 → 服务端收到并回复 (客户端控制心跳频率)*/
+    if (self.owner) {
+        if (self.keepLive_source_t) {
+            dispatch_source_cancel(self.keepLive_source_t);
+            self.keepLive_source_t = NULL;
+        }
+        [self startKeepLiveTimer];
     }
-    [self startKeepLiveTimer];
+    if (self.isEnabledAck) {
+        if (self.ackQueue_source_t) {
+            dispatch_source_cancel(self.ackQueue_source_t);
+            self.ackQueue_source_t = NULL;
+        }
+        [self startAckQueueTimer];
+    }
 }
 
 - (void)keepLive {
     if ([self.socket isConnected]) {
         [self send:[PWKeepLiveCommand new]];
     } else {
-        [self.keepLiveTimer invalidate];
-        self.keepLiveTimer = nil;
+        if (self.keepLive_source_t) {
+            dispatch_source_cancel(self.keepLive_source_t);
+            self.keepLive_source_t = NULL;
+        }
     }
 }
 
-- (void)startKeepLiveTimer{
-    self.keepLiveTimer = [NSTimer scheduledTimerWithTimeInterval:PWKeepLiveTimeInterval target:self selector:@selector(keepLive) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.keepLiveTimer forMode:NSRunLoopCommonModes];
+- (void)ackQueueCommand:(PWAckCommand<PWCommandSendable> *)command {
+    if (self.currentAckMsgId != nil && [self.currentAckMsgId isEqualToString:command.sourceMsgId]) {
+        if ([self.ackQueueSource valueForKey:command.sourceMsgId]) {
+            [self.ackQueueSource removeObjectForKey:command.sourceMsgId];
+            [self.ackQueueSourceKey removeObjectAtIndex:0];
+            self.currentAckMsgId = nil;
+            [self ackMaybeDequeueWrite];
+        }
+    }
+}
+
+- (void)startAckQueueTimer {
+     __weak PWLocalDevice *weakSelf = self;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(timer,dispatch_walltime(NULL, 0), PWAckQueueTimeInterval * NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(timer, ^{ @autoreleasepool {
+        __strong PWLocalDevice *strongSelf = weakSelf;
+        if (strongSelf == nil) {return ;}
+        [strongSelf ackMaybeDequeueWrite];
+    }});
+    dispatch_resume(timer);
+    self.ackQueue_source_t = timer;
+}
+
+- (void)startKeepLiveTimer {
+    __weak PWLocalDevice *weakSelf = self;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(timer,dispatch_walltime(NULL, 0), PWKeepLiveTimeInterval * NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(timer, ^{ @autoreleasepool {
+        __strong PWLocalDevice *strongSelf = weakSelf;
+        if (strongSelf == nil) {return ;}
+        [strongSelf keepLive];
+    }});
+    dispatch_resume(timer);
+    self.keepLive_source_t = timer;
 }
 
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.keepLiveTimer == nil) {
-            [self keepLiveTimer];
+        if (self.keepLive_source_t == NULL) {
+            [self startKeepLiveTimer];
+        }
+        if (self.isEnabledAck && self.ackQueue_source_t == NULL) {
+            [self startAckQueueTimer];
         }
         [self.delegate deviceDidConnectSuccess:self];
     });
@@ -161,9 +294,35 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
     } else if (tag == PWTagBody) {
         PWCommand *command = [self.ability commandWithData:data];
         if (command != nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.delegate device:self didReceiveCommand:command];
-            });
+            /*&* 心跳包*/
+            if ([command.msgType isEqualToString:[PWKeepLiveCommand msgType]]) {
+                if (!self.owner) {
+                    [self send:(PWKeepLiveCommand *)command];
+                }
+            }
+            /*&* ack*/
+            else if ([command.msgType isEqualToString:[PWAckCommand msgType]]) {
+                [self ackQueueCommand:(PWAckCommand *)command];
+            }
+            else {
+                if (command.msgId.length > 0) {
+                    /*&* 回复 ack*/
+                    [self send:[[PWAckCommand alloc] initWithSourceMsgId:command.msgId sourceMsgType:command.msgType]];
+                    
+                    if (![self.ackMsgIdSource containsObject:command.msgId]) {
+                        
+                        [self addReceiveMsgId:command.msgId];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate device:self didReceiveCommand:command];
+                        });
+                    }
+                    
+                }else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate device:self didReceiveCommand:command];
+                    });
+                }
+            }
         }
         [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
     }

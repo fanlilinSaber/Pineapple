@@ -18,6 +18,7 @@
     self = [super init];
     if (self) {
         self.msgType = PWTextCommand.msgType;
+        self.enabledAck = YES;
         _text = text;
     }
     return self;

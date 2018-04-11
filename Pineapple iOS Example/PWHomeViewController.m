@@ -16,6 +16,7 @@
 #import <CocoaAsyncSocket/GCDAsyncUdpSocket.h>
 #import "PWASRStatusCommand.h"
 #import "PWAddRMQViewController.h"
+#import "PWUserLoginStatusCommand.h"
 
 static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
@@ -35,12 +36,17 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 
 @implementation PWHomeViewController
 
+- (void)dealloc {
+    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+}
+
 - (void)loadView {
     [super loadView];
     
     self.title = @"设备列表";
     
     self.ability = [PWAbility new];
+    [self.ability addCommand:[PWUserLoginStatusCommand class] withMsgType:[PWUserLoginStatusCommand msgType]];
     
     self.devices = @[];
     
@@ -271,16 +277,19 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 //                                                                                  @"topicNumber" : strs.lastObject
 //                                                                                  }];
         
+//        PWUserLoginStatusCommand *comand = [[PWUserLoginStatusCommand alloc] initWithUserToken:text];
         
         PWDevice *device = self.devices[indexPath.row];
+        
         if ([device isKindOfClass:[PWLocalDevice class]]) {
             PWLocalDevice *localDevice = (PWLocalDevice *)device;
-            // 测试
-            for (int i = 0; i < 1000; i ++) {
+//            // 测试
+            for (int i = 0; i < 30; i ++) {
 //                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:[NSString stringWithFormat:@"%d",i]];
-                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:@"2"];
+                PWUserLoginStatusCommand *comandNew = [[PWUserLoginStatusCommand alloc] initWithUserToken:[NSString stringWithFormat:@"%d",i]];
+//                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:@"2"];
                 [localDevice send:comandNew];
-                
+
             }
 //            [localDevice send:comand];
         }
@@ -299,6 +308,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
 #pragma mark - Private
 
 - (void)addLocalDevice:(PWLocalDevice *)device {
+    device.enabledAck = YES;
     device.delegate = self;
     [device connect];
     NSMutableArray *devices = [self.devices mutableCopy];
@@ -477,6 +487,9 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     if ([command.msgType isEqualToString:PWTextCommand.msgType]) {
         PWTextCommand *textCommand = (PWTextCommand *)command;
         [self log:[NSString stringWithFormat:@"%@:%d->%@", device.host, device.port, textCommand.text]];
+    }else if ([command.msgType isEqualToString:PWUserLoginStatusCommand.msgType]) {
+        PWUserLoginStatusCommand *userCommand = (PWUserLoginStatusCommand *)command;
+        [self log:[NSString stringWithFormat:@"%@:%d->%@", device.host, device.port, userCommand.userToken]];
     }
 }
 

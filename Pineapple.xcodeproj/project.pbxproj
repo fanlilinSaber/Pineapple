@@ -58,6 +58,8 @@
 		489FEED21F94537700453009 /* PWBluetooth.h in Sources */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; };
 		489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489FEED51F945A5A00453009 /* PWConnectViewController.m */; };
 		489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489FEED61F945A5A00453009 /* PWConnectViewController.xib */; };
+		48A3550F207CD00100E89BB0 /* PWAckCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 48A3550D207CD00100E89BB0 /* PWAckCommand.h */; };
+		48A35510207CD00100E89BB0 /* PWAckCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A3550E207CD00100E89BB0 /* PWAckCommand.m */; };
 		48AB0F1F1FBECD060047F51C /* PWASRStatusCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0F1D1FBECD050047F51C /* PWASRStatusCommand.m */; };
 		48AE65BA1F90A39900A4D44C /* PWCodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AE65B91F90A39900A4D44C /* PWCodeListViewController.m */; };
 		48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */; };
@@ -65,6 +67,7 @@
 		48C122291F90CABD00664192 /* PWBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C122271F90CABD00664192 /* PWBluetooth.m */; };
 		48D7495020562A5C0027BA50 /* PWMQDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D7494E20562A5C0027BA50 /* PWMQDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48D7495120562A5C0027BA50 /* PWMQDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7494F20562A5C0027BA50 /* PWMQDevice.m */; };
+		48DAA057207DACBE001FBC98 /* PWUserLoginStatusCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DAA056207DACBE001FBC98 /* PWUserLoginStatusCommand.m */; };
 		48DC71271FAC06E400118869 /* PWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DC71261FAC06E400118869 /* PWDrawViewController.m */; };
 		48DC712A1FAC07BE00118869 /* PWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DC71291FAC07BE00118869 /* PWDrawView.m */; };
 		BC90E28B5A0AC3C0E510D975 /* libPods-Pineapple iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */; };
@@ -173,6 +176,8 @@
 		489FEED41F945A5A00453009 /* PWConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWConnectViewController.h; sourceTree = "<group>"; };
 		489FEED51F945A5A00453009 /* PWConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWConnectViewController.m; sourceTree = "<group>"; };
 		489FEED61F945A5A00453009 /* PWConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWConnectViewController.xib; sourceTree = "<group>"; };
+		48A3550D207CD00100E89BB0 /* PWAckCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWAckCommand.h; sourceTree = "<group>"; };
+		48A3550E207CD00100E89BB0 /* PWAckCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWAckCommand.m; sourceTree = "<group>"; };
 		48AB0F1D1FBECD050047F51C /* PWASRStatusCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWASRStatusCommand.m; sourceTree = "<group>"; };
 		48AB0F1E1FBECD050047F51C /* PWASRStatusCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWASRStatusCommand.h; sourceTree = "<group>"; };
 		48AE65B81F90A39900A4D44C /* PWCodeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWCodeListViewController.h; sourceTree = "<group>"; };
@@ -183,6 +188,8 @@
 		48C122271F90CABD00664192 /* PWBluetooth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWBluetooth.m; sourceTree = "<group>"; };
 		48D7494E20562A5C0027BA50 /* PWMQDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWMQDevice.h; sourceTree = "<group>"; };
 		48D7494F20562A5C0027BA50 /* PWMQDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWMQDevice.m; sourceTree = "<group>"; };
+		48DAA055207DACBE001FBC98 /* PWUserLoginStatusCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWUserLoginStatusCommand.h; sourceTree = "<group>"; };
+		48DAA056207DACBE001FBC98 /* PWUserLoginStatusCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWUserLoginStatusCommand.m; sourceTree = "<group>"; };
 		48DC71251FAC06E400118869 /* PWDrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDrawViewController.h; sourceTree = "<group>"; };
 		48DC71261FAC06E400118869 /* PWDrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDrawViewController.m; sourceTree = "<group>"; };
 		48DC71281FAC07BE00118869 /* PWDrawView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDrawView.h; sourceTree = "<group>"; };
@@ -261,6 +268,8 @@
 				40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */,
 				402E987A1E8BBE5A00946178 /* PWTextCommand.h */,
 				402E987B1E8BBE5A00946178 /* PWTextCommand.m */,
+				48A3550D207CD00100E89BB0 /* PWAckCommand.h */,
+				48A3550E207CD00100E89BB0 /* PWAckCommand.m */,
 				48C122261F90CABD00664192 /* PWBluetooth.h */,
 				48C122271F90CABD00664192 /* PWBluetooth.m */,
 			);
@@ -295,6 +304,8 @@
 				402E986F1E8B5B8500946178 /* PWDeviceCell.m */,
 				48AB0F1E1FBECD050047F51C /* PWASRStatusCommand.h */,
 				48AB0F1D1FBECD050047F51C /* PWASRStatusCommand.m */,
+				48DAA055207DACBE001FBC98 /* PWUserLoginStatusCommand.h */,
+				48DAA056207DACBE001FBC98 /* PWUserLoginStatusCommand.m */,
 			);
 			path = "Pineapple iOS Example";
 			sourceTree = "<group>";
@@ -451,6 +462,7 @@
 				4034041C1E8DFF8800029235 /* PWTextCommand.h in Headers */,
 				40B2A2281EA88EB500A02D96 /* PWDevice.h in Headers */,
 				40F538411EA612FC00B1FDC9 /* PWRemoteDevice.h in Headers */,
+				48A3550F207CD00100E89BB0 /* PWAckCommand.h in Headers */,
 				403404151E8DEEC300029235 /* PWListener.h in Headers */,
 				48D7495020562A5C0027BA50 /* PWMQDevice.h in Headers */,
 				40B2A2241EA864B300A02D96 /* PWKeepLiveCommand.h in Headers */,
@@ -654,6 +666,7 @@
 				403404161E8DEEC300029235 /* PWListener.m in Sources */,
 				40AC06AD1E890CC0004150E2 /* PWCommand.m in Sources */,
 				40F5384A1EA620B800B1FDC9 /* PWAbility.m in Sources */,
+				48A35510207CD00100E89BB0 /* PWAckCommand.m in Sources */,
 				40F538421EA612FE00B1FDC9 /* PWRemoteDevice.m in Sources */,
 				4034041B1E8DFF8500029235 /* PWTextCommand.m in Sources */,
 				4031A3DB1E88EC470067D8ED /* PWLocalDevice.m in Sources */,
@@ -679,6 +692,7 @@
 				40F538191EA5C24E00B1FDC9 /* PWAddRemoteDeviceViewController.m in Sources */,
 				485550832050D93C00007291 /* IQUIView+Hierarchy.m in Sources */,
 				4855507B2050D93C00007291 /* IQBarButtonItem.m in Sources */,
+				48DAA057207DACBE001FBC98 /* PWUserLoginStatusCommand.m in Sources */,
 				40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */,
 				485550802050D93C00007291 /* IQNSArray+Sort.m in Sources */,
 				485550852050D93C00007291 /* IQKeyboardReturnKeyHandler.m in Sources */,
