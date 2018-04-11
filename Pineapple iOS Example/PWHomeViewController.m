@@ -153,7 +153,7 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     [alert addAction:cancelAction];
     UIAlertAction *savelAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSString *clientId = alert.textFields.firstObject.text;
-        self.proxy = [[PWProxy alloc] initWithAbility:self.ability host:@"mqf-er9w0k6ntu.mqtt.aliyuncs.com" port:1883 user:@"aEACwHFvAqv1A3eK" pass:@"LC4uWeVKgBiG9QigL3cP+estMYQ=" clientId:clientId rootTopic:@"topic_equipment001" nodeId:@"room1"];
+        self.proxy = [[PWProxy alloc] initWithAbility:self.ability host:@"139.196.193.82" port:1883 user:@"LTAIfpvLJeSOrSFq" pass:@"pvUMDpB0Ub6JrhFhtbpyLd4loII=" clientId:@"GID_MARSAR_CLOUD@@@181424842721251328" rootTopic:@"MARSAR_CLOUD" nodeId:@"79230655108784128"];
         self.proxy.delegate = self;
         [self.proxy connect];
     }];

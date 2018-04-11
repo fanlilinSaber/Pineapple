@@ -70,6 +70,24 @@
                            willQos:1
                     willRetainFlag:FALSE
                       withClientId:self.clientId];
+//    [self.sessionManager connectTo:self.host
+//                              port:self.port
+//                               tls:NO
+//                         keepalive:60
+//                             clean:true
+//                              auth:true
+//                              user:self.user
+//                              pass:self.pass
+//                              will:false
+//                         willTopic:nil
+//                           willMsg:nil
+//                           willQos:1
+//                    willRetainFlag:FALSE
+//                      withClientId:self.clientId
+//                    securityPolicy:nil
+//                      certificates:nil
+//                     protocolLevel:MQTTProtocolVersion311
+//                    connectHandler:nil];
 }
 
 - (void)reconnect {
@@ -77,7 +95,7 @@
 }
 
 - (void)disconnect {
-    [self.sessionManager disconnect];
+     [self.sessionManager disconnect];
 }
 
 - (void)send:(PWCommand<PWCommandSendable> *)command toDevice:(PWRemoteDevice *)device {
