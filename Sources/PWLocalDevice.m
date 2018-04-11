@@ -40,7 +40,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
 @implementation PWLocalDevice
 
 - (void)dealloc {
-    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (self.keepLive_source_t) {
         dispatch_source_cancel(self.keepLive_source_t);
         self.keepLive_source_t = NULL;
