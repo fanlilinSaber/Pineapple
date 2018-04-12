@@ -34,13 +34,13 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
 @property (nonatomic, strong) NSMutableArray *ackMsgIdSource;
 /*&* <##>*/
 @property (nonatomic, copy) NSString *currentAckMsgId;
-
+/*&* <##>*/
+@property (nonatomic, assign, getter=isReconnect) BOOL reconnect;
 @end
 
 @implementation PWLocalDevice
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (self.keepLive_source_t) {
         dispatch_source_cancel(self.keepLive_source_t);
         self.keepLive_source_t = NULL;
@@ -48,6 +48,9 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
     if (self.ackQueue_source_t) {
         dispatch_source_cancel(self.ackQueue_source_t);
         self.ackQueue_source_t = NULL;
+    }
+    if (self.isReconnect) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
 }
 
@@ -58,6 +61,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
         _ability = ability;
         _host = host;
         _port = port;
+        _reconnect = reconnect;
         if (reconnect) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
         }
