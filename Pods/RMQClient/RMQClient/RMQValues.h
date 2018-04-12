@@ -51,7 +51,7 @@
 
 #import <Foundation/Foundation.h>
 //@import JKVValue;
-#import <JKVValue.h>
+#import <JKVValue/JKVValue.h>
 #import "RMQParser.h"
 #import "RMQConnectionConfig.h"
 

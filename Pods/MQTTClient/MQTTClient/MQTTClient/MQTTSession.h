@@ -350,6 +350,23 @@ typedef void (^MQTTPublishHandler)(NSError *error);
  */
 @property (nonatomic, readonly) BOOL sessionPresent;
 
+/** streamSSLLevel an NSString containing the security level for read and write streams
+ * For list of possible values see:
+ * https://developer.apple.com/documentation/corefoundation/cfstream/cfstream_socket_security_level_constants
+ * Please also note that kCFStreamSocketSecurityLevelTLSv1_2 is not in a list
+ * and cannot be used as constant, but you can use it as a string value
+ * defaults to kCFStreamSocketSecurityLevelNegotiatedSSL
+ */
+@property (strong, nonatomic) NSString *streamSSLLevel;
+
+/** host an NSString containing the hostName or IP address of the Server
+ */
+@property (readonly) NSString *host;
+
+/** port an unsigned 32 bit integer containing the IP port number of the Server
+ */
+@property (readonly) UInt32 port;
+
 /** The Client Identifier identifies the Client to the Server. If nil, a random clientId is generated.
  */
 @property (strong, nonatomic) NSString *clientId;
@@ -446,11 +463,8 @@ typedef void (^MQTTPublishHandler)(NSError *error);
 /** maximumPacketSize specifies the number of seconds after which a session should expire MQTT v5.0*/
 @property (strong, nonatomic) NSNumber *maximumPacketSize;
 
-/** runLoop The runLoop where the streams are scheduled. If nil, defaults to [NSRunLoop currentRunLoop]. */
-@property (strong, nonatomic) NSRunLoop *runLoop;
-
-/** runLoopMode The runLoopMode where the streams are scheduled. If nil, defaults to NSRunLoopCommonModes. */
-@property (strong, nonatomic) NSString *runLoopMode;
+/** queue The queue where the streams are scheduled. */
+@property (strong, nonatomic) dispatch_queue_t queue;
 
 
 /** for mqttio-OBJC backward compatibility
@@ -475,8 +489,6 @@ typedef void (^MQTTPublishHandler)(NSError *error);
 
 /** connect to the given host through the given transport with the given
  *  MQTT session parameters asynchronously
- *
- *  @exception NSInternalInconsistencyException if the parameters are invalid
  *
  */
 
@@ -850,6 +862,7 @@ typedef void (^MQTTPublishHandler)(NSError *error);
  *  @param sessionExpiryInterval the time in seconds before the session can be deleted
  *  @param reasonString a string explaining the reason
  *  @param userProperty additional dictionary of user key/value combinations
+ *  @param disconnectHandler will be called when the disconnect finished
  */
 - (void)closeWithReturnCode:(MQTTReturnCode)returnCode
       sessionExpiryInterval:(NSNumber *)sessionExpiryInterval

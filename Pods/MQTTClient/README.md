@@ -1,9 +1,18 @@
-MQTT-Client-Framework 
-=====================
+# MQTT-Client-Framework 
 
-an Objective-C native MQTT Framework http://mqtt.org
+| |Build Status|
+|---|:---:|
+|**iOS**  |[![Build Status](https://travis-ci.org/novastone-media/MQTT-Client-Framework.svg?branch=master)](https://travis-ci.org/novastone-media/MQTT-Client-Framework)|
+|**macOS**||
+|**tvOS** ||
 
-### Tested with
+**Welcome to MQTT-Client-Framework**
+
+MQTT-Client-Framework is Objective-C native MQTT Framework http://mqtt.org
+
+You can read [introduction](http://www.hivemq.com/blog/mqtt-client-library-encyclopedia-mqtt-client-framework) to learn more about framework.
+
+MQTT-Client-Framework is tested with a long list of brokers:
 
 * mosquitto
 * paho
@@ -19,6 +28,9 @@ an Objective-C native MQTT Framework http://mqtt.org
 * CloudMQTT
 * aws
 * hbmqtt (MQTTv311 only, limitations)
+* [aedes](https://github.com/mcollina/aedes) 
+
+## Installation
 
 ### As a CocoaPod
 
@@ -62,15 +74,18 @@ Or include the source from here.
 ### With Carthage
 
 [Carthage](https://github.com/Carthage/Carthage)
+```
+github "novastone-media/MQTT-Client-Framework"
+```
 
-### Usage
+## Usage
 
 Create a new client and connect to a broker:
 
 ```objective-c
 #import "MQTTClient.h"
 
-\@interface MyDelegate : ... <MQTTSessionDelegate>
+@interface MyDelegate : ... <MQTTSessionDelegate>
 ...
 
         MQTTCFSocketTransport *transport = [[MQTTCFSocketTransport alloc] init];
@@ -120,16 +135,6 @@ Publish a message to a topic:
 	                qos:MQTTQosLevelAtLeastOnce]; // this is part of the asynchronous API
 ```
 
-### docs
+## Thanks
 
-Documentation generated with doxygen http://doxygen.org in [Documentation](MQTTClient/dist/documentation/html/index.html)
-
-
-### Comparison MQTT Clients for iOS (incomplete)
-
-|Wrapper|---|----|MQTTKit  |Marquette|Moscapsule|Musqueteer|MQTT-Client|MqttSDK|CocoaMQTT|
-|-------|---|----|---------|---------|----------|----------|-----------|-------|---------|
-|       |   |    |Obj-C    |Obj-C    |Swift     |Obj-C     |Obj-C      |Obj-C  |Swift    |
-|Library|IBM|Paho|Mosquitto|Mosquitto|Mosquitto |Mosquitto |native     |native |native   |
-
-
+This project was originally written by [Christoph Krey](https://github.com/ckrey).

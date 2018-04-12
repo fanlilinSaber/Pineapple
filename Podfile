@@ -8,7 +8,7 @@ target 'Pineapple iOS' do
   # Pods for Pineapple iOS
   pod 'CocoaAsyncSocket'
   pod 'MQTTClient', '~> 0.9'
-  pod 'RMQClient'
+  pod 'RMQClient', '~> 0.9'
 
 end
 
@@ -20,6 +20,6 @@ target 'Pineapple iOS Example' do
   pod 'CocoaAsyncSocket'
   pod 'MQTTClient', '~> 0.9'
   pod 'Masonry'
-  pod 'RMQClient'
+  pod 'RMQClient', '~> 0.9'
 
 end
