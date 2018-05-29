@@ -40,6 +40,7 @@
 		40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */; };
 		40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F538461EA6201000B1FDC9 /* PWAbility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40F5384A1EA620B800B1FDC9 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538471EA6201000B1FDC9 /* PWAbility.m */; };
+		48367C6920872D3600FD8D0F /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48367C6820872D3600FD8D0F /* NSString+Additions.m */; };
 		485550522050CB4500007291 /* PWAddRMQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550512050CB4500007291 /* PWAddRMQViewController.m */; };
 		485550782050D93C00007291 /* IQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550552050D93C00007291 /* IQTextView.m */; };
 		485550792050D93C00007291 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550592050D93C00007291 /* IQToolbar.m */; };
@@ -65,11 +66,16 @@
 		48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */; };
 		48C122281F90CABD00664192 /* PWBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48C122291F90CABD00664192 /* PWBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C122271F90CABD00664192 /* PWBluetooth.m */; };
+		48D5ABBA20858D2900A1BADA /* test.cer in Resources */ = {isa = PBXBuildFile; fileRef = 48D5ABB920858D2900A1BADA /* test.cer */; };
+		48D5ABBC2085E21000A1BADA /* marsdt.cer in Resources */ = {isa = PBXBuildFile; fileRef = 48D5ABBB2085E21000A1BADA /* marsdt.cer */; };
 		48D7495020562A5C0027BA50 /* PWMQDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D7494E20562A5C0027BA50 /* PWMQDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48D7495120562A5C0027BA50 /* PWMQDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7494F20562A5C0027BA50 /* PWMQDevice.m */; };
 		48DAA057207DACBE001FBC98 /* PWUserLoginStatusCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DAA056207DACBE001FBC98 /* PWUserLoginStatusCommand.m */; };
 		48DC71271FAC06E400118869 /* PWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DC71261FAC06E400118869 /* PWDrawViewController.m */; };
 		48DC712A1FAC07BE00118869 /* PWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DC71291FAC07BE00118869 /* PWDrawView.m */; };
+		48FBADBF208489D2009DDFB7 /* PWAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FBADBD208489D2009DDFB7 /* PWAPIController.m */; };
+		48FBADC320848A07009DDFB7 /* PWNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FBADC120848A07009DDFB7 /* PWNetViewController.m */; };
+		48FBADC420848A07009DDFB7 /* PWNetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48FBADC220848A07009DDFB7 /* PWNetViewController.xib */; };
 		BC90E28B5A0AC3C0E510D975 /* libPods-Pineapple iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +147,8 @@
 		40F538461EA6201000B1FDC9 /* PWAbility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAbility.h; sourceTree = "<group>"; };
 		40F538471EA6201000B1FDC9 /* PWAbility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAbility.m; sourceTree = "<group>"; };
 		43414782D074D3F96B8BE168 /* Pods-Pineapple iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		48367C6720872D3600FD8D0F /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
+		48367C6820872D3600FD8D0F /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		485550502050CB4500007291 /* PWAddRMQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWAddRMQViewController.h; sourceTree = "<group>"; };
 		485550512050CB4500007291 /* PWAddRMQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWAddRMQViewController.m; sourceTree = "<group>"; };
 		485550552050D93C00007291 /* IQTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTextView.m; sourceTree = "<group>"; };
@@ -186,6 +194,8 @@
 		48BF35811F90BE400088B7ED /* PWBluetoothViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWBluetoothViewController.m; sourceTree = "<group>"; };
 		48C122261F90CABD00664192 /* PWBluetooth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWBluetooth.h; sourceTree = "<group>"; };
 		48C122271F90CABD00664192 /* PWBluetooth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWBluetooth.m; sourceTree = "<group>"; };
+		48D5ABB920858D2900A1BADA /* test.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.cer; sourceTree = "<group>"; };
+		48D5ABBB2085E21000A1BADA /* marsdt.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = marsdt.cer; sourceTree = "<group>"; };
 		48D7494E20562A5C0027BA50 /* PWMQDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWMQDevice.h; sourceTree = "<group>"; };
 		48D7494F20562A5C0027BA50 /* PWMQDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWMQDevice.m; sourceTree = "<group>"; };
 		48DAA055207DACBE001FBC98 /* PWUserLoginStatusCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWUserLoginStatusCommand.h; sourceTree = "<group>"; };
@@ -194,6 +204,11 @@
 		48DC71261FAC06E400118869 /* PWDrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDrawViewController.m; sourceTree = "<group>"; };
 		48DC71281FAC07BE00118869 /* PWDrawView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDrawView.h; sourceTree = "<group>"; };
 		48DC71291FAC07BE00118869 /* PWDrawView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDrawView.m; sourceTree = "<group>"; };
+		48FBADBD208489D2009DDFB7 /* PWAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAPIController.m; sourceTree = "<group>"; };
+		48FBADBE208489D2009DDFB7 /* PWAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAPIController.h; sourceTree = "<group>"; };
+		48FBADC020848A07009DDFB7 /* PWNetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWNetViewController.h; sourceTree = "<group>"; };
+		48FBADC120848A07009DDFB7 /* PWNetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWNetViewController.m; sourceTree = "<group>"; };
+		48FBADC220848A07009DDFB7 /* PWNetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PWNetViewController.xib; sourceTree = "<group>"; };
 		54AA792B28D4BA8323E68EEF /* libPods-Pineapple iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pineapple iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		572600FDB7B746AEE9C343C3 /* Pods-Pineapple iOS Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS Example/Pods-Pineapple iOS Example.debug.xcconfig"; sourceTree = "<group>"; };
 		99EDD59D9CCE27C154047902 /* Pods-Pineapple iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -279,6 +294,7 @@
 		4031A3BD1E88EABD0067D8ED /* Pineapple iOS Example */ = {
 			isa = PBXGroup;
 			children = (
+				48FBADB920848834009DDFB7 /* 网络请求 */,
 				485550532050D93C00007291 /* IQKeyBoardManager */,
 				48DC71241FAC06AE00118869 /* 画线 */,
 				48BF357F1F90BE080088B7ED /* Bluetooth */,
@@ -435,6 +451,22 @@
 			path = "画线";
 			sourceTree = "<group>";
 		};
+		48FBADB920848834009DDFB7 /* 网络请求 */ = {
+			isa = PBXGroup;
+			children = (
+				48367C6720872D3600FD8D0F /* NSString+Additions.h */,
+				48367C6820872D3600FD8D0F /* NSString+Additions.m */,
+				48D5ABBB2085E21000A1BADA /* marsdt.cer */,
+				48D5ABB920858D2900A1BADA /* test.cer */,
+				48FBADBE208489D2009DDFB7 /* PWAPIController.h */,
+				48FBADBD208489D2009DDFB7 /* PWAPIController.m */,
+				48FBADC020848A07009DDFB7 /* PWNetViewController.h */,
+				48FBADC120848A07009DDFB7 /* PWNetViewController.m */,
+				48FBADC220848A07009DDFB7 /* PWNetViewController.xib */,
+			);
+			path = "网络请求";
+			sourceTree = "<group>";
+		};
 		77A25E7AAF82DA44EC137F30 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,9 +597,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48D5ABBC2085E21000A1BADA /* marsdt.cer in Resources */,
 				4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */,
 				489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */,
+				48FBADC420848A07009DDFB7 /* PWNetViewController.xib in Resources */,
 				4855507D2050D93C00007291 /* IQKeyboardManager.bundle in Resources */,
+				48D5ABBA20858D2900A1BADA /* test.cer in Resources */,
 				4031A3CB1E88EABD0067D8ED /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,7 +686,9 @@
 				485550832050D93C00007291 /* IQUIView+Hierarchy.m in Sources */,
 				4855507B2050D93C00007291 /* IQBarButtonItem.m in Sources */,
 				48DAA057207DACBE001FBC98 /* PWUserLoginStatusCommand.m in Sources */,
+				48367C6920872D3600FD8D0F /* NSString+Additions.m in Sources */,
 				40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */,
+				48FBADC320848A07009DDFB7 /* PWNetViewController.m in Sources */,
 				485550802050D93C00007291 /* IQNSArray+Sort.m in Sources */,
 				485550852050D93C00007291 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				4031A3C31E88EABD0067D8ED /* AppDelegate.m in Sources */,
@@ -665,6 +702,7 @@
 				48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */,
 				485550782050D93C00007291 /* IQTextView.m in Sources */,
 				4855507C2050D93C00007291 /* IQUIView+IQKeyboardToolbar.m in Sources */,
+				48FBADBF208489D2009DDFB7 /* PWAPIController.m in Sources */,
 				4855507E2050D93C00007291 /* IQSegmentedNextPrevious.m in Sources */,
 				48DC712A1FAC07BE00118869 /* PWDrawView.m in Sources */,
 			);

@@ -21,5 +21,6 @@ target 'Pineapple iOS Example' do
   pod 'MQTTClient', '~> 0.9'
   pod 'Masonry'
   pod 'RMQClient', '~> 0.9'
+  pod 'AFNetworking', '~> 3.0'
 
 end

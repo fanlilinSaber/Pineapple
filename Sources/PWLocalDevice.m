@@ -141,6 +141,9 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
              self.currentAckMsgId = self.ackQueueSourceKey.firstObject;
              NSData *writeData = [self.ackQueueSource valueForKey:self.currentAckMsgId];
              [self sendData:writeData];
+         }else if (self.currentAckMsgId != nil) {
+             NSData *writeData = [self.ackQueueSource valueForKey:self.currentAckMsgId];
+             [self sendData:writeData];
          }
      }else {
          if (self.ackQueue_source_t) {
@@ -154,6 +157,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
 - (NSString *)uuidString {
     CFUUIDRef uuidObj = CFUUIDCreate(nil);
     NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
+    [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
     CFRelease(uuidObj);
     return uuidString ;
 }

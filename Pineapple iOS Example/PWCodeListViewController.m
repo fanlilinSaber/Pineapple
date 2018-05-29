@@ -11,6 +11,7 @@
 #import "PWHomeViewController.h"
 #import "PWBluetoothViewController.h"
 #import "PWDrawViewController.h"
+#import "PWNetViewController.h"
 @interface PWCodeListViewController () <UITableViewDelegate, UITableViewDataSource>
 /*&* <##>*/
 @property (nonatomic, strong) UITableView *tableView;
@@ -27,7 +28,8 @@
     // Do any additional setup after loading the view.
     self.dataArray = @[@{@"name" : @"TCP - UDP - MQTT", @"className" : @"PWHomeViewController"},
                        @{@"name" : @"蓝牙客户端", @"className" : @"PWBluetoothViewController"},
-                       @{@"name" : @"画线", @"className" : @"PWDrawViewController"}];
+                       @{@"name" : @"画线", @"className" : @"PWDrawViewController"},
+                       @{@"name" : @"网络请求", @"className" : @"PWNetViewController"}];
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
