@@ -15,7 +15,7 @@
 static NSInteger const PWTagHeader = 10;
 static NSInteger const PWTagBody = 11;
 static NSTimeInterval const PWKeepLiveTimeInterval = 60;
-static NSTimeInterval const PWAckQueueTimeInterval = 3;
+static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 @interface PWLocalDevice () <GCDAsyncSocketDelegate>
 
@@ -27,15 +27,21 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
 /*&* <##>*/
 @property (nonatomic, strong) NSMutableArray *ackQueueSourceKey;
 /*&* <##>*/
-@property (nonatomic) dispatch_source_t keepLive_source_t;
+@property (nonatomic, strong) dispatch_source_t keepLive_source_t;
 /*&* <##>*/
-@property (nonatomic) dispatch_source_t ackQueue_source_t;
+@property (nonatomic, strong) dispatch_source_t ackQueue_source_t;
+/*&* <##>*/
+@property (nonatomic, strong) dispatch_queue_t ackQueue;
 /*&* */
-@property (nonatomic, strong) NSMutableArray *ackMsgIdSource;
+@property (nonatomic, strong) NSMutableArray *ackRecentMsgId;
 /*&* <##>*/
 @property (nonatomic, copy) NSString *currentAckMsgId;
 /*&* <##>*/
 @property (nonatomic, assign, getter=isReconnect) BOOL reconnect;
+/*&* <##>*/
+@property (nonatomic, assign, getter=isSendQueueData) BOOL sendQueueData;
+/*&* <##>*/
+@property (nonatomic, assign, getter=isAckQueueRuning) BOOL ackQueueRuning;
 @end
 
 @implementation PWLocalDevice
@@ -48,6 +54,9 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
     if (self.ackQueue_source_t) {
         dispatch_source_cancel(self.ackQueue_source_t);
         self.ackQueue_source_t = NULL;
+    }
+    if (self.ackQueue) {
+        self.ackQueue = NULL;
     }
     if (self.isReconnect) {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -87,7 +96,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
     _enabledAck = enabledAck;
     if (enabledAck) {
         _ackQueueSource = [NSMutableDictionary dictionary];
-        _ackMsgIdSource = [NSMutableArray array];
+        _ackRecentMsgId = [NSMutableArray array];
         _ackQueueSourceKey = [NSMutableArray array];
     }
 }
@@ -110,22 +119,47 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
     }
     if (self.isEnabledAck) {
         [self.ackQueueSource removeAllObjects];
-        [self.ackMsgIdSource removeAllObjects];
+        [self.ackRecentMsgId removeAllObjects];
         [self.ackQueueSourceKey removeAllObjects];
+    }
+    if (self.keepLive_source_t) {
+        dispatch_source_cancel(self.keepLive_source_t);
+        self.keepLive_source_t = NULL;
+    }
+    if (self.ackQueue_source_t) {
+        self.ackQueueRuning = NO;
+        dispatch_source_cancel(self.ackQueue_source_t);
+        self.ackQueue_source_t = NULL;
+    }
+    if (self.ackQueue) {
+        self.ackQueue = NULL;
     }
 }
 
 - (void)send:(PWCommand<PWCommandSendable> *)command {
     if (command.isEnabledAck && self.isEnabledAck) {
-        NSString *uuidString = [self uuidString];
-        command.msgId = uuidString;
-        NSData *body = command.dataRepresentation;
-        NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
-        NSMutableData *data = [[NSMutableData alloc] initWithData:header];
-        [data appendData:body];
-        [self.ackQueueSource setValue:data forKey:command.msgId];
-        [self.ackQueueSourceKey addObject:command.msgId];
-        [self ackMaybeDequeueWrite];
+        dispatch_barrier_async(self.ackQueue, ^{
+            NSString *uuidString = [self uuidString];
+            command.msgId = uuidString;
+            NSData *body = command.dataRepresentation;
+            NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
+            NSMutableData *data = [[NSMutableData alloc] initWithData:header];
+            [data appendData:body];
+            /*&* 当前消息队列闲置时候才马上发送*/
+            if (![self isAckQueueCount]) {
+                self.currentAckMsgId = command.msgId;
+                [self sendData:data];
+            }
+            [self addAckQueueData:data msgId:command.msgId];
+            if (self.ackQueue_source_t) {
+                /*&* 当前AckQueue Whether in Runing*/
+                if (!self.isAckQueueRuning) {
+                    [self resumeAckQueueTimer];
+                }
+            }else {
+                [self startAckQueueTimer];
+            }
+        });
     }else {
         NSData *body = command.dataRepresentation;
         NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
@@ -136,21 +170,34 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
 }
 
 - (void)ackMaybeDequeueWrite {
-     if ([self.socket isConnected]) {
-         if (self.ackQueueSourceKey.count > 0 && self.currentAckMsgId == nil) {
-             self.currentAckMsgId = self.ackQueueSourceKey.firstObject;
-             NSData *writeData = [self.ackQueueSource valueForKey:self.currentAckMsgId];
-             [self sendData:writeData];
-         }else if (self.currentAckMsgId != nil) {
-             NSData *writeData = [self.ackQueueSource valueForKey:self.currentAckMsgId];
-             [self sendData:writeData];
-         }
-     }else {
-         if (self.ackQueue_source_t) {
-             dispatch_source_cancel(self.ackQueue_source_t);
-             self.ackQueue_source_t = NULL;
-         }
-     }
+    if ([self.socket isConnected]) {
+        if (self.isSendQueueData) {
+             return;
+        }
+        self.sendQueueData = YES;
+        if ([self isAckQueueCount]) {
+            self.currentAckMsgId = self.ackQueueSourceKey.firstObject;
+            NSData *writeData = [self.ackQueueSource valueForKey:self.currentAckMsgId];
+            [self sendData:writeData];
+        }else {
+            [self suspendAckQueueTimer];
+        }
+        self.sendQueueData = NO;
+        }else {
+            [self cancelAckQueueTimer];
+        }
+}
+
+- (BOOL)isAckQueueCount {
+    if (self.ackQueueSource.count > 0) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)addAckQueueData:(NSData *)data msgId:(NSString *)msgId {
+    [self.ackQueueSource setValue:data forKey:msgId];
+    [self.ackQueueSourceKey addObject:msgId];
 }
 
 #pragma mark - uuidString
@@ -171,9 +218,9 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
 #pragma mark - Private
 
 - (void)addReceiveMsgId:(NSString *)msgId {
-    [self.ackMsgIdSource addObject:msgId];
-    if (self.ackMsgIdSource.count == 20) {
-        [self.ackMsgIdSource removeObjectsInRange:NSMakeRange(0, 10)];
+    [self.ackRecentMsgId addObject:msgId];
+    if (self.ackRecentMsgId.count == 20) {
+        [self.ackRecentMsgId removeObjectsInRange:NSMakeRange(0, 10)];
     }
 }
 
@@ -203,11 +250,10 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
         [self startKeepLiveTimer];
     }
     if (self.isEnabledAck) {
-        if (self.ackQueue_source_t) {
-            dispatch_source_cancel(self.ackQueue_source_t);
-            self.ackQueue_source_t = NULL;
+        if (self.ackQueue == NULL) {
+            NSString *qName = [NSString stringWithFormat:@"com.ackQueue-%@", [[NSUUID UUID] UUIDString]];
+            self.ackQueue = dispatch_queue_create([qName cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_CONCURRENT);
         }
-        [self startAckQueueTimer];
     }
 }
 
@@ -222,21 +268,51 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
     }
 }
 
-- (void)ackQueueCommand:(PWAckCommand<PWCommandSendable> *)command {
-    if (self.currentAckMsgId != nil && [self.currentAckMsgId isEqualToString:command.sourceMsgId]) {
-        if ([self.ackQueueSource valueForKey:command.sourceMsgId]) {
-            [self.ackQueueSource removeObjectForKey:command.sourceMsgId];
-            [self.ackQueueSourceKey removeObjectAtIndex:0];
-            self.currentAckMsgId = nil;
-            [self ackMaybeDequeueWrite];
-        }
+- (void)cancelAckQueueTimer {
+    if (self.ackQueue_source_t && self.isAckQueueRuning) {
+        self.ackQueueRuning = NO;
+        dispatch_source_cancel(self.ackQueue_source_t);
+        self.ackQueue_source_t = NULL;
     }
 }
 
+- (void)resumeAckQueueTimer {
+    if (self.ackQueue_source_t && !self.isAckQueueRuning) {
+        self.ackQueueRuning = YES;
+        dispatch_resume(self.ackQueue_source_t);
+    }
+}
+
+- (void)suspendAckQueueTimer {
+    NSLog(@"suspendAckQueueTimer");
+    if (self.ackQueue_source_t && self.isAckQueueRuning) {
+        self.ackQueueRuning = NO;
+        dispatch_suspend(self.ackQueue_source_t);
+    }
+}
+
+- (void)ackQueueRemoveSourceMsgId:(NSString *)sourceMsgId {
+    dispatch_barrier_async(self.ackQueue, ^{
+        if (self.currentAckMsgId != nil && [self.currentAckMsgId isEqualToString:sourceMsgId]) {
+            [self suspendAckQueueTimer];
+            if ([self.ackQueueSource valueForKey:sourceMsgId]) {
+                [self.ackQueueSource removeObjectForKey:sourceMsgId];
+                [self.ackQueueSourceKey removeObjectAtIndex:0];
+                self.currentAckMsgId = nil;
+            }
+            /*&* 当前消息队列还有 ack command 继续开启*/
+            if ([self isAckQueueCount]) {
+                [self ackMaybeDequeueWrite];
+                [self resumeAckQueueTimer];
+            }
+        }
+    });
+}
+
 - (void)startAckQueueTimer {
+    self.ackQueueRuning = YES;
      __weak PWLocalDevice *weakSelf = self;
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,self.ackQueue);
     dispatch_source_set_timer(timer,dispatch_walltime(NULL, 0), PWAckQueueTimeInterval * NSEC_PER_SEC, 0);
     dispatch_source_set_event_handler(timer, ^{ @autoreleasepool {
         __strong PWLocalDevice *strongSelf = weakSelf;
@@ -267,9 +343,6 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.keepLive_source_t == NULL) {
             [self startKeepLiveTimer];
-        }
-        if (self.isEnabledAck && self.ackQueue_source_t == NULL) {
-            [self startAckQueueTimer];
         }
         [self.delegate deviceDidConnectSuccess:self];
     });
@@ -310,14 +383,14 @@ static NSTimeInterval const PWAckQueueTimeInterval = 3;
             }
             /*&* ack*/
             else if ([command.msgType isEqualToString:[PWAckCommand msgType]]) {
-                [self ackQueueCommand:(PWAckCommand *)command];
+                [self ackQueueRemoveSourceMsgId:((PWAckCommand *)command).sourceMsgId];
             }
             else {
                 if (command.msgId.length > 0) {
                     /*&* 回复 ack*/
                     [self send:[[PWAckCommand alloc] initWithSourceMsgId:command.msgId sourceMsgType:command.msgType]];
                     
-                    if (![self.ackMsgIdSource containsObject:command.msgId]) {
+                    if (![self.ackRecentMsgId containsObject:command.msgId]) {
                         
                         [self addReceiveMsgId:command.msgId];
                         dispatch_async(dispatch_get_main_queue(), ^{
