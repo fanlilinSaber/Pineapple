@@ -59,9 +59,13 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
         self.ackQueue_source_t = NULL;
     }
     if (self.ackQueue) {
-        self.ackQueue == NULL;
+        self.ackQueue = NULL;
     }
+#ifdef DEBUG
     NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+#else
+#endif
+    
 }
 
 - (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
@@ -186,7 +190,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 - (BOOL)isAckQueueCount {
-    if (self.ackQueueSource.count > 0) {
+    if (self.ackQueueSource.count > 0 && self.ackQueueSourceKey.count > 0) {
         return YES;
     }
     return NO;
@@ -238,14 +242,6 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     } else if (read) {
         [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
     }
-    /*&* 作为服务端不主动发送心跳包 由客户端发送 → 服务端收到并回复 (客户端控制心跳频率)*/
-    if (self.owner) {
-        if (self.keepLive_source_t) {
-            dispatch_source_cancel(self.keepLive_source_t);
-            self.keepLive_source_t = NULL;
-        }
-        [self startKeepLiveTimer];
-    }
     if (self.isEnabledAck) {
         if (self.ackQueue == NULL) {
             NSString *qName = [NSString stringWithFormat:@"com.ackQueue-%@", [[NSUUID UUID] UUIDString]];
@@ -267,7 +263,6 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 - (void)cancelAckQueueTimer {
-    NSLog(@"cancelAckQueueTimer");
     if (self.ackQueue_source_t && self.isAckQueueRuning) {
         self.ackQueueRuning = NO;
         dispatch_source_cancel(self.ackQueue_source_t);
@@ -276,7 +271,6 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 - (void)resumeAckQueueTimer {
-    NSLog(@"resumeAckQueueTimer");
     if (self.ackQueue_source_t && !self.isAckQueueRuning) {
         self.ackQueueRuning = YES;
         dispatch_resume(self.ackQueue_source_t);
@@ -292,9 +286,6 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
                 [self.ackQueueSource removeObjectForKey:sourceMsgId];
                 [self.ackQueueSourceKey removeObjectAtIndex:0];
                 self.currentAckMsgId = nil;
-            }
-            /*&* 当前消息队列还有 ack command 继续开启*/
-            if ([self isAckQueueCount]) {
                 [self ackMaybeDequeueWrite];
             }
         }
@@ -306,11 +297,10 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     if (self.ackQueue == NULL) {
         NSString *qName = [NSString stringWithFormat:@"com.ackQueue-%@", [[NSUUID UUID] UUIDString]];
         self.ackQueue = dispatch_queue_create([qName cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_CONCURRENT);
-        
     }
     __weak PWLocalDevice *weakSelf = self;
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,self.ackQueue);
-    dispatch_source_set_timer(timer,dispatch_walltime(NULL, 0), PWAckQueueTimeInterval * NSEC_PER_SEC, 0);
+    dispatch_source_set_timer(timer,dispatch_walltime(NULL, PWAckQueueTimeInterval * NSEC_PER_SEC), PWAckQueueTimeInterval * NSEC_PER_SEC, 0);
     dispatch_source_set_event_handler(timer, ^{ @autoreleasepool {
         __strong PWLocalDevice *strongSelf = weakSelf;
         if (strongSelf == nil) {return ;}
@@ -338,7 +328,12 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.keepLive_source_t == NULL) {
+        /*&* 作为服务端不主动发送心跳包 由客户端发送 → 服务端收到并回复 (客户端控制心跳频率)*/
+        if (self.owner) {
+            if (self.keepLive_source_t) {
+                dispatch_source_cancel(self.keepLive_source_t);
+                self.keepLive_source_t = NULL;
+            }
             [self startKeepLiveTimer];
         }
         [self.delegate deviceDidConnectSuccess:self];
