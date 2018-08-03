@@ -56,7 +56,6 @@
 		485550832050D93C00007291 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550712050D93C00007291 /* IQUIView+Hierarchy.m */; };
 		485550842050D93C00007291 /* IQUIViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550752050D93C00007291 /* IQUIViewController+Additions.m */; };
 		485550852050D93C00007291 /* IQKeyboardReturnKeyHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550772050D93C00007291 /* IQKeyboardReturnKeyHandler.m */; };
-		489FEED21F94537700453009 /* PWBluetooth.h in Sources */ = {isa = PBXBuildFile; fileRef = 48C122261F90CABD00664192 /* PWBluetooth.h */; };
 		489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489FEED51F945A5A00453009 /* PWConnectViewController.m */; };
 		489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489FEED61F945A5A00453009 /* PWConnectViewController.xib */; };
 		48A3550F207CD00100E89BB0 /* PWAckCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 48A3550D207CD00100E89BB0 /* PWAckCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -653,7 +652,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				489FEED21F94537700453009 /* PWBluetooth.h in Sources */,
 				48D7495120562A5C0027BA50 /* PWMQDevice.m in Sources */,
 				40B2A2291EA88EB500A02D96 /* PWDevice.m in Sources */,
 				403404161E8DEEC300029235 /* PWListener.m in Sources */,
