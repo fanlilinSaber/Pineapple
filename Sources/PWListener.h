@@ -27,4 +27,5 @@
 
 - (void)start;
 
+- (void)disconnect;
 @end

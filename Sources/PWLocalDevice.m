@@ -72,6 +72,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     self = [super initWithName:name clientId:nil];
     if (self) {
         _owner = YES;
+        _enabledAck = NO;
         _ability = ability;
         _host = host;
         _port = port;
@@ -87,6 +88,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     self = [super initWithName:@"未知" clientId:nil];
     if (self) {
         _owner = NO;
+        _enabledAck = NO;
         _ability = ability;
         _host = socket.connectedHost;
         _port = socket.connectedPort;
@@ -280,6 +282,9 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 - (void)ackQueueRemoveSourceMsgId:(NSString *)sourceMsgId {
+    if (self.ackQueue == NULL) {
+        return;
+    }
     dispatch_barrier_async(self.ackQueue, ^{
         if (self.currentAckMsgId != nil && [self.currentAckMsgId isEqualToString:sourceMsgId]) {
             if ([self.ackQueueSource valueForKey:sourceMsgId]) {
@@ -402,4 +407,5 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 @end
+
 

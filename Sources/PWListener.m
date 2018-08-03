@@ -47,6 +47,10 @@
     }
 }
 
+- (void)disconnect {
+    [self.listenSocket disconnect];
+}
+
 #pragma mark - Handle App Life Style
 
 - (void)appWillResignActive {
