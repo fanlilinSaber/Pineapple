@@ -19,14 +19,14 @@
         self.msgType = PWAckCommand.msgType;
         self.sourceMsgId = sourceMsgId;
         self.sourceMsgType = sourceMsgType;
+        self.params = @{@"sourceMsgId" : self.sourceMsgId,
+                        @"sourceMsgType" : self.sourceMsgType
+                        };
     }
     return self;
 }
 
 - (NSData *)dataRepresentation {
-    self.params = @{@"sourceMsgId" : self.sourceMsgId,
-                    @"sourceMsgType" : self.sourceMsgType
-                    };
     NSMutableDictionary *data = [super fillDataWithProperties];
     return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
 }

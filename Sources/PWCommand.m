@@ -46,4 +46,40 @@
     return data;
 }
 
+- (PWCommand *)copyNew {
+    PWCommand *command = [[PWCommand alloc] init];
+    command.msgType = self.msgType;
+    command.fromId = self.fromId;
+    command.toId = self.toId;
+    command.params = self.params;
+    command.paramsArray = self.paramsArray;
+    command.msgId = self.msgId;
+    command.ack = self.ack;
+    return command;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    PWCommand *command = [[[self class] allocWithZone:zone] init];
+    command.msgType = self.msgType;
+    command.fromId = self.fromId;
+    command.toId = self.toId;
+    command.params = self.params;
+    command.paramsArray = self.paramsArray;
+    command.msgId = self.msgId;
+    command.ack = self.ack;
+    return command;
+}
+
+- (id)mutableCopyWithZone:(NSZone *)zone {
+    PWCommand *command = [[[self class] allocWithZone:zone] init];
+    command.msgType = self.msgType;
+    command.fromId = self.fromId;
+    command.toId = self.toId;
+    command.params = self.params;
+    command.paramsArray = self.paramsArray;
+    command.msgId = self.msgId;
+    command.ack = self.ack;
+    return command;
+}
+
 @end

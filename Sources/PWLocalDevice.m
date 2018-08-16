@@ -144,27 +144,28 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 - (void)send:(PWCommand<PWCommandSendable> *)command {
-    if (command.isEnabledAck && self.isEnabledAck) {
+    PWCommand<PWCommandSendable> *newCommand = [command mutableCopy];
+    if (newCommand.isEnabledAck && self.isEnabledAck) {
         dispatch_barrier_async(self.ackQueue, ^{
             NSString *uuidString = [self uuidString];
-            command.msgId = uuidString;
-            NSData *body = command.dataRepresentation;
+            newCommand.msgId = uuidString;
+            NSData *body = newCommand.dataRepresentation;
             NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
             NSMutableData *data = [[NSMutableData alloc] initWithData:header];
             [data appendData:body];
             /*&* 当前消息队列闲置时候才马上发送*/
             if (![self isAckQueueCount]) {
-                self.currentAckMsgId = command.msgId;
+                self.currentAckMsgId = newCommand.msgId;
                 [self sendData:data];
             }
-            [self addAckQueueData:data msgId:command.msgId];
+            [self addAckQueueData:data msgId:newCommand.msgId];
             if (self.ackQueue_source_t == NULL) {
                 [self startAckQueueTimer];
             }
         });
         
     }else {
-        NSData *body = command.dataRepresentation;
+        NSData *body = newCommand.dataRepresentation;
         NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
         NSMutableData *data = [[NSMutableData alloc] initWithData:header];
         [data appendData:body];
@@ -181,6 +182,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
         if ([self isAckQueueCount]) {
             self.currentAckMsgId = self.ackQueueSourceKey.firstObject;
             NSData *writeData = [self.ackQueueSource valueForKey:self.currentAckMsgId];
+            //            NSString *str =[[NSString alloc] initWithData:writeData encoding:NSUTF8StringEncoding];
+            //            NSLog(@"再次发送 %@",str);
             [self sendData:writeData];
         }else {
             [self cancelAckQueueTimer];
@@ -248,7 +251,6 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
         if (self.ackQueue == NULL) {
             NSString *qName = [NSString stringWithFormat:@"com.ackQueue-%@", [[NSUUID UUID] UUIDString]];
             self.ackQueue = dispatch_queue_create([qName cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_CONCURRENT);
-            
         }
     }
 }
@@ -283,10 +285,13 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 - (void)ackQueueRemoveSourceMsgId:(NSString *)sourceMsgId {
     if (self.ackQueue == NULL) {
+        //        NSLog(@"return sourceMsgId = %@",sourceMsgId);
         return;
     }
     dispatch_barrier_async(self.ackQueue, ^{
+        //        NSLog(@"currentAckMsgId = %@ , sourceMsgId = %@",self.currentAckMsgId,sourceMsgId);
         if (self.currentAckMsgId != nil && [self.currentAckMsgId isEqualToString:sourceMsgId]) {
+            //            NSLog(@"ackQueueSourceKey = %@",self.ackQueueSourceKey);
             if ([self.ackQueueSource valueForKey:sourceMsgId]) {
                 [self.ackQueueSource removeObjectForKey:sourceMsgId];
                 [self.ackQueueSourceKey removeObjectAtIndex:0];
@@ -380,6 +385,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
             }
             /*&* ack*/
             else if ([command.msgType isEqualToString:[PWAckCommand msgType]]) {
+                //                NSLog(@"收到ack 回复 消息了 %@",((PWAckCommand *)command).sourceMsgId);
                 [self ackQueueRemoveSourceMsgId:((PWAckCommand *)command).sourceMsgId];
             }
             else {

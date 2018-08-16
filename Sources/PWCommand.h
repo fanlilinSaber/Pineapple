@@ -22,7 +22,7 @@
 
 @end
 
-@interface PWCommand: NSObject
+@interface PWCommand: NSObject<NSCopying>
 
 @property (copy, nonatomic) NSString *msgType;
 @property (copy, nonatomic) NSString *fromId;
@@ -36,4 +36,5 @@
 - (void)fillPropertiesWithData:(NSDictionary *)data;
 - (NSMutableDictionary *)fillDataWithProperties;
 
+- (PWCommand *)copyNew;
 @end
