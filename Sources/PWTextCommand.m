@@ -20,12 +20,12 @@
         self.msgType = PWTextCommand.msgType;
         self.enabledAck = YES;
         _text = text;
+        self.params = @{@"text": self.text};
     }
     return self;
 }
 
 - (NSData *)dataRepresentation {
-    self.params = @{@"text": self.text};
     NSMutableDictionary *data = [super fillDataWithProperties];
     return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
 }
