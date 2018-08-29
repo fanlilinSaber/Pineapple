@@ -55,6 +55,22 @@
     return self;
 }
 
+- (void)addSubscriptionQueue:(NSString *)queue {
+    NSAssert(queue != nil, @"queue name Can't be nil");
+    NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];
+    [subscriptions setValue:@(0) forKey:queue];
+    
+    self.sessionManager.subscriptions = subscriptions;
+}
+
+- (void)cancelSubscriptionQueue:(NSString *)queue {
+    NSAssert(queue != nil, @"queue name Can't be nil");
+    NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];
+    [subscriptions removeObjectForKey:queue];
+    
+    self.sessionManager.subscriptions = subscriptions;
+}
+
 - (void)connect {
     [self.sessionManager connectTo:self.host
                               port:self.port
@@ -91,6 +107,13 @@
                      topic:[NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, device.clientId]
                        qos:1
                     retain:false];
+}
+
+- (void)send:(PWCommand<PWCommandSendable> *)command topic:(NSString *)topic {
+    [self.sessionManager sendData:command.dataRepresentation
+                            topic:topic
+                              qos:1
+                           retain:false];
 }
 
 #pragma mark - Private
