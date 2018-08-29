@@ -30,9 +30,12 @@
 
 - (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId;
 
+- (void)addSubscriptionQueue:(NSString *)queue;
+- (void)cancelSubscriptionQueue:(NSString *)queue;
 - (void)connect;
 - (void)reconnect;
 - (void)disconnect;
 - (void)send:(PWCommand<PWCommandSendable> *)command toDevice:(PWRemoteDevice *)device;
+- (void)send:(PWCommand<PWCommandSendable> *)command topic:(NSString *)topic;
 
 @end
