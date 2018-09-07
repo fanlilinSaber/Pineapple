@@ -55,6 +55,13 @@
     return self;
 }
 
+- (BOOL)isConnected {
+    if (self.sessionManager.state == MQTTSessionManagerStateConnected) {
+        return YES;
+    }
+    return NO;
+}
+
 - (void)addSubscriptionQueue:(NSString *)queue {
     NSAssert(queue != nil, @"queue name Can't be nil");
     NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];

@@ -30,6 +30,7 @@
 
 - (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId;
 
+- (BOOL)isConnected;
 - (void)addSubscriptionQueue:(NSString *)queue;
 - (void)cancelSubscriptionQueue:(NSString *)queue;
 - (void)connect;
