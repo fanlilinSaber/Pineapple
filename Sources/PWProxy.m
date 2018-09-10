@@ -64,10 +64,12 @@
 
 - (void)addSubscriptionQueue:(NSString *)queue {
     NSAssert(queue != nil, @"queue name Can't be nil");
-    NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];
-    [subscriptions setValue:@(1) forKey:queue];
-    
-    self.sessionManager.subscriptions = subscriptions;
+    NSDictionary *effectiveSubscriptions = [self.sessionManager.effectiveSubscriptions mutableCopy];
+    if (![effectiveSubscriptions objectForKey:queue]) {
+        NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];
+        [subscriptions setValue:@(1) forKey:queue];
+        self.sessionManager.subscriptions = subscriptions;
+    }
 }
 
 - (void)cancelSubscriptionQueue:(NSString *)queue {
