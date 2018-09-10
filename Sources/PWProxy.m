@@ -45,8 +45,8 @@
         _nodeId = nodeId;
         _sessionManager = [MQTTSessionManager new];
         _sessionManager.delegate = self;
-        _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@", self.rootTopic, self.nodeId]: @0,
-                                          [NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, self.clientId]: @0};
+        _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@", self.rootTopic, self.nodeId]: @1,
+                                          [NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, self.clientId]: @1};
         [_sessionManager addObserver:self
                           forKeyPath:@"state"
                              options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -65,7 +65,7 @@
 - (void)addSubscriptionQueue:(NSString *)queue {
     NSAssert(queue != nil, @"queue name Can't be nil");
     NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];
-    [subscriptions setValue:@(0) forKey:queue];
+    [subscriptions setValue:@(1) forKey:queue];
     
     self.sessionManager.subscriptions = subscriptions;
 }
