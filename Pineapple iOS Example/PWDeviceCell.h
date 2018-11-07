@@ -2,7 +2,7 @@
 //  PWDeviceCell.h
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/3/29.
+//  Created by Fan Li Lin on 2017/3/29.
 //
 //
 

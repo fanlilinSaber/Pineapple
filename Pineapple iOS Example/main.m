@@ -2,7 +2,7 @@
 //  main.m
 //  Pineapple iOS Example
 //
-//  Created by Dan Jiang on 2017/3/27.
+//  Created by Fan Li Lin on 2017/3/27.
 //
 //
 

@@ -2,13 +2,15 @@
 //  PWCommand.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/3/27.
+//  Created by Fan Li Lin on 2017/3/27.
 //
 //
 
 #import "PWCommand.h"
 
 @implementation PWCommand
+
+#pragma mark - @public Method
 
 - (void)fillPropertiesWithData:(NSDictionary *)data {
     self.msgType = data[@"msgType"];
@@ -46,17 +48,7 @@
     return data;
 }
 
-- (PWCommand *)copyNew {
-    PWCommand *command = [[PWCommand alloc] init];
-    command.msgType = self.msgType;
-    command.fromId = self.fromId;
-    command.toId = self.toId;
-    command.params = self.params;
-    command.paramsArray = self.paramsArray;
-    command.msgId = self.msgId;
-    command.ack = self.ack;
-    return command;
-}
+#pragma mark - @protocol NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {
     PWCommand *command = [[[self class] allocWithZone:zone] init];
@@ -67,6 +59,7 @@
     command.paramsArray = self.paramsArray;
     command.msgId = self.msgId;
     command.ack = self.ack;
+    command.enabledAck = self.enabledAck;
     return command;
 }
 
@@ -79,7 +72,11 @@
     command.paramsArray = self.paramsArray;
     command.msgId = self.msgId;
     command.ack = self.ack;
+    command.enabledAck = self.enabledAck;
     return command;
 }
 
+- (NSData *)dataRepresentationWithData:(NSDictionary *)data {
+    return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
+}
 @end

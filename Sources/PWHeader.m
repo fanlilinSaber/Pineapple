@@ -2,18 +2,22 @@
 //  PWHeader.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/4/19.
+//  Created by Fan Li Lin on 2017/4/19.
 //
 //
 
 #import "PWHeader.h"
 
+/*&* 包头换行符*/
 static NSString * const PWHeaderCRLF = @"\r\n";
-
+/*&* 版本*/
 static NSString * const PWHeaderVersion = @"Version";
+/*&* content 长度*/
 static NSString * const PWHeaderContentLength = @"Content-Length";
 
 @implementation PWHeader
+
+#pragma mark - @init Method
 
 - (instancetype)initWithContentLength:(NSUInteger)contentLength {
     self = [super init];
@@ -46,8 +50,10 @@ static NSString * const PWHeaderContentLength = @"Content-Length";
     return self;
 }
 
+#pragma mark - @public Method
 - (NSData *)dataRepresentation {
     NSMutableString *header = [NSMutableString new];
+    /*&* 协议包头格式 其他端必须保持一致*/
     [header appendFormat:@"%@: %@%@", PWHeaderVersion, self.version, PWHeaderCRLF];
     [header appendFormat:@"%@: %lu%@%@", PWHeaderContentLength, (unsigned long)self.contentLength, PWHeaderCRLF, PWHeaderCRLF];
     return [header dataUsingEncoding:NSUTF8StringEncoding];

@@ -2,7 +2,7 @@
 //  PWListener.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/3/31.
+//  Created by Fan Li Lin on 2017/3/31.
 //
 //
 
@@ -10,9 +10,11 @@
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 @interface PWListener () <GCDAsyncSocketDelegate>
-
+/*&* 核心 socket */
 @property (strong, nonatomic) GCDAsyncSocket *listenSocket;
+/*&* ability*/
 @property (strong, nonatomic) PWAbility *ability;
+/*&* port*/
 @property (nonatomic) NSInteger port;
 
 @end
@@ -22,6 +24,8 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark - @init Method
 
 - (instancetype)initWithAbility:(PWAbility *)ability port:(NSInteger)port {
     self = [super init];
@@ -34,6 +38,8 @@
     }
     return self;
 }
+
+#pragma mark - @public Method
 
 - (void)start {
     if (!self.listenSocket) {
@@ -51,7 +57,7 @@
     [self.listenSocket disconnect];
 }
 
-#pragma mark - Handle App Life Style
+#pragma mark - @Handle App Life Cycle
 
 - (void)appWillResignActive {
     [self.listenSocket disconnect];

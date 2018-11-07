@@ -8,12 +8,14 @@
 #import "PWBluetooth.h"
 
 @interface PWBluetooth ()<CBPeripheralDelegate, CBCentralManagerDelegate>
-/*&* <##>*/
+/*&* 当前连接的蓝色设备 Peripheral*/
 @property (nonatomic, strong) CBPeripheral *currentPeripheral;
 
 @end
 
 @implementation PWBluetooth
+
+#pragma mark - @init Method
 
 - (instancetype)init
 {
@@ -24,7 +26,8 @@
     return self;
 }
 
-#pragma mark - public
+#pragma mark - @public Method
+
 - (void)stopScan{
     [self.manager stopScan];
 }
@@ -43,7 +46,7 @@
     [self.manager cancelPeripheralConnection:peripheral];
 }
 
-#pragma mark - set
+#pragma mark - @get
 - (BOOL)isReady{
     BOOL state = YES;
     if (self.manager.state != CBManagerStatePoweredOn) {

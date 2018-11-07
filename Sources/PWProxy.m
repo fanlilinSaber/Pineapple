@@ -2,7 +2,7 @@
 //  PWProxy.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/4/17.
+//  Created by Fan Li Lin on 2017/4/17.
 //
 //
 
@@ -10,17 +10,23 @@
 #import <MQTTClient/MQTTSessionManager.h>
 
 @interface PWProxy () <MQTTSessionManagerDelegate>
-
+/*&* MQTT sessionManager*/
 @property (strong, nonatomic) MQTTSessionManager *sessionManager;
+/*&* ability*/
 @property (strong, nonatomic) PWAbility *ability;
+/*&* host*/
 @property (copy, nonatomic) NSString *host;
+/*&* port*/
 @property (nonatomic) NSInteger port;
+/*&* 用户名*/
 @property (copy, nonatomic) NSString *user;
+/*&* 密码*/
 @property (copy, nonatomic) NSString *pass;
-@property (copy, nonatomic) NSString *groupId;
-@property (copy, nonatomic) NSString *deviceId;
+/*&* clientId*/
 @property (copy, nonatomic) NSString *clientId;
+/*&* 根节点*/
 @property (copy, nonatomic) NSString *rootTopic;
+/*&* 子节点*/
 @property (copy, nonatomic) NSString *nodeId;
 
 @end
@@ -31,6 +37,8 @@
     [_sessionManager disconnectWithDisconnectHandler:nil];
     [_sessionManager removeObserver:self forKeyPath:@"state"];
 }
+
+#pragma mark - @init Method
 
 - (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId {
     self = [super init];
@@ -54,6 +62,8 @@
     }
     return self;
 }
+
+#pragma mark - @public Method
 
 - (BOOL)isConnected {
     if (self.sessionManager.state == MQTTSessionManagerStateConnected) {
@@ -125,7 +135,8 @@
                            retain:false];
 }
 
-#pragma mark - Private
+#pragma mark - @private Method
+#pragma mark - @Observer
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     switch (self.sessionManager.state) {

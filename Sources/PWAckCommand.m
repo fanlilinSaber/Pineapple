@@ -13,6 +13,8 @@
     return @"CommonAck";
 }
 
+#pragma mark - @init Method
+
 - (instancetype)initWithSourceMsgId:(NSString *)sourceMsgId sourceMsgType:(NSString *)sourceMsgType {
     self = [super init];
     if (self) {
@@ -26,10 +28,14 @@
     return self;
 }
 
+#pragma mark - @protocol PWCommandSendable
+
 - (NSData *)dataRepresentation {
     NSMutableDictionary *data = [super fillDataWithProperties];
-    return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
+    return [super dataRepresentationWithData:data];
 }
+
+#pragma mark - @protocol PWCommandSendable
 
 - (void)parseData:(NSDictionary *)data {
     [super fillPropertiesWithData:data];

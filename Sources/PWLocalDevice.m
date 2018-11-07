@@ -2,7 +2,7 @@
 //  PWLocalDevice.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/3/27.
+//  Created by Fan Li Lin on 2017/3/27.
 //
 //
 
@@ -12,35 +12,41 @@
 #import "PWAckCommand.h"
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
+/*&* 消息头 tag header*/
 static NSInteger const PWTagHeader = 10;
+/*&* 消息主要内容 tag content*/
 static NSInteger const PWTagBody = 11;
+/*&* 心跳间隔 单位：秒*/
 static NSTimeInterval const PWKeepLiveTimeInterval = 60;
+/*&* ack 消息队列检测 单位：秒*/
 static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 @interface PWLocalDevice () <GCDAsyncSocketDelegate>
-
+/*&* ability*/
 @property (strong, nonatomic) PWAbility *ability;
+/*&* 核心 socket */
 @property (strong, nonatomic) GCDAsyncSocket *socket;
+/*&* 核心 socket 是否是自己new出来的*/
 @property (nonatomic, getter=isOwner) BOOL owner;
-/*&* 无序的 key拿字典来存储*/
+/*&* ack 消息缓冲队列 无序的 key拿字典来存储*/
 @property (nonatomic, strong) NSMutableDictionary *ackQueueSource;
-/*&* <##>*/
+/*&* ack 消息缓冲队列 对应key*/
 @property (nonatomic, strong) NSMutableArray *ackQueueSourceKey;
-/*&* <##>*/
+/*&* 心跳 source timer*/
 @property (nonatomic, strong) dispatch_source_t keepLive_source_t;
-/*&* <##>*/
+/*&* ack 消息队列循环检测 source timer*/
 @property (nonatomic, strong) dispatch_source_t ackQueue_source_t;
-/*&* <##>*/
+/*&* ack 消息派发队列*/
 @property (nonatomic, strong) dispatch_queue_t ackQueue;
-/*&* */
+/*&* 用来记录最近收到的ack消息 避免其他因素导致重复回复*/
 @property (nonatomic, strong) NSMutableArray *ackRecentMsgId;
-/*&* <##>*/
+/*&* 当前发送的ack command 的MsgId; 用来避免因为后收到其他回复的ack MsgId 导致消息乱序*/
 @property (nonatomic, copy) NSString *currentAckMsgId;
-/*&* <##>*/
+/*&* 重连机制*/
 @property (nonatomic, assign, getter=isReconnect) BOOL reconnect;
-/*&* <##>*/
+/*&* 标记ack消息回复和消息队列循环检测 source 后续方法重复调用*/
 @property (nonatomic, assign, getter=isSendQueueData) BOOL sendQueueData;
-/*&* <##>*/
+/*&* ack 派发队列状态*/
 @property (nonatomic, assign, getter=isAckQueueRuning) BOOL ackQueueRuning;
 @end
 
@@ -67,6 +73,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 #endif
     
 }
+
+#pragma mark - @init Method
 
 - (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
     self = [super initWithName:name clientId:nil];
@@ -99,6 +107,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     return self;
 }
 
+#pragma mark - @set
 - (void)setEnabledAck:(BOOL)enabledAck {
     _enabledAck = enabledAck;
     if (enabledAck) {
@@ -107,6 +116,23 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
         _ackQueueSourceKey = [NSMutableArray array];
     }
 }
+
+#pragma mark - uuidString
+- (NSString *)uuidString {
+    CFUUIDRef uuidObj = CFUUIDCreate(nil);
+    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
+    [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    CFRelease(uuidObj);
+    return uuidString ;
+}
+
+#pragma mark - Handle App Life Style
+
+- (void)appDidBecomeActive {
+    [self connectWithRead:NO];
+}
+
+#pragma mark - @public Method
 
 - (BOOL)isConnected {
     return [self.socket isConnected];
@@ -153,11 +179,12 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
             NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
             NSMutableData *data = [[NSMutableData alloc] initWithData:header];
             [data appendData:body];
-            /*&* 当前消息队列闲置时候才马上发送*/
+            /*&* 当前消息队列闲置时候才马上发送 队列里的消息必须顺序执行*/
             if (![self isAckQueueCount]) {
                 self.currentAckMsgId = newCommand.msgId;
                 [self sendData:data];
             }
+            /*&* 添加到ack缓存队列里*/
             [self addAckQueueData:data msgId:newCommand.msgId];
             if (self.ackQueue_source_t == NULL) {
                 [self startAckQueueTimer];
@@ -173,6 +200,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
+#pragma mark - @private Method
+// ack消息体 队列检测发送
 - (void)ackMaybeDequeueWrite {
     if ([self.socket isConnected]) {
         if (self.isSendQueueData) {
@@ -194,6 +223,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
+// ack消息队列 count
 - (BOOL)isAckQueueCount {
     if (self.ackQueueSource.count > 0 && self.ackQueueSourceKey.count > 0) {
         return YES;
@@ -201,28 +231,13 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     return NO;
 }
 
+// 添加ack消息体到ack缓存队列里
 - (void)addAckQueueData:(NSData *)data msgId:(NSString *)msgId {
     [self.ackQueueSource setValue:data forKey:msgId];
     [self.ackQueueSourceKey addObject:msgId];
 }
 
-#pragma mark - uuidString
-- (NSString *)uuidString {
-    CFUUIDRef uuidObj = CFUUIDCreate(nil);
-    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
-    [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    CFRelease(uuidObj);
-    return uuidString ;
-}
-
-#pragma mark - Handle App Life Style
-
-- (void)appDidBecomeActive {
-    [self connectWithRead:NO];
-}
-
-#pragma mark - Private
-
+// 添加收到的ack消息体msgId 只保留最近20条记录
 - (void)addReceiveMsgId:(NSString *)msgId {
     [self.ackRecentMsgId addObject:msgId];
     if (self.ackRecentMsgId.count == 20) {
@@ -230,10 +245,12 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
+// 发送command data
 - (void)sendData:(NSData *)data {
     [self.socket writeData:data withTimeout:-1 tag:0];
 }
 
+// 连接 socket service
 - (void)connectWithRead:(BOOL)read {
     if (!self.socket) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
@@ -255,6 +272,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
+// 心跳包
 - (void)keepLive {
     if ([self.socket isConnected]) {
         [self send:[PWKeepLiveCommand new]];
@@ -266,6 +284,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
+// 取消 ack queue source
 - (void)cancelAckQueueTimer {
     if (self.ackQueue_source_t && self.isAckQueueRuning) {
         self.ackQueueRuning = NO;
@@ -274,6 +293,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
+// 恢复 ack queue source
 - (void)resumeAckQueueTimer {
     if (self.ackQueue_source_t && !self.isAckQueueRuning) {
         self.ackQueueRuning = YES;
@@ -283,6 +303,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
+// ack队列消息体移除（收到ack回复消息后马上移除当前的ack消息体；并且循环队列里的下一个消息体）
 - (void)ackQueueRemoveSourceMsgId:(NSString *)sourceMsgId {
     if (self.ackQueue == NULL) {
         //        NSLog(@"return sourceMsgId = %@",sourceMsgId);
@@ -302,6 +323,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     });
 }
 
+// 开始启用ack队列检测 source
 - (void)startAckQueueTimer {
     self.ackQueueRuning = YES;
     if (self.ackQueue == NULL) {
@@ -320,6 +342,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     self.ackQueue_source_t = timer;
 }
 
+// 开始启用心跳包 source
 - (void)startKeepLiveTimer {
     __weak PWLocalDevice *weakSelf = self;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

@@ -2,7 +2,7 @@
 //  PWTextCommand.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/3/29.
+//  Created by Fan Li Lin on 2017/3/29.
 //
 //
 
@@ -13,6 +13,8 @@
 + (NSString *)msgType {
     return @"Text";
 }
+
+#pragma mark - @init Method
 
 - (instancetype)initWithText:(NSString *)text {
     self = [super init];
@@ -25,10 +27,14 @@
     return self;
 }
 
+#pragma mark - @protocol PWCommandSendable
+
 - (NSData *)dataRepresentation {
     NSMutableDictionary *data = [super fillDataWithProperties];
-    return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
+    return [super dataRepresentationWithData:data];
 }
+
+#pragma mark - @protocol PWCommandReceivable
 
 - (void)parseData:(NSDictionary *)data {
     [super fillPropertiesWithData:data];
