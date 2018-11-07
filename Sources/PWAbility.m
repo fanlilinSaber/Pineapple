@@ -2,7 +2,7 @@
 //  PWAbility.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/3/29.
+//  Created by Fan Li Lin on 2017/3/29.
 //
 //
 
@@ -12,12 +12,14 @@
 #import "PWAckCommand.h"
 
 @interface PWAbility ()
-
+/*&* 自定义协议的command class 类*/
 @property (copy, nonatomic) NSDictionary *commands;
 
 @end
 
 @implementation PWAbility
+
+#pragma mark - @init Method
 
 - (instancetype)init {
     self = [super init];
@@ -28,6 +30,8 @@
     }
     return self;
 }
+
+#pragma mark - @public Method
 
 - (PWCommand *)commandWithData:(NSData *)data {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];

@@ -2,7 +2,7 @@
 //  PWKeepLiveCommand.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/4/20.
+//  Created by Fan Li Lin on 2017/4/20.
 //
 //
 
@@ -14,6 +14,8 @@
     return @"Keep Live";
 }
 
+#pragma mark - @init Method
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -22,9 +24,11 @@
     return self;
 }
 
+#pragma mark - @protocol PWCommandSendable
+
 - (NSData *)dataRepresentation {
     NSDictionary *data = [NSDictionary new];
-    return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
+    return [super dataRepresentationWithData:data];
 }
 
 @end

@@ -10,40 +10,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol PWBluetoothClientDelegate;
-
+// 蓝牙客户端连接 protocol
 @protocol PWBluetoothClientDelegate <NSObject>
 @optional;
+// 蓝牙设备状态
 - (void)bluetoothCentralManagerState:(CBManagerState)state;
-/**
- *  *&* 发现设备*
- */
+// 发现设备
 - (void)bluetoothCentralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI;
-/**
- *  *&* 连接到Peripherals-成功*
- */
+// 连接到Peripherals-成功
 - (void)bluetoothCentralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral;
-/**
- *  *&* 连接失败*
- */
+// 连接失败
 -(void)bluetoothCentralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
-/**
- *  *&* 断开连接*
- */
+// 断开连接
 - (void)bluetoothCentralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
-/**
- *  *&* 扫描到服务*
- */
+// 扫描到服务
 -(void)bluetoothPeripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error;
-/**
- *  *&* 扫描到特征*
- */
+// 扫描到特征
 - (void)bluetoothPeripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error;
-/**
- *  *&* 扫描到information*
- */
+// 扫描到information
 - (void)bluetoothPeripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error;
-
+// Notification 消息
 - (void)bluetoothPeripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error;
 
 @end
@@ -63,22 +49,27 @@ NS_ASSUME_NONNULL_BEGIN
 /*&* 订阅广播 (一般实时心率) 对订阅的特征值uuid 若支持notfiy setNotifyValue*/
 @property (nonatomic, strong) NSArray *subscibe_uuid;
 
-
-
 /**
- *  *&* 开始扫描*
+ 开始扫描
  */
 - (void)stopScan;
+
 /**
- *  *&* 停止扫描*
+ 停止扫描
  */
 - (void)startScan;
+
 /**
- *  *&* 连接 设备*
+ 连接设备
+
+ @param peripheral peripheral
  */
 - (void)connectPeripheral:(CBPeripheral *)peripheral;
+
 /**
- *  *&* 断开连接*
+ 断开设备
+
+ @param peripheral peripheral
  */
 - (void)cancelPeripheralConnection:(CBPeripheral *)peripheral;
 

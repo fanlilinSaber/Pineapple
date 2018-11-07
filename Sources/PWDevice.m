@@ -2,13 +2,15 @@
 //  PWDevice.m
 //  Pineapple
 //
-//  Created by Dan Jiang on 2017/4/20.
+//  Created by Fan Li Lin on 2017/4/20.
 //
 //
 
 #import "PWDevice.h"
 
 @implementation PWDevice
+
+#pragma mark - @init Method
 
 - (instancetype)initWithName:(NSString *)name clientId:(NSString *)clientId {
     self = [super init];
