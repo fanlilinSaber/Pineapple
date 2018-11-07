@@ -12,6 +12,7 @@
 @class PWListener;
 // protocol
 @protocol PWListenerDelegate <NSObject>
+@optional
 // 服务器开启成功
 - (void)listenerDidStartSuccess:(PWListener *)listener;
 // 服务器开启失败

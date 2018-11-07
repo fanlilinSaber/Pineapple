@@ -13,6 +13,7 @@
 @class PWLocalDevice, GCDAsyncSocket;
 // protocol
 @protocol PWLocalDeviceDelegate <NSObject>
+@optional
 // socket 连接成功
 - (void)deviceDidConnectSuccess:(PWLocalDevice *)device;
 // socket 连接失败
