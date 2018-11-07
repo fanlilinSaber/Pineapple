@@ -13,6 +13,7 @@
 @class PWProxy;
 // protocol
 @protocol PWProxyDelegate <NSObject>
+@optional
 // MQTT 已关闭
 - (void)proxyClosed:(PWProxy *)proxy;
 // MQTT 关闭中
