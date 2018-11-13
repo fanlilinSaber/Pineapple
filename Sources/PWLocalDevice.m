@@ -179,12 +179,12 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
             NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
             NSMutableData *data = [[NSMutableData alloc] initWithData:header];
             [data appendData:body];
-            /*&* 当前消息队列闲置时候才马上发送 队列里的消息必须顺序执行*/
+            // 当前消息队列闲置时候才马上发送 队列里的消息必须顺序执行
             if (![self isAckQueueCount]) {
                 self.currentAckMsgId = newCommand.msgId;
                 [self sendData:data];
             }
-            /*&* 添加到ack缓存队列里*/
+            // 添加到ack缓存队列里
             [self addAckQueueData:data msgId:newCommand.msgId];
             if (self.ackQueue_source_t == NULL) {
                 [self startAckQueueTimer];
@@ -361,7 +361,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     dispatch_async(dispatch_get_main_queue(), ^{
-        /*&* 作为服务端不主动发送心跳包 由客户端发送 → 服务端收到并回复 (客户端控制心跳频率)*/
+        // 作为服务端不主动发送心跳包 由客户端发送 → 服务端收到并回复 (客户端控制心跳频率)
         if (self.owner) {
             if (self.keepLive_source_t) {
                 dispatch_source_cancel(self.keepLive_source_t);
@@ -379,7 +379,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     self.socket = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (error) {
-            /*&* socket serve closed*/
+            // socket serve closed
             if (error.code == 7) {
                 [self.delegate device:self remoteDidDisconnectError:error];
             }else{
@@ -400,20 +400,20 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     } else if (tag == PWTagBody) {
         PWCommand *command = [self.ability commandWithData:data];
         if (command != nil) {
-            /*&* 心跳包*/
+            // 心跳包
             if ([command.msgType isEqualToString:[PWKeepLiveCommand msgType]]) {
                 if (!self.owner) {
                     [self send:(PWKeepLiveCommand *)command];
                 }
             }
-            /*&* ack*/
+           // ack回复
             else if ([command.msgType isEqualToString:[PWAckCommand msgType]]) {
                 //                NSLog(@"收到ack 回复 消息了 %@",((PWAckCommand *)command).sourceMsgId);
                 [self ackQueueRemoveSourceMsgId:((PWAckCommand *)command).sourceMsgId];
             }
             else {
                 if (command.msgId.length > 0) {
-                    /*&* 回复 ack*/
+                    // 回复 ack
                     [self send:[[PWAckCommand alloc] initWithSourceMsgId:command.msgId sourceMsgType:command.msgType]];
                     
                     if (![self.ackRecentMsgId containsObject:command.msgId]) {

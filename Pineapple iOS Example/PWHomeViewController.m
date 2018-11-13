@@ -271,11 +271,11 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
     NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
     NSString *text = self.textField.text;
     if (indexPath && ![text isEqualToString:@""]) {
-        PWTextCommand *comand = [[PWTextCommand alloc] initWithText:text];
-//        NSArray *strs = [text componentsSeparatedByString:@"."];
-//        PWASRStatusCommand *comand = [[PWASRStatusCommand alloc] initWithParams:@{@"operType" : strs.firstObject,
-//                                                                                  @"topicNumber" : strs.lastObject
-//                                                                                  }];
+//        PWTextCommand *comand = [[PWTextCommand alloc] initWithText:text];
+        NSArray *strs = [text componentsSeparatedByString:@"."];
+        PWASRStatusCommand *comand = [[PWASRStatusCommand alloc] initWithParams:@{@"operType" : strs.firstObject,
+                                                                                  @"topicNumber" : strs.lastObject
+                                                                                  }];
         
 //        PWUserLoginStatusCommand *comand = [[PWUserLoginStatusCommand alloc] initWithUserToken:text];
         
@@ -283,15 +283,15 @@ static NSString * const PWDeviceCellIdentifier = @"DeviceCell";
         
         if ([device isKindOfClass:[PWLocalDevice class]]) {
             PWLocalDevice *localDevice = (PWLocalDevice *)device;
-//            // 测试
-            for (int i = 0; i < 30; i ++) {
-//                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:[NSString stringWithFormat:@"%d",i]];
-                PWUserLoginStatusCommand *comandNew = [[PWUserLoginStatusCommand alloc] initWithUserToken:[NSString stringWithFormat:@"%d",i]];
-//                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:@"2"];
-                [localDevice send:comandNew];
-
-            }
-//            [localDevice send:comand];
+////            // 测试
+//            for (int i = 0; i < 30; i ++) {
+////                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:[NSString stringWithFormat:@"%d",i]];
+//                PWUserLoginStatusCommand *comandNew = [[PWUserLoginStatusCommand alloc] initWithUserToken:[NSString stringWithFormat:@"%d",i]];
+////                PWTextCommand *comandNew = [[PWTextCommand alloc] initWithText:@"2"];
+//                [localDevice send:comandNew];
+//
+//            }
+            [localDevice send:comand];
         }
         else if ([device isKindOfClass:[PWMQDevice class]]) {
             PWMQDevice *mqDevice = (PWMQDevice *)device;
