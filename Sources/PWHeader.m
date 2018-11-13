@@ -53,7 +53,7 @@ static NSString * const PWHeaderContentLength = @"Content-Length";
 #pragma mark - @public Method
 - (NSData *)dataRepresentation {
     NSMutableString *header = [NSMutableString new];
-    /*&* 协议包头格式 其他端必须保持一致*/
+    // 协议包头格式 其他端必须保持一致
     [header appendFormat:@"%@: %@%@", PWHeaderVersion, self.version, PWHeaderCRLF];
     [header appendFormat:@"%@: %lu%@%@", PWHeaderContentLength, (unsigned long)self.contentLength, PWHeaderCRLF, PWHeaderCRLF];
     return [header dataUsingEncoding:NSUTF8StringEncoding];
