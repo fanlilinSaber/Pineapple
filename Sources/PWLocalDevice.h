@@ -65,10 +65,12 @@
  @return YES or NO
  */
 - (BOOL)isConnected;
+
 /**
  开始连接
  */
 - (void)connect;
+
 /**
  断开连接
  */

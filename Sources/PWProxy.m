@@ -51,6 +51,7 @@
         _clientId = clientId;
         _rootTopic = rootTopic;
         _nodeId = nodeId;
+        // new MQTTSessionManager
         _sessionManager = [MQTTSessionManager new];
         _sessionManager.delegate = self;
         _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@", self.rootTopic, self.nodeId]: @1,
@@ -86,7 +87,6 @@
     NSAssert(queue != nil, @"queue name Can't be nil");
     NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];
     [subscriptions removeObjectForKey:queue];
-    
     self.sessionManager.subscriptions = subscriptions;
 }
 
