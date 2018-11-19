@@ -108,6 +108,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 #pragma mark - @set
+
 - (void)setEnabledAck:(BOOL)enabledAck {
     _enabledAck = enabledAck;
     if (enabledAck) {
@@ -118,6 +119,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 #pragma mark - uuidString
+
 - (NSString *)uuidString {
     CFUUIDRef uuidObj = CFUUIDCreate(nil);
     NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
@@ -412,10 +414,11 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
                 [self ackQueueRemoveSourceMsgId:((PWAckCommand *)command).sourceMsgId];
             }
             else {
+                // 如果接收到的'command'带有'msgId' 需要回复
                 if (command.msgId.length > 0) {
                     // 回复 ack
                     [self send:[[PWAckCommand alloc] initWithSourceMsgId:command.msgId sourceMsgType:command.msgType]];
-                    
+                    // 消息去重
                     if (![self.ackRecentMsgId containsObject:command.msgId]) {
                         
                         [self addReceiveMsgId:command.msgId];

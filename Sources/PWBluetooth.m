@@ -17,12 +17,12 @@
 
 #pragma mark - @init Method
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         _manager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     }
+    
     return self;
 }
 

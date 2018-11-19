@@ -13,7 +13,7 @@
 @interface PWAbility : NSObject
 
 /**
- 解析接受的data消息 转为 command model
+ 解析接收的data消息 转为 command model
 
  @param data json data
  @return command model
