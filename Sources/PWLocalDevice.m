@@ -22,11 +22,11 @@ static NSTimeInterval const PWKeepLiveTimeInterval = 60;
 static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 @interface PWLocalDevice () <GCDAsyncSocketDelegate>
-/*&* ability*/
+/*&* socket通信command注册*/
 @property (strong, nonatomic) PWAbility *ability;
-/*&* 核心 socket */
+/*&* socket通信组件*/
 @property (strong, nonatomic) GCDAsyncSocket *socket;
-/*&* 核心 socket 是否是自己new出来的*/
+/*&* socket 是否是自己new出来的;作为服务端和客服端判断*/
 @property (nonatomic, getter=isOwner) BOOL owner;
 /*&* ack 消息缓冲队列 无序的 key拿字典来存储*/
 @property (nonatomic, strong) NSMutableDictionary *ackQueueSource;
@@ -181,12 +181,12 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
             NSData *header = [[[PWHeader alloc] initWithContentLength:body.length] dataRepresentation];
             NSMutableData *data = [[NSMutableData alloc] initWithData:header];
             [data appendData:body];
-            // 当前消息队列闲置时候才马上发送 队列里的消息必须顺序执行
+            /*&* 当前消息队列闲置时候才马上发送 队列里的消息必须顺序执行*/
             if (![self isAckQueueCount]) {
                 self.currentAckMsgId = newCommand.msgId;
                 [self sendData:data];
             }
-            // 添加到ack缓存队列里
+            /*&* 添加到ack缓存队列里*/
             [self addAckQueueData:data msgId:newCommand.msgId];
             if (self.ackQueue_source_t == NULL) {
                 [self startAckQueueTimer];
@@ -203,7 +203,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 #pragma mark - @private Method
-// ack消息体 队列检测发送
+/*&* ack消息体 队列检测发送*/
 - (void)ackMaybeDequeueWrite {
     if ([self.socket isConnected]) {
         if (self.isSendQueueData) {
@@ -225,7 +225,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-// ack消息队列 count
+/*&* ack消息队列 count*/
 - (BOOL)isAckQueueCount {
     if (self.ackQueueSource.count > 0 && self.ackQueueSourceKey.count > 0) {
         return YES;
@@ -233,13 +233,13 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     return NO;
 }
 
-// 添加ack消息体到ack缓存队列里
+/*&* 添加ack消息体到ack缓存队列里*/
 - (void)addAckQueueData:(NSData *)data msgId:(NSString *)msgId {
     [self.ackQueueSource setValue:data forKey:msgId];
     [self.ackQueueSourceKey addObject:msgId];
 }
 
-// 添加收到的ack消息体msgId 只保留最近20条记录
+/*&* 添加收到的ack消息体msgId 只保留最近20条记录*/
 - (void)addReceiveMsgId:(NSString *)msgId {
     [self.ackRecentMsgId addObject:msgId];
     if (self.ackRecentMsgId.count == 20) {
@@ -247,12 +247,12 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-// 发送command data
+/*&* 发送command data*/
 - (void)sendData:(NSData *)data {
     [self.socket writeData:data withTimeout:-1 tag:0];
 }
 
-// 连接 socket service
+/*&* 连接 socket service*/
 - (void)connectWithRead:(BOOL)read {
     if (!self.socket) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
@@ -274,7 +274,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-// 心跳包
+/*&* 心跳包*/
 - (void)keepLive {
     if ([self.socket isConnected]) {
         [self send:[PWKeepLiveCommand new]];
@@ -286,7 +286,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-// 取消 ack queue source
+/*&* 取消 ack queue source*/
 - (void)cancelAckQueueTimer {
     if (self.ackQueue_source_t && self.isAckQueueRuning) {
         self.ackQueueRuning = NO;
@@ -295,7 +295,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-// 恢复 ack queue source
+/*&* 恢复 ack queue source*/
 - (void)resumeAckQueueTimer {
     if (self.ackQueue_source_t && !self.isAckQueueRuning) {
         self.ackQueueRuning = YES;
@@ -305,7 +305,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-// ack队列消息体移除（收到ack回复消息后马上移除当前的ack消息体；并且循环队列里的下一个消息体）
+/*&* ack队列消息体移除（收到ack回复消息后马上移除当前的ack消息体；并且循环队列里的下一个消息体）*/
 - (void)ackQueueRemoveSourceMsgId:(NSString *)sourceMsgId {
     if (self.ackQueue == NULL) {
         //        NSLog(@"return sourceMsgId = %@",sourceMsgId);
@@ -325,7 +325,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     });
 }
 
-// 开始启用ack队列检测 source
+/*&* 开始启用ack队列检测 source*/
 - (void)startAckQueueTimer {
     self.ackQueueRuning = YES;
     if (self.ackQueue == NULL) {
@@ -344,7 +344,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     self.ackQueue_source_t = timer;
 }
 
-// 开始启用心跳包 source
+/*&* 开始启用心跳包 source*/
 - (void)startKeepLiveTimer {
     __weak PWLocalDevice *weakSelf = self;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -363,7 +363,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     dispatch_async(dispatch_get_main_queue(), ^{
-        // 作为服务端不主动发送心跳包 由客户端发送 → 服务端收到并回复 (客户端控制心跳频率)
+        /*&* 作为服务端不主动发送心跳包 由客户端发送 → 服务端收到并回复 (客户端控制心跳频率)*/
         if (self.owner) {
             if (self.keepLive_source_t) {
                 dispatch_source_cancel(self.keepLive_source_t);
@@ -402,23 +402,23 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     } else if (tag == PWTagBody) {
         PWCommand *command = [self.ability commandWithData:data];
         if (command != nil) {
-            // 心跳包
+            /*&* 心跳包*/
             if ([command.msgType isEqualToString:[PWKeepLiveCommand msgType]]) {
                 if (!self.owner) {
                     [self send:(PWKeepLiveCommand *)command];
                 }
             }
-           // ack回复
+           /*&* ack回复*/
             else if ([command.msgType isEqualToString:[PWAckCommand msgType]]) {
                 //                NSLog(@"收到ack 回复 消息了 %@",((PWAckCommand *)command).sourceMsgId);
                 [self ackQueueRemoveSourceMsgId:((PWAckCommand *)command).sourceMsgId];
             }
             else {
-                // 如果接收到的'command'带有'msgId' 需要回复
+                /*&* 如果接收到的'command'带有'msgId' 需要回复*/
                 if (command.msgId.length > 0) {
-                    // 回复 ack
+                    /*&* 回复 ack*/
                     [self send:[[PWAckCommand alloc] initWithSourceMsgId:command.msgId sourceMsgType:command.msgType]];
-                    // 消息去重
+                    /*&* 消息去重*/
                     if (![self.ackRecentMsgId containsObject:command.msgId]) {
                         
                         [self addReceiveMsgId:command.msgId];

@@ -51,7 +51,7 @@
         _clientId = clientId;
         _rootTopic = rootTopic;
         _nodeId = nodeId;
-        // new MQTTSessionManager
+        /*&* new MQTTSessionManager*/
         _sessionManager = [MQTTSessionManager new];
         _sessionManager.delegate = self;
         _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@", self.rootTopic, self.nodeId]: @1,

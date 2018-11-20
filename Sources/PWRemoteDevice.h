@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PWDevice.h"
 
-// 给其他端发送消息 必须实现的载体类
+// 用MQTT 给其他端发送消息 必须实现或者继承
 @interface PWRemoteDevice : PWDevice
 
 @end

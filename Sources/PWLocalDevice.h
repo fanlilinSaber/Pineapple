@@ -27,9 +27,9 @@
 
 @end
 
-// socket 客户端 service
+// socket service
 @interface PWLocalDevice : PWDevice
-/*&* socket 客户端 delegate*/
+/*&* socket delegate*/
 @property (weak, nonatomic) id<PWLocalDeviceDelegate> delegate;
 /*&* host*/
 @property (copy, nonatomic) NSString *host;
