@@ -52,7 +52,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 @implementation PWLocalDevice
 
-- (void)dealloc {
+- (void)dealloc
+{
     if (self.isReconnect) {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
@@ -76,7 +77,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 #pragma mark - @init Method
 
-- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect {
+- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect
+{
     self = [super initWithName:name clientId:nil];
     if (self) {
         _owner = YES;
@@ -92,7 +94,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     return self;
 }
 
-- (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket {
+- (instancetype)initWithAbility:(PWAbility *)ability socket:(GCDAsyncSocket *)socket
+{
     self = [super initWithName:@"未知" clientId:nil];
     if (self) {
         _owner = NO;
@@ -109,7 +112,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 #pragma mark - @set
 
-- (void)setEnabledAck:(BOOL)enabledAck {
+- (void)setEnabledAck:(BOOL)enabledAck
+{
     _enabledAck = enabledAck;
     if (enabledAck) {
         _ackQueueSource = [NSMutableDictionary dictionary];
@@ -120,7 +124,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 #pragma mark - uuidString
 
-- (NSString *)uuidString {
+- (NSString *)uuidString
+{
     CFUUIDRef uuidObj = CFUUIDCreate(nil);
     NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
     [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
@@ -130,17 +135,20 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 #pragma mark - Handle App Life Style
 
-- (void)appDidBecomeActive {
+- (void)appDidBecomeActive
+{
     [self connectWithRead:NO];
 }
 
 #pragma mark - @public Method
 
-- (BOOL)isConnected {
+- (BOOL)isConnected
+{
     return [self.socket isConnected];
 }
 
-- (void)connect {
+- (void)connect
+{
     if (self.owner) {
         [self connectWithRead:NO];
     } else {
@@ -148,7 +156,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-- (void)disconnect {
+- (void)disconnect
+{
     if ([self.socket isConnected]) {
         [self.socket disconnect];
     }
@@ -171,7 +180,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-- (void)send:(PWCommand<PWCommandSendable> *)command {
+- (void)send:(PWCommand<PWCommandSendable> *)command
+{
     PWCommand<PWCommandSendable> *newCommand = [command mutableCopy];
     if (newCommand.isEnabledAck && self.isEnabledAck) {
         dispatch_barrier_async(self.ackQueue, ^{
@@ -204,7 +214,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 #pragma mark - @private Method
 /*&* ack消息体 队列检测发送*/
-- (void)ackMaybeDequeueWrite {
+- (void)ackMaybeDequeueWrite
+{
     if ([self.socket isConnected]) {
         if (self.isSendQueueData) {
             return;
@@ -226,7 +237,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* ack消息队列 count*/
-- (BOOL)isAckQueueCount {
+- (BOOL)isAckQueueCount
+{
     if (self.ackQueueSource.count > 0 && self.ackQueueSourceKey.count > 0) {
         return YES;
     }
@@ -234,13 +246,15 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* 添加ack消息体到ack缓存队列里*/
-- (void)addAckQueueData:(NSData *)data msgId:(NSString *)msgId {
+- (void)addAckQueueData:(NSData *)data msgId:(NSString *)msgId
+{
     [self.ackQueueSource setValue:data forKey:msgId];
     [self.ackQueueSourceKey addObject:msgId];
 }
 
 /*&* 添加收到的ack消息体msgId 只保留最近20条记录*/
-- (void)addReceiveMsgId:(NSString *)msgId {
+- (void)addReceiveMsgId:(NSString *)msgId
+{
     [self.ackRecentMsgId addObject:msgId];
     if (self.ackRecentMsgId.count == 20) {
         [self.ackRecentMsgId removeObjectsInRange:NSMakeRange(0, 10)];
@@ -248,12 +262,14 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* 发送command data*/
-- (void)sendData:(NSData *)data {
+- (void)sendData:(NSData *)data
+{
     [self.socket writeData:data withTimeout:-1 tag:0];
 }
 
 /*&* 连接 socket service*/
-- (void)connectWithRead:(BOOL)read {
+- (void)connectWithRead:(BOOL)read
+{
     if (!self.socket) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
         [self.socket setIPv4PreferredOverIPv6:NO]; /*&* 设置支持IPV6 默认情况下,首选协议IPV6*/
@@ -275,7 +291,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* 心跳包*/
-- (void)keepLive {
+- (void)keepLive
+{
     if ([self.socket isConnected]) {
         [self send:[PWKeepLiveCommand new]];
     } else {
@@ -287,7 +304,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* 取消 ack queue source*/
-- (void)cancelAckQueueTimer {
+- (void)cancelAckQueueTimer
+{
     if (self.ackQueue_source_t && self.isAckQueueRuning) {
         self.ackQueueRuning = NO;
         dispatch_source_cancel(self.ackQueue_source_t);
@@ -296,7 +314,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* 恢复 ack queue source*/
-- (void)resumeAckQueueTimer {
+- (void)resumeAckQueueTimer
+{
     if (self.ackQueue_source_t && !self.isAckQueueRuning) {
         self.ackQueueRuning = YES;
         dispatch_resume(self.ackQueue_source_t);
@@ -306,7 +325,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* ack队列消息体移除（收到ack回复消息后马上移除当前的ack消息体；并且循环队列里的下一个消息体）*/
-- (void)ackQueueRemoveSourceMsgId:(NSString *)sourceMsgId {
+- (void)ackQueueRemoveSourceMsgId:(NSString *)sourceMsgId
+{
     if (self.ackQueue == NULL) {
         //        NSLog(@"return sourceMsgId = %@",sourceMsgId);
         return;
@@ -326,7 +346,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* 开始启用ack队列检测 source*/
-- (void)startAckQueueTimer {
+- (void)startAckQueueTimer
+{
     self.ackQueueRuning = YES;
     if (self.ackQueue == NULL) {
         NSString *qName = [NSString stringWithFormat:@"com.ackQueue-%@", [[NSUUID UUID] UUIDString]];
@@ -345,7 +366,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 }
 
 /*&* 开始启用心跳包 source*/
-- (void)startKeepLiveTimer {
+- (void)startKeepLiveTimer
+{
     __weak PWLocalDevice *weakSelf = self;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
@@ -361,7 +383,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 #pragma mark - GCDAsyncSocketDelegate
 
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
+{
     dispatch_async(dispatch_get_main_queue(), ^{
         /*&* 作为服务端不主动发送心跳包 由客户端发送 → 服务端收到并回复 (客户端控制心跳频率)*/
         if (self.owner) {
@@ -376,7 +399,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     [self.socket readDataToData:[PWHeader endTerm] withTimeout:-1 tag:PWTagHeader];
 }
 
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error {
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error
+{
     self.socket.delegate = nil;
     self.socket = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -395,7 +419,8 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {}
 
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
     if (tag == PWTagHeader) {
         PWHeader *header = [[PWHeader alloc] initWithData:data];
         [self.socket readDataToLength:header.contentLength withTimeout:-1 tag:PWTagBody];

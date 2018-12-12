@@ -10,13 +10,15 @@
 
 @implementation PWKeepLiveCommand
 
-+ (NSString *)msgType {
++ (NSString *)msgType
+{
     return @"Keep Live";
 }
 
 #pragma mark - @init Method
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self) {
         self.msgType = PWKeepLiveCommand.msgType;
@@ -26,7 +28,8 @@
 
 #pragma mark - @protocol PWCommandSendable
 
-- (NSData *)dataRepresentation {
+- (NSData *)dataRepresentation
+{
     NSDictionary *data = [NSDictionary new];
     return [super dataRepresentationWithData:data];
 }

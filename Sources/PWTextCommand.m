@@ -10,13 +10,15 @@
 
 @implementation PWTextCommand
 
-+ (NSString *)msgType {
++ (NSString *)msgType
+{
     return @"Text";
 }
 
 #pragma mark - @init Method
 
-- (instancetype)initWithText:(NSString *)text {
+- (instancetype)initWithText:(NSString *)text
+{
     self = [super init];
     if (self) {
         self.msgType = PWTextCommand.msgType;
@@ -29,14 +31,16 @@
 
 #pragma mark - @protocol PWCommandSendable
 
-- (NSData *)dataRepresentation {
+- (NSData *)dataRepresentation
+{
     NSMutableDictionary *data = [super fillDataWithProperties];
     return [super dataRepresentationWithData:data];
 }
 
 #pragma mark - @protocol PWCommandReceivable
 
-- (void)parseData:(NSDictionary *)data {
+- (void)parseData:(NSDictionary *)data
+{
     [super fillPropertiesWithData:data];
     self.text = self.params[@"text"];
 }

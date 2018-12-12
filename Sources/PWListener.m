@@ -21,13 +21,15 @@
 
 @implementation PWListener
 
-- (void)dealloc {
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - @init Method
 
-- (instancetype)initWithAbility:(PWAbility *)ability port:(NSInteger)port {
+- (instancetype)initWithAbility:(PWAbility *)ability port:(NSInteger)port
+{
     self = [super init];
     if (self) {
         _ability = ability;
@@ -41,7 +43,8 @@
 
 #pragma mark - @public Method
 
-- (void)start {
+- (void)start
+{
     if (!self.listenSocket) {
         self.listenSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     }
@@ -53,23 +56,27 @@
     }
 }
 
-- (void)disconnect {
+- (void)disconnect
+{
     [self.listenSocket disconnect];
 }
 
 #pragma mark - @Handle App Life Cycle
 
-- (void)appWillResignActive {
+- (void)appWillResignActive
+{
     [self.listenSocket disconnect];
 }
 
-- (void)appDidBecomeActive {
+- (void)appDidBecomeActive
+{
     [self start];
 }
 
 #pragma mark - GCDAsyncSocketDelegate
 
-- (void)socket:(GCDAsyncSocket *)sender didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
+- (void)socket:(GCDAsyncSocket *)sender didAcceptNewSocket:(GCDAsyncSocket *)newSocket
+{
     PWLocalDevice *device = [[PWLocalDevice alloc] initWithAbility:self.ability socket:newSocket];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate listener:self didConnectDevice:device];

@@ -17,7 +17,8 @@
 
 #pragma mark - @init Method
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self) {
         _manager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
@@ -28,26 +29,31 @@
 
 #pragma mark - @public Method
 
-- (void)stopScan{
+- (void)stopScan
+{
     [self.manager stopScan];
 }
 
-- (void)startScan{
+- (void)startScan
+{
     NSAssert(self.isReady != NO, @"bluetooth is not enabled");
     [self.manager scanForPeripheralsWithServices:nil options:nil];
 }
 
-- (void)connectPeripheral:(CBPeripheral *)peripheral{
+- (void)connectPeripheral:(CBPeripheral *)peripheral
+{
     self.currentPeripheral = peripheral;
     [self.manager connectPeripheral:peripheral options:@{ CBCentralManagerScanOptionAllowDuplicatesKey:@YES }];
 }
 
-- (void)cancelPeripheralConnection:(CBPeripheral *)peripheral{
+- (void)cancelPeripheralConnection:(CBPeripheral *)peripheral
+{
     [self.manager cancelPeripheralConnection:peripheral];
 }
 
 #pragma mark - @get
-- (BOOL)isReady{
+- (BOOL)isReady
+{
     BOOL state = YES;
     if (self.manager.state != CBManagerStatePoweredOn) {
         return NO;
@@ -55,7 +61,8 @@
     return state;
 }
 
-- (BOOL)isConnection{
+- (BOOL)isConnection
+{
     NSAssert(self.currentPeripheral != nil, @"currentPeripheral is nil");
     BOOL state = YES;
     if (self.currentPeripheral.state != CBPeripheralStateConnected) {
@@ -66,7 +73,8 @@
 
 #pragma mark - CBCentralManagerDelegate
 #pragma mark - 当前蓝牙主设备状态
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central{
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManagerState:)]) {
         [self.delecgate bluetoothCentralManagerState:central.state];
     }
@@ -99,7 +107,8 @@
     }
 }
 
-- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManager:didDiscoverPeripheral:advertisementData:RSSI:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothCentralManager:central didDiscoverPeripheral:peripheral advertisementData:advertisementData RSSI:RSSI];
@@ -110,7 +119,8 @@
 
 #pragma mark 设备扫描与连接的代理
 /*&* 连接到Peripherals-成功*/
-- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral{
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManager:didConnectPeripheral:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothCentralManager:central didConnectPeripheral:peripheral];
@@ -122,7 +132,8 @@
 }
 
 /*&* 连接外设失败*/
--(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+-(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManager:didFailToConnectPeripheral:error:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothCentralManager:central didFailToConnectPeripheral:peripheral error:error];
@@ -131,7 +142,8 @@
 }
 
 /*&* 丢失连接*/
-- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManager:didDisconnectPeripheral:error:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothCentralManager:central didDisconnectPeripheral:peripheral error:error];
@@ -140,7 +152,8 @@
 }
 
 /*&* 扫描到服务*/
--(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothPeripheral:didDiscoverServices:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothPeripheral:peripheral didDiscoverServices:error];
@@ -154,7 +167,8 @@
 }
 
 /*&* 发现外设服务里的特征的时候调用的代理方法(这个是比较重要的方法，你在这里可以通过事先知道UUID找到你需要的特征，订阅特征，或者这里写入数据给特征也可以*/
-- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothPeripheral:didDiscoverCharacteristicsForService:error:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothPeripheral:peripheral didDiscoverCharacteristicsForService:service error:error];
@@ -179,7 +193,8 @@
 
 #pragma mark 设备信息处理
 /*&* 扫描到具体的值*/
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error{
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothPeripheral:didUpdateValueForCharacteristic:error:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothPeripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
@@ -187,7 +202,8 @@
     }
 }
 
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothPeripheral:didUpdateNotificationStateForCharacteristic:error:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothPeripheral:peripheral didUpdateNotificationStateForCharacteristic:characteristic error:error];

@@ -12,7 +12,8 @@
 
 #pragma mark - @public Method
 
-- (void)fillPropertiesWithData:(NSDictionary *)data {
+- (void)fillPropertiesWithData:(NSDictionary *)data
+{
     self.msgType = data[@"msgType"];
     self.fromId = data[@"fromId"];
     self.toId = data[@"toId"];
@@ -29,7 +30,8 @@
     }
 }
 
-- (NSMutableDictionary *)fillDataWithProperties {
+- (NSMutableDictionary *)fillDataWithProperties
+{
     NSMutableDictionary *data = [NSMutableDictionary new];
     data[@"msgType"] = self.msgType;
     data[@"fromId"] = self.fromId;
@@ -50,7 +52,8 @@
 
 #pragma mark - @protocol NSCopying
 
-- (id)copyWithZone:(NSZone *)zone {
+- (id)copyWithZone:(NSZone *)zone
+{
     PWCommand *command = [[[self class] allocWithZone:zone] init];
     command.msgType = self.msgType;
     command.fromId = self.fromId;
@@ -63,7 +66,8 @@
     return command;
 }
 
-- (id)mutableCopyWithZone:(NSZone *)zone {
+- (id)mutableCopyWithZone:(NSZone *)zone
+{
     PWCommand *command = [[[self class] allocWithZone:zone] init];
     command.msgType = self.msgType;
     command.fromId = self.fromId;
@@ -76,7 +80,8 @@
     return command;
 }
 
-- (NSData *)dataRepresentationWithData:(NSDictionary *)data {
+- (NSData *)dataRepresentationWithData:(NSDictionary *)data
+{
     return [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
 }
 @end

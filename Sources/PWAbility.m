@@ -21,7 +21,8 @@
 
 #pragma mark - @init Method
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self) {
         _commands = @{PWTextCommand.msgType: PWTextCommand.class,
@@ -33,7 +34,8 @@
 
 #pragma mark - @public Method
 
-- (PWCommand *)commandWithData:(NSData *)data {
+- (PWCommand *)commandWithData:(NSData *)data
+{
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     NSString *msgType = (NSString *)[json valueForKey:@"msgType"];
     if (!msgType) {
@@ -50,7 +52,8 @@
     }
 }
 
-- (void)addCommand:(Class)aClass withMsgType:(NSString *)msgType {
+- (void)addCommand:(Class)aClass withMsgType:(NSString *)msgType
+{
     NSAssert([aClass isSubclassOfClass:PWCommand.class], @"Command Must Inherited From PWCommand");
     NSAssert([aClass conformsToProtocol:@protocol(PWCommandReceivable)], @"Command Must Conform To PWCommandReceivable");
     NSAssert(self.commands[msgType] == nil, @"Command Already Existed");
