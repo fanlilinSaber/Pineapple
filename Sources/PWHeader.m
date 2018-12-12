@@ -19,7 +19,8 @@ static NSString * const PWHeaderContentLength = @"Content-Length";
 
 #pragma mark - @init Method
 
-- (instancetype)initWithContentLength:(NSUInteger)contentLength {
+- (instancetype)initWithContentLength:(NSUInteger)contentLength
+{
     self = [super init];
     if (self) {
         _version = @"1.0";
@@ -28,7 +29,8 @@ static NSString * const PWHeaderContentLength = @"Content-Length";
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(NSData *)data
+{
     self = [super init];
     if (self) {
         NSString *header = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -51,7 +53,8 @@ static NSString * const PWHeaderContentLength = @"Content-Length";
 }
 
 #pragma mark - @public Method
-- (NSData *)dataRepresentation {
+- (NSData *)dataRepresentation
+{
     NSMutableString *header = [NSMutableString new];
     // 协议包头格式 其他端必须保持一致
     [header appendFormat:@"%@: %@%@", PWHeaderVersion, self.version, PWHeaderCRLF];

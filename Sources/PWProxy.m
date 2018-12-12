@@ -33,14 +33,16 @@
 
 @implementation PWProxy
 
-- (void)dealloc {
+- (void)dealloc
+{
     [_sessionManager disconnectWithDisconnectHandler:nil];
     [_sessionManager removeObserver:self forKeyPath:@"state"];
 }
 
 #pragma mark - @init Method
 
-- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId {
+- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId
+{
     self = [super init];
     if (self) {
         _ability = ability;
@@ -66,14 +68,16 @@
 
 #pragma mark - @public Method
 
-- (BOOL)isConnected {
+- (BOOL)isConnected
+{
     if (self.sessionManager.state == MQTTSessionManagerStateConnected) {
         return YES;
     }
     return NO;
 }
 
-- (void)addSubscriptionQueue:(NSString *)queue {
+- (void)addSubscriptionQueue:(NSString *)queue
+{
     NSAssert(queue != nil, @"queue name Can't be nil");
     NSDictionary *effectiveSubscriptions = [self.sessionManager.effectiveSubscriptions mutableCopy];
     if (![effectiveSubscriptions objectForKey:queue]) {
@@ -83,14 +87,16 @@
     }
 }
 
-- (void)cancelSubscriptionQueue:(NSString *)queue {
+- (void)cancelSubscriptionQueue:(NSString *)queue
+{
     NSAssert(queue != nil, @"queue name Can't be nil");
     NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];
     [subscriptions removeObjectForKey:queue];
     self.sessionManager.subscriptions = subscriptions;
 }
 
-- (void)connect {
+- (void)connect
+{
     [self.sessionManager connectTo:self.host
                               port:self.port
                                tls:NO
@@ -111,15 +117,18 @@
                     connectHandler:nil];
 }
 
-- (void)reconnect {
+- (void)reconnect
+{
     [self.sessionManager connectToLast:nil];
 }
 
-- (void)disconnect {
+- (void)disconnect
+{
      [self.sessionManager disconnectWithDisconnectHandler:nil];
 }
 
-- (void)send:(PWCommand<PWCommandSendable> *)command toDevice:(PWRemoteDevice *)device {
+- (void)send:(PWCommand<PWCommandSendable> *)command toDevice:(PWRemoteDevice *)device
+{
     command.fromId = self.clientId;
     command.toId = device.clientId;
     [self.sessionManager sendData:command.dataRepresentation
@@ -128,7 +137,8 @@
                     retain:false];
 }
 
-- (void)send:(PWCommand<PWCommandSendable> *)command topic:(NSString *)topic {
+- (void)send:(PWCommand<PWCommandSendable> *)command topic:(NSString *)topic
+{
     [self.sessionManager sendData:command.dataRepresentation
                             topic:topic
                               qos:1
@@ -138,7 +148,8 @@
 #pragma mark - @private Method
 #pragma mark - @Observer
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
     switch (self.sessionManager.state) {
         case MQTTSessionManagerStateClosed:
             [self.delegate proxyClosed:self];
@@ -163,7 +174,8 @@
 
 #pragma mark - MQTTSessionManagerDelegate
 
-- (void)handleMessage:(NSData *)data onTopic:(NSString *)topic retained:(BOOL)retained {
+- (void)handleMessage:(NSData *)data onTopic:(NSString *)topic retained:(BOOL)retained
+{
     PWCommand *command = [self.ability commandWithData:data];
     [self.delegate proxy:self didReceiveCommand:command];    
 }

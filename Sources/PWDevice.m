@@ -12,7 +12,8 @@
 
 #pragma mark - @init Method
 
-- (instancetype)initWithName:(NSString *)name clientId:(NSString *)clientId {
+- (instancetype)initWithName:(NSString *)name clientId:(NSString *)clientId
+{
     self = [super init];
     if (self) {
         _name = name;

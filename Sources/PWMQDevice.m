@@ -21,7 +21,8 @@
 
 @implementation PWMQDevice
 
-- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name uri:(NSString *)uri {
+- (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name uri:(NSString *)uri
+{
     self = [super initWithName:name clientId:nil];
     if (self) {
         _ability = ability;
@@ -30,7 +31,8 @@
     return self;
 }
 
-- (void)connect {
+- (void)connect
+{
     if (!self.conn) {
         self.conn = [[RMQConnection alloc] initWithUri:self.uri delegate:[RMQConnectionDelegateLogger new]];
     }
@@ -56,7 +58,8 @@
 //    [self.conn close];
 }
 
-- (void)send:(NSString *)text {
+- (void)send:(NSString *)text
+{
     [self.ch.defaultExchange publish:[text dataUsingEncoding:NSUTF8StringEncoding] routingKey:@"queue_one_key1"];
 }
 
