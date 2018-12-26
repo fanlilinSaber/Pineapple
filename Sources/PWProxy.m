@@ -56,14 +56,25 @@
         /*&* new MQTTSessionManager*/
         _sessionManager = [MQTTSessionManager new];
         _sessionManager.delegate = self;
-        _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@", self.rootTopic, self.nodeId]: @1,
-                                          [NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, self.clientId]: @1};
+        if (nodeId == nil) {
+            _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@", self.rootTopic]: @2,
+                                              [NSString stringWithFormat:@"%@/%@", self.rootTopic, self.clientId]: @2};
+        }else {
+            _sessionManager.subscriptions = @{[NSString stringWithFormat:@"%@/%@", self.rootTopic, self.nodeId]: @2,
+                                              [NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, self.clientId]: @2};
+        }
+        
         [_sessionManager addObserver:self
                           forKeyPath:@"state"
                              options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                              context:nil];
     }
     return self;
+}
+
+- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic
+{
+    return [self initWithAbility:ability host:host port:port user:user pass:pass clientId:clientId rootTopic:rootTopic nodeId:nil];
 }
 
 #pragma mark - @public Method
@@ -82,7 +93,7 @@
     NSDictionary *effectiveSubscriptions = [self.sessionManager.effectiveSubscriptions mutableCopy];
     if (![effectiveSubscriptions objectForKey:queue]) {
         NSMutableDictionary *subscriptions = [[NSMutableDictionary alloc] initWithDictionary:self.sessionManager.subscriptions];
-        [subscriptions setValue:@(1) forKey:queue];
+        [subscriptions setValue:@(2) forKey:queue];
         self.sessionManager.subscriptions = subscriptions;
     }
 }
@@ -108,7 +119,7 @@
                               will:false
                          willTopic:nil
                            willMsg:nil
-                           willQos:1
+                           willQos:2
                     willRetainFlag:FALSE
                       withClientId:self.clientId
                     securityPolicy:nil
