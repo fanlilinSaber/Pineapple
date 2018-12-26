@@ -45,11 +45,25 @@
  @param user 用户名
  @param pass 密码
  @param clientId clientId
- @param rootTopic rootTopic
+ @param rootTopic rootTopic (当前rootTopic“不包含”nodeId)
  @param nodeId nodeId
  @return PWProxy Object
  */
 - (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId;
+
+/**
+ init
+
+ @param ability ability 消息体（command） 解析和转换对应实体对象的关键 ability
+ @param host host
+ @param port port
+ @param user 用户名
+ @param pass 密码
+ @param clientId clientId
+ @param rootTopic rootTopic（当前rootTopic“包含”nodeId）
+ @return PWProxy Object
+ */
+- (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic;
 
 /**
  连接状态
