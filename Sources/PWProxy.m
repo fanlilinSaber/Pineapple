@@ -148,7 +148,7 @@
     }
     [self.sessionManager sendData:command.dataRepresentation
                             topic:topic
-                              qos:1
+                              qos:2
                            retain:false];
 }
 
@@ -156,7 +156,7 @@
 {
     [self.sessionManager sendData:command.dataRepresentation
                             topic:topic
-                              qos:1
+                              qos:2
                            retain:false];
 }
 
