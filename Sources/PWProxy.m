@@ -142,10 +142,14 @@
 {
     command.fromId = self.clientId;
     command.toId = device.clientId;
+    NSString *topic = [NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, device.clientId];
+    if (self.nodeId == nil) {
+        topic = [NSString stringWithFormat:@"%@/%@", self.rootTopic, device.clientId];
+    }
     [self.sessionManager sendData:command.dataRepresentation
-                     topic:[NSString stringWithFormat:@"%@/%@/%@", self.rootTopic, self.nodeId, device.clientId]
-                       qos:1
-                    retain:false];
+                            topic:topic
+                              qos:1
+                           retain:false];
 }
 
 - (void)send:(PWCommand<PWCommandSendable> *)command topic:(NSString *)topic
