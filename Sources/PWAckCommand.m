@@ -14,7 +14,7 @@
     return @"CommonAck";
 }
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)initWithSourceMsgId:(NSString *)sourceMsgId sourceMsgType:(NSString *)sourceMsgType
 {
@@ -30,7 +30,7 @@
     return self;
 }
 
-#pragma mark - @protocol PWCommandSendable
+#pragma mark - PWCommandSendable protocol
 
 - (NSData *)dataRepresentation
 {
@@ -38,7 +38,7 @@
     return [super dataRepresentationWithData:data];
 }
 
-#pragma mark - @protocol PWCommandSendable
+#pragma mark - PWCommandSendable protocol
 
 - (void)parseData:(NSDictionary *)data
 {

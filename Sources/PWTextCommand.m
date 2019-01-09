@@ -15,7 +15,7 @@
     return @"Text";
 }
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)initWithText:(NSString *)text
 {
@@ -29,7 +29,7 @@
     return self;
 }
 
-#pragma mark - @protocol PWCommandSendable
+#pragma mark - PWCommandSendable protocol
 
 - (NSData *)dataRepresentation
 {
@@ -37,7 +37,7 @@
     return [super dataRepresentationWithData:data];
 }
 
-#pragma mark - @protocol PWCommandReceivable
+#pragma mark - PWCommandReceivable protocol
 
 - (void)parseData:(NSDictionary *)data
 {

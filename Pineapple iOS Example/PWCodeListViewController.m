@@ -29,7 +29,8 @@
     self.dataArray = @[@{@"name" : @"TCP - UDP - MQTT", @"className" : @"PWHomeViewController"},
                        @{@"name" : @"蓝牙客户端", @"className" : @"PWBluetoothViewController"},
                        @{@"name" : @"画线", @"className" : @"PWDrawViewController"},
-                       @{@"name" : @"网络请求", @"className" : @"PWNetViewController"}];
+                       @{@"name" : @"网络请求", @"className" : @"PWNetViewController"},
+                       @{@"name" : @"图片缩放同步", @"className" : @"PWPictureZoomViewController"}];
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,7 +67,6 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
 
 
 

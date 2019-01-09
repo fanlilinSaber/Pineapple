@@ -40,6 +40,8 @@
 		40F538451EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538441EA613C300B1FDC9 /* PWAddLocalDeviceViewController.m */; };
 		40F538491EA6201A00B1FDC9 /* PWAbility.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F538461EA6201000B1FDC9 /* PWAbility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40F5384A1EA620B800B1FDC9 /* PWAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F538471EA6201000B1FDC9 /* PWAbility.m */; };
+		480CEED821DDF19A00AB8EF7 /* PWZoomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 480CEED721DDF19A00AB8EF7 /* PWZoomImageView.m */; };
+		480CEEDA21DDF86000AB8EF7 /* 2334.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 480CEED921DDF86000AB8EF7 /* 2334.jpg */; };
 		48367C6920872D3600FD8D0F /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48367C6820872D3600FD8D0F /* NSString+Additions.m */; };
 		485550522050CB4500007291 /* PWAddRMQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550512050CB4500007291 /* PWAddRMQViewController.m */; };
 		485550782050D93C00007291 /* IQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550552050D93C00007291 /* IQTextView.m */; };
@@ -56,6 +58,7 @@
 		485550832050D93C00007291 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550712050D93C00007291 /* IQUIView+Hierarchy.m */; };
 		485550842050D93C00007291 /* IQUIViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550752050D93C00007291 /* IQUIViewController+Additions.m */; };
 		485550852050D93C00007291 /* IQKeyboardReturnKeyHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485550772050D93C00007291 /* IQKeyboardReturnKeyHandler.m */; };
+		4882F24721DDEB7D003FE9ED /* PWPictureZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4882F24621DDEB7D003FE9ED /* PWPictureZoomViewController.m */; };
 		489FEED71F945A5A00453009 /* PWConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489FEED51F945A5A00453009 /* PWConnectViewController.m */; };
 		489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489FEED61F945A5A00453009 /* PWConnectViewController.xib */; };
 		48A3550F207CD00100E89BB0 /* PWAckCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 48A3550D207CD00100E89BB0 /* PWAckCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -146,6 +149,9 @@
 		40F538461EA6201000B1FDC9 /* PWAbility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWAbility.h; sourceTree = "<group>"; };
 		40F538471EA6201000B1FDC9 /* PWAbility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWAbility.m; sourceTree = "<group>"; };
 		43414782D074D3F96B8BE168 /* Pods-Pineapple iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pineapple iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pineapple iOS/Pods-Pineapple iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		480CEED621DDF19A00AB8EF7 /* PWZoomImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWZoomImageView.h; sourceTree = "<group>"; };
+		480CEED721DDF19A00AB8EF7 /* PWZoomImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWZoomImageView.m; sourceTree = "<group>"; };
+		480CEED921DDF86000AB8EF7 /* 2334.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2334.jpg; sourceTree = "<group>"; };
 		48367C6720872D3600FD8D0F /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
 		48367C6820872D3600FD8D0F /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		485550502050CB4500007291 /* PWAddRMQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWAddRMQViewController.h; sourceTree = "<group>"; };
@@ -180,6 +186,8 @@
 		485550752050D93C00007291 /* IQUIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIViewController+Additions.m"; sourceTree = "<group>"; };
 		485550762050D93C00007291 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
 		485550772050D93C00007291 /* IQKeyboardReturnKeyHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardReturnKeyHandler.m; sourceTree = "<group>"; };
+		4882F24521DDEB7D003FE9ED /* PWPictureZoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWPictureZoomViewController.h; sourceTree = "<group>"; };
+		4882F24621DDEB7D003FE9ED /* PWPictureZoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWPictureZoomViewController.m; sourceTree = "<group>"; };
 		489FEED41F945A5A00453009 /* PWConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWConnectViewController.h; sourceTree = "<group>"; };
 		489FEED51F945A5A00453009 /* PWConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWConnectViewController.m; sourceTree = "<group>"; };
 		489FEED61F945A5A00453009 /* PWConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWConnectViewController.xib; sourceTree = "<group>"; };
@@ -293,6 +301,7 @@
 		4031A3BD1E88EABD0067D8ED /* Pineapple iOS Example */ = {
 			isa = PBXGroup;
 			children = (
+				4882F24421DDEB28003FE9ED /* 图片缩放 */,
 				48FBADB920848834009DDFB7 /* 网络请求 */,
 				485550532050D93C00007291 /* IQKeyBoardManager */,
 				48DC71241FAC06AE00118869 /* 画线 */,
@@ -425,6 +434,18 @@
 				485550762050D93C00007291 /* IQUIView+Hierarchy.h */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		4882F24421DDEB28003FE9ED /* 图片缩放 */ = {
+			isa = PBXGroup;
+			children = (
+				4882F24521DDEB7D003FE9ED /* PWPictureZoomViewController.h */,
+				4882F24621DDEB7D003FE9ED /* PWPictureZoomViewController.m */,
+				480CEED621DDF19A00AB8EF7 /* PWZoomImageView.h */,
+				480CEED721DDF19A00AB8EF7 /* PWZoomImageView.m */,
+				480CEED921DDF86000AB8EF7 /* 2334.jpg */,
+			);
+			path = "图片缩放";
 			sourceTree = "<group>";
 		};
 		48BF357F1F90BE080088B7ED /* Bluetooth */ = {
@@ -599,6 +620,7 @@
 				48D5ABBC2085E21000A1BADA /* marsdt.cer in Resources */,
 				4031A3CE1E88EABD0067D8ED /* LaunchScreen.storyboard in Resources */,
 				489FEED81F945A5A00453009 /* PWConnectViewController.xib in Resources */,
+				480CEEDA21DDF86000AB8EF7 /* 2334.jpg in Resources */,
 				48FBADC420848A07009DDFB7 /* PWNetViewController.xib in Resources */,
 				4855507D2050D93C00007291 /* IQKeyboardManager.bundle in Resources */,
 				48D5ABBA20858D2900A1BADA /* test.cer in Resources */,
@@ -698,11 +720,13 @@
 				4855507F2050D93C00007291 /* IQKeyboardManager.m in Sources */,
 				485550812050D93C00007291 /* IQUIWindow+Hierarchy.m in Sources */,
 				48BF35821F90BE400088B7ED /* PWBluetoothViewController.m in Sources */,
+				480CEED821DDF19A00AB8EF7 /* PWZoomImageView.m in Sources */,
 				485550782050D93C00007291 /* IQTextView.m in Sources */,
 				4855507C2050D93C00007291 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				48FBADBF208489D2009DDFB7 /* PWAPIController.m in Sources */,
 				4855507E2050D93C00007291 /* IQSegmentedNextPrevious.m in Sources */,
 				48DC712A1FAC07BE00118869 /* PWDrawView.m in Sources */,
+				4882F24721DDEB7D003FE9ED /* PWPictureZoomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,7 +991,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1018,7 +1042,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

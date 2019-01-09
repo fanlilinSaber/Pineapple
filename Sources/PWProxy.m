@@ -39,7 +39,7 @@
     [_sessionManager removeObserver:self forKeyPath:@"state"];
 }
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)initWithAbility:(PWAbility *)ability host:(NSString *)host port:(NSInteger)port user:(NSString *)user pass:(NSString *)pass clientId:(NSString *)clientId rootTopic:(NSString *)rootTopic nodeId:(NSString *)nodeId
 {
@@ -77,7 +77,7 @@
     return [self initWithAbility:ability host:host port:port user:user pass:pass clientId:clientId rootTopic:rootTopic nodeId:nil];
 }
 
-#pragma mark - @public Method
+#pragma mark - public Method
 
 - (BOOL)isConnected
 {
@@ -160,8 +160,8 @@
                            retain:false];
 }
 
-#pragma mark - @private Method
-#pragma mark - @Observer
+#pragma mark - private Method
+#pragma mark - Observer
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

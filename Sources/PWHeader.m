@@ -17,7 +17,7 @@ static NSString * const PWHeaderContentLength = @"Content-Length";
 
 @implementation PWHeader
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)initWithContentLength:(NSUInteger)contentLength
 {
@@ -52,7 +52,7 @@ static NSString * const PWHeaderContentLength = @"Content-Length";
     return self;
 }
 
-#pragma mark - @public Method
+#pragma mark - public Method
 - (NSData *)dataRepresentation
 {
     NSMutableString *header = [NSMutableString new];

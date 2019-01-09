@@ -15,7 +15,7 @@
     return @"Keep Live";
 }
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)init
 {
@@ -26,7 +26,7 @@
     return self;
 }
 
-#pragma mark - @protocol PWCommandSendable
+#pragma mark - PWCommandSendable protocol
 
 - (NSData *)dataRepresentation
 {
