@@ -19,7 +19,7 @@
 
 @implementation PWAbility
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)init
 {
@@ -32,7 +32,7 @@
     return self;
 }
 
-#pragma mark - @public Method
+#pragma mark - public Method
 
 - (PWCommand *)commandWithData:(NSData *)data
 {

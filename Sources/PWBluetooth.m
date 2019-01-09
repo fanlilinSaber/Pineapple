@@ -15,7 +15,7 @@
 
 @implementation PWBluetooth
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)init
 {
@@ -27,7 +27,7 @@
     return self;
 }
 
-#pragma mark - @public Method
+#pragma mark - public Method
 
 - (void)stopScan
 {
@@ -51,7 +51,7 @@
     [self.manager cancelPeripheralConnection:peripheral];
 }
 
-#pragma mark - @get
+#pragma mark - getters
 - (BOOL)isReady
 {
     BOOL state = YES;
@@ -117,7 +117,7 @@
     NSLog(@"发现设备：%@ %@ \nadvertisementData = %@\nidentifier = %@",peripheral.name,RSSI,advertisementData,peripheral.identifier);
 }
 
-#pragma mark 设备扫描与连接的代理
+#pragma mark - 设备扫描与连接的代理
 /*&* 连接到Peripherals-成功*/
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
@@ -191,7 +191,7 @@
     }
 }
 
-#pragma mark 设备信息处理
+#pragma mark - 设备信息处理
 /*&* 扫描到具体的值*/
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error
 {

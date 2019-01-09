@@ -75,7 +75,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     
 }
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)initWithAbility:(PWAbility *)ability name:(NSString *)name host:(NSString *)host port:(int)port reconnect:(BOOL)reconnect
 {
@@ -110,7 +110,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     return self;
 }
 
-#pragma mark - @set
+#pragma mark - setters
 
 - (void)setEnabledAck:(BOOL)enabledAck
 {
@@ -140,7 +140,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     [self connectWithRead:NO];
 }
 
-#pragma mark - @public Method
+#pragma mark - public Method
 
 - (BOOL)isConnected
 {
@@ -212,7 +212,7 @@ static NSTimeInterval const PWAckQueueTimeInterval = 5;
     }
 }
 
-#pragma mark - @private Method
+#pragma mark - private Method
 /*&* ack消息体 队列检测发送*/
 - (void)ackMaybeDequeueWrite
 {

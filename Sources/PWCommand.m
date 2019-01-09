@@ -10,7 +10,7 @@
 
 @implementation PWCommand
 
-#pragma mark - @public Method
+#pragma mark - public Method
 
 - (void)fillPropertiesWithData:(NSDictionary *)data
 {
@@ -50,7 +50,7 @@
     return data;
 }
 
-#pragma mark - @protocol NSCopying
+#pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone
 {

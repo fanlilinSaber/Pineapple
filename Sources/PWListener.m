@@ -26,7 +26,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - @init Method
+#pragma mark - init Method
 
 - (instancetype)initWithAbility:(PWAbility *)ability port:(NSInteger)port
 {
@@ -41,7 +41,7 @@
     return self;
 }
 
-#pragma mark - @public Method
+#pragma mark - public Method
 
 - (void)start
 {
@@ -61,7 +61,7 @@
     [self.listenSocket disconnect];
 }
 
-#pragma mark - @Handle App Life Cycle
+#pragma mark - Handle App Life Cycle
 
 - (void)appWillResignActive
 {
