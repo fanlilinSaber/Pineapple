@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "Pineapple"
-  spec.version = "1.2.5"
+  spec.version = "1.3.0"
   spec.summary = "Simplify TCP Socket & MQTT"
   spec.homepage = "http://git.oschina.net/i-focusing-app/Pineapple"
   spec.license = { type: 'MIT', file: 'LICENSE' }
@@ -8,7 +8,38 @@ Pod::Spec.new do |spec|
   spec.platform = :ios, "8.4"
   spec.requires_arc = true
   spec.source = { git: "https://git.oschina.net/i-focusing-app/Pineapple.git", tag: spec.version, submodules: true }
-  spec.source_files = "Sources/**/*.{h,m}"
+  spec.public_header_files = "Sources/Pineapple.h"
+  spec.source_files = "Sources/Pineapple.h"
+  
+  spec.subspec "Commmand" do |ss|
+    ss.source_files = "Sources/Commmand/**/*"
+  end
+  
+  spec.subspec "MQTT" do |ss|
+    ss.source_files = "Sources/MQTT/**/*"
+  end
+  
+  spec.subspec "Socket" do |ss|
+    ss.source_files = "Sources/Socket/**/*"
+  end
+  
+  spec.subspec "Device" do |ss|
+    ss.source_files = "Sources/Device/**/*"
+  end
+  
+  spec.subspec "Bluetooth" do |ss|
+    ss.source_files = "Sources/Bluetooth/**/*"
+  end
+  
+  spec.subspec "Ability" do |ss|
+    ss.source_files = "Sources/Ability/**/*"
+  end
+  
+  spec.subspec "Usable" do |ss|
+    ss.source_files = "Sources/Usable/**/*"
+    ss.dependency "Sources/Commmand"
+  end
+  
   spec.resources = "Sources/*.bundle"
   spec.dependency "CocoaAsyncSocket"
   spec.dependency "MQTTClient", "~> 0.9"

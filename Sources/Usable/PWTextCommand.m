@@ -21,20 +21,10 @@
 {
     self = [super init];
     if (self) {
-        self.msgType = PWTextCommand.msgType;
-        self.enabledAck = YES;
         _text = text;
         self.params = @{@"text": self.text};
     }
     return self;
-}
-
-#pragma mark - PWCommandSendable protocol
-
-- (NSData *)dataRepresentation
-{
-    NSMutableDictionary *data = [super fillDataWithProperties];
-    return [super dataRepresentationWithData:data];
 }
 
 #pragma mark - PWCommandReceivable protocol

@@ -20,7 +20,6 @@
 {
     self = [super init];
     if (self) {
-        self.msgType = PWAckCommand.msgType;
         self.sourceMsgId = sourceMsgId;
         self.sourceMsgType = sourceMsgType;
         self.params = @{@"sourceMsgId" : self.sourceMsgId,
@@ -28,14 +27,6 @@
                         };
     }
     return self;
-}
-
-#pragma mark - PWCommandSendable protocol
-
-- (NSData *)dataRepresentation
-{
-    NSMutableDictionary *data = [super fillDataWithProperties];
-    return [super dataRepresentationWithData:data];
 }
 
 #pragma mark - PWCommandSendable protocol

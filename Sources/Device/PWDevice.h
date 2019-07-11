@@ -10,9 +10,9 @@
 
 // Device model
 @interface PWDevice : NSObject
-/*&* Device name*/
+/*&* Device name */
 @property (copy, nonatomic) NSString *name;
-/*&* Device clientId*/
+/*&* Device clientId */
 @property (copy, nonatomic) NSString *clientId;
 
 /**

@@ -12,11 +12,10 @@
 @interface PWListener () <GCDAsyncSocketDelegate>
 /*&* 核心 socket */
 @property (strong, nonatomic) GCDAsyncSocket *listenSocket;
-/*&* ability*/
+/*&* ability */
 @property (strong, nonatomic) PWAbility *ability;
-/*&* port*/
+/*&* port */
 @property (nonatomic) NSInteger port;
-
 @end
 
 @implementation PWListener

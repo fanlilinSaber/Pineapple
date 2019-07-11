@@ -11,7 +11,7 @@
 
 // 文本 command
 @interface PWTextCommand : PWCommand <PWCommandSendable, PWCommandReceivable>
-/*&* 文本text*/
+/*&* 文本text */
 @property (copy, nonatomic) NSString *text;
 
 /**

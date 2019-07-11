@@ -12,9 +12,8 @@
 #import "PWAckCommand.h"
 
 @interface PWAbility ()
-/*&* 自定义协议的command class 类*/
+/*&* 自定义协议的command class 类 */
 @property (copy, nonatomic) NSDictionary *commands;
-
 @end
 
 @implementation PWAbility
@@ -37,6 +36,11 @@
 - (PWCommand *)commandWithData:(NSData *)data
 {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    return [self commandWithJson:json];
+}
+
+- (PWCommand *)commandWithJson:(NSDictionary *)json
+{
     NSString *msgType = (NSString *)[json valueForKey:@"msgType"];
     if (!msgType) {
         if ([json isKindOfClass:[NSDictionary class]] && json.count == 0) {
@@ -60,6 +64,12 @@
     NSMutableDictionary *commands = [self.commands mutableCopy];
     commands[msgType] = aClass;
     self.commands = commands;
+}
+
+- (void)addCommand:(Class)aClass
+{
+    NSString *msgType = [aClass msgType];
+    [self addCommand:aClass withMsgType:msgType];
 }
 
 @end

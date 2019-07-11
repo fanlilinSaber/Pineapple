@@ -24,7 +24,7 @@
 
 // socket 服务端 service
 @interface PWListener : NSObject
-/*&* socket 服务端 delegate*/
+/*&* socket 服务端 delegate */
 @property (weak, nonatomic) id<PWListenerDelegate> delegate;
 
 /**
