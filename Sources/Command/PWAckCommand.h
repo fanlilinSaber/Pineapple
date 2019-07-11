@@ -23,4 +23,5 @@
  @return PWAckCommand Object
  */
 - (instancetype)initWithSourceMsgId:(NSString *)sourceMsgId sourceMsgType:(NSString *)sourceMsgType;
+
 @end
