@@ -44,11 +44,6 @@ Pod::Spec.new do |spec|
     ss.dependency "Pineapple/Command"
   end
   
-  spec.subspec "Usable" do |ss|
-    ss.source_files = "Sources/Usable/**/*"
-    ss.dependency "Pineapple/Command"
-  end
-  
   spec.subspec "RMQ" do |ss|
     ss.source_files = "Sources/RMQ/**/*"
     ss.dependency "Pineapple/Device"

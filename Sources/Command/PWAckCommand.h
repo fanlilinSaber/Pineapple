@@ -5,7 +5,8 @@
 //  Created by 范李林 on 2018/4/10.
 //
 
-#import <Pineapple/Pineapple.h>
+#import <Foundation/Foundation.h>
+#import "PWCommand.h"
 
 // ack 回复command
 @interface PWAckCommand : PWCommand <PWCommandSendable, PWCommandReceivable>
