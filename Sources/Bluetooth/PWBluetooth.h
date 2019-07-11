@@ -36,17 +36,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface PWBluetooth : NSObject
-/*&* 蓝牙管理*/
+/*&* 蓝牙管理 */
 @property (nonatomic, strong, readonly) CBCentralManager *manager;
-/*&* 蓝牙是否可用*/
+/*&* 蓝牙是否可用 */
 @property (nonatomic, assign, readonly, getter = isReady) BOOL ready;
-/*&* 是否连接*/
+/*&* 是否连接 */
 @property (nonatomic, assign, readonly, getter = isConnection)  BOOL connection;
-/*&* delecgate*/
+/*&* delecgate */
 @property (nonatomic, weak) id <PWBluetoothClientDelegate>delecgate;
-/*&* services 如果设置了 默认内部 执行 discoverCharacteristics*/
+/*&* services 如果设置了 默认内部 执行 discoverCharacteristics */
 @property (nonatomic, strong) NSArray *services_uuid;
-/*&* 订阅广播 (一般实时心率) 对订阅的特征值uuid 若支持notfiy setNotifyValue*/
+/*&* 订阅广播 (一般实时心率) 对订阅的特征值uuid 若支持notfiy setNotifyValue */
 @property (nonatomic, strong) NSArray *subscibe_uuid;
 
 /**

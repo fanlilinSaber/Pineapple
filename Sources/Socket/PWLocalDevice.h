@@ -29,13 +29,13 @@
 
 // socket service
 @interface PWLocalDevice : PWDevice
-/*&* socket delegate*/
+/*&* socket delegate */
 @property (weak, nonatomic) id<PWLocalDeviceDelegate> delegate;
-/*&* host*/
+/*&* host */
 @property (copy, nonatomic) NSString *host;
-/*&* port*/
+/*&* port */
 @property (nonatomic) int port;
-/*&* 激活YES 发送的消息启用ACK机制；默认为NO*/
+/*&* 激活YES 发送的消息启用ACK机制；默认为NO */
 @property (nonatomic, assign, getter=isEnabledAck) BOOL enabledAck;
 
 /**

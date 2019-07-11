@@ -8,7 +8,7 @@
 #import "PWBluetooth.h"
 
 @interface PWBluetooth ()<CBPeripheralDelegate, CBCentralManagerDelegate>
-/*&* 当前连接的蓝色设备 Peripheral*/
+// 当前连接的蓝色设备 Peripheral
 @property (nonatomic, strong) CBPeripheral *currentPeripheral;
 
 @end
@@ -52,6 +52,7 @@
 }
 
 #pragma mark - getters
+
 - (BOOL)isReady
 {
     BOOL state = YES;
@@ -118,7 +119,7 @@
 }
 
 #pragma mark - 设备扫描与连接的代理
-/*&* 连接到Peripherals-成功*/
+// 连接到Peripherals-成功
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManager:didConnectPeripheral:)]) {
@@ -131,7 +132,7 @@
     [peripheral discoverServices:nil];
 }
 
-/*&* 连接外设失败*/
+// 连接外设失败
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManager:didFailToConnectPeripheral:error:)]) {
@@ -141,7 +142,7 @@
     }
 }
 
-/*&* 丢失连接*/
+// 丢失连接
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothCentralManager:didDisconnectPeripheral:error:)]) {
@@ -151,7 +152,7 @@
     }
 }
 
-/*&* 扫描到服务*/
+// 扫描到服务
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothPeripheral:didDiscoverServices:)]) {
@@ -166,7 +167,7 @@
     }
 }
 
-/*&* 发现外设服务里的特征的时候调用的代理方法(这个是比较重要的方法，你在这里可以通过事先知道UUID找到你需要的特征，订阅特征，或者这里写入数据给特征也可以*/
+// 发现外设服务里的特征的时候调用的代理方法(这个是比较重要的方法，你在这里可以通过事先知道UUID找到你需要的特征，订阅特征，或者这里写入数据给特征也可以
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothPeripheral:didDiscoverCharacteristicsForService:error:)]) {
@@ -192,7 +193,7 @@
 }
 
 #pragma mark - 设备信息处理
-/*&* 扫描到具体的值*/
+// 扫描到具体的值
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error
 {
     if (self.delecgate && [self.delecgate respondsToSelector:@selector(bluetoothPeripheral:didUpdateValueForCharacteristic:error:)]) {
@@ -208,9 +209,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delecgate bluetoothPeripheral:peripheral didUpdateNotificationStateForCharacteristic:characteristic error:error];
         });
-        
     }
 }
-
 
 @end

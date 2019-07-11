@@ -266,34 +266,15 @@
 		4031A3B31E88E9750067D8ED /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				48B6DB7B22D6D927006C3E37 /* Usable */,
+				48B6DB7A22D6D1ED006C3E37 /* Ability */,
+				48B6DB7922D6D1CB006C3E37 /* Bluetooth */,
+				48B6DB7822D6D05B006C3E37 /* Device */,
+				48B6DB7722D6D026006C3E37 /* Socket */,
+				48B6DB7622D6D020006C3E37 /* MQTT */,
+				48B6DB7522D6D015006C3E37 /* Command */,
 				4031A3B41E88E9750067D8ED /* Info-iOS.plist */,
 				4031A3B51E88E9750067D8ED /* Pineapple.h */,
-				40B2A2261EA88EB500A02D96 /* PWDevice.h */,
-				40B2A2271EA88EB500A02D96 /* PWDevice.m */,
-				4012FA4F1EA4AAD50080B0DB /* PWProxy.h */,
-				4012FA501EA4AAD50080B0DB /* PWProxy.m */,
-				40F5383E1EA6102500B1FDC9 /* PWRemoteDevice.h */,
-				40F5383F1EA6102500B1FDC9 /* PWRemoteDevice.m */,
-				403404131E8DEEC300029235 /* PWListener.h */,
-				403404141E8DEEC300029235 /* PWListener.m */,
-				4031A3D81E88EC470067D8ED /* PWLocalDevice.h */,
-				4031A3D91E88EC470067D8ED /* PWLocalDevice.m */,
-				48D7494E20562A5C0027BA50 /* PWMQDevice.h */,
-				48D7494F20562A5C0027BA50 /* PWMQDevice.m */,
-				40F538461EA6201000B1FDC9 /* PWAbility.h */,
-				40F538471EA6201000B1FDC9 /* PWAbility.m */,
-				40A5F8491EA746DC0078F47C /* PWHeader.h */,
-				40A5F84A1EA746DC0078F47C /* PWHeader.m */,
-				40AC06AA1E890CC0004150E2 /* PWCommand.h */,
-				40AC06AB1E890CC0004150E2 /* PWCommand.m */,
-				40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */,
-				40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */,
-				402E987A1E8BBE5A00946178 /* PWTextCommand.h */,
-				402E987B1E8BBE5A00946178 /* PWTextCommand.m */,
-				48A3550D207CD00100E89BB0 /* PWAckCommand.h */,
-				48A3550E207CD00100E89BB0 /* PWAckCommand.m */,
-				48C122261F90CABD00664192 /* PWBluetooth.h */,
-				48C122271F90CABD00664192 /* PWBluetooth.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -448,6 +429,81 @@
 			path = "图片缩放";
 			sourceTree = "<group>";
 		};
+		48B6DB7522D6D015006C3E37 /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				40AC06AA1E890CC0004150E2 /* PWCommand.h */,
+				40AC06AB1E890CC0004150E2 /* PWCommand.m */,
+			);
+			path = Command;
+			sourceTree = "<group>";
+		};
+		48B6DB7622D6D020006C3E37 /* MQTT */ = {
+			isa = PBXGroup;
+			children = (
+				48D7494E20562A5C0027BA50 /* PWMQDevice.h */,
+				48D7494F20562A5C0027BA50 /* PWMQDevice.m */,
+				40F5383E1EA6102500B1FDC9 /* PWRemoteDevice.h */,
+				40F5383F1EA6102500B1FDC9 /* PWRemoteDevice.m */,
+				4012FA4F1EA4AAD50080B0DB /* PWProxy.h */,
+				4012FA501EA4AAD50080B0DB /* PWProxy.m */,
+			);
+			path = MQTT;
+			sourceTree = "<group>";
+		};
+		48B6DB7722D6D026006C3E37 /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				40B2A2221EA864B300A02D96 /* PWKeepLiveCommand.h */,
+				40B2A2231EA864B300A02D96 /* PWKeepLiveCommand.m */,
+				48A3550D207CD00100E89BB0 /* PWAckCommand.h */,
+				48A3550E207CD00100E89BB0 /* PWAckCommand.m */,
+				40A5F8491EA746DC0078F47C /* PWHeader.h */,
+				40A5F84A1EA746DC0078F47C /* PWHeader.m */,
+				4031A3D81E88EC470067D8ED /* PWLocalDevice.h */,
+				4031A3D91E88EC470067D8ED /* PWLocalDevice.m */,
+				403404131E8DEEC300029235 /* PWListener.h */,
+				403404141E8DEEC300029235 /* PWListener.m */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
+		48B6DB7822D6D05B006C3E37 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				40B2A2261EA88EB500A02D96 /* PWDevice.h */,
+				40B2A2271EA88EB500A02D96 /* PWDevice.m */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
+		48B6DB7922D6D1CB006C3E37 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				48C122261F90CABD00664192 /* PWBluetooth.h */,
+				48C122271F90CABD00664192 /* PWBluetooth.m */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		48B6DB7A22D6D1ED006C3E37 /* Ability */ = {
+			isa = PBXGroup;
+			children = (
+				40F538461EA6201000B1FDC9 /* PWAbility.h */,
+				40F538471EA6201000B1FDC9 /* PWAbility.m */,
+			);
+			path = Ability;
+			sourceTree = "<group>";
+		};
+		48B6DB7B22D6D927006C3E37 /* Usable */ = {
+			isa = PBXGroup;
+			children = (
+				402E987A1E8BBE5A00946178 /* PWTextCommand.h */,
+				402E987B1E8BBE5A00946178 /* PWTextCommand.m */,
+			);
+			path = Usable;
+			sourceTree = "<group>";
+		};
 		48BF357F1F90BE080088B7ED /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,8 +647,10 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 4031A39E1E88E85A0067D8ED;
 			productRefGroup = 4031A3AB1E88E8D80067D8ED /* Products */;

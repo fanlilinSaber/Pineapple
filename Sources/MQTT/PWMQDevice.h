@@ -19,7 +19,7 @@
 
 // MQ service
 @interface PWMQDevice : PWDevice
-/*&* uri*/
+/*&* uri */
 @property (nonatomic, copy) NSString *uri;
 
 /**

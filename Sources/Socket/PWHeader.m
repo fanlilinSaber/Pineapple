@@ -8,11 +8,11 @@
 
 #import "PWHeader.h"
 
-/*&* 包头换行符*/
+/*&* 包头换行符 */
 static NSString * const PWHeaderCRLF = @"\r\n";
-/*&* 版本*/
+/*&* 版本 */
 static NSString * const PWHeaderVersion = @"Version";
-/*&* content 长度*/
+/*&* content 长度 */
 static NSString * const PWHeaderContentLength = @"Content-Length";
 
 @implementation PWHeader
@@ -53,16 +53,21 @@ static NSString * const PWHeaderContentLength = @"Content-Length";
 }
 
 #pragma mark - public Method
+
 - (NSData *)dataRepresentation
 {
     NSMutableString *header = [NSMutableString new];
     // 协议包头格式 其他端必须保持一致
     [header appendFormat:@"%@: %@%@", PWHeaderVersion, self.version, PWHeaderCRLF];
     [header appendFormat:@"%@: %lu%@%@", PWHeaderContentLength, (unsigned long)self.contentLength, PWHeaderCRLF, PWHeaderCRLF];
+#ifdef DEBUG
+    NSLog(@"\n发送协议header信息:\n%@", header);
+#endif
     return [header dataUsingEncoding:NSUTF8StringEncoding];
 }
 
-+ (NSData *)endTerm {
++ (NSData *)endTerm
+{
     return [[NSString stringWithFormat:@"%@%@", PWHeaderCRLF, PWHeaderCRLF] dataUsingEncoding:NSUTF8StringEncoding];
 }
 

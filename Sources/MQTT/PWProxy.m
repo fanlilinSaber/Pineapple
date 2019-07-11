@@ -10,25 +10,24 @@
 #import <MQTTClient/MQTTSessionManager.h>
 
 @interface PWProxy () <MQTTSessionManagerDelegate>
-/*&* MQTT sessionManager*/
+/*&* MQTT sessionManager */
 @property (strong, nonatomic) MQTTSessionManager *sessionManager;
-/*&* ability*/
+/*&* ability */
 @property (strong, nonatomic) PWAbility *ability;
-/*&* host*/
+/*&* host */
 @property (copy, nonatomic) NSString *host;
-/*&* port*/
+/*&* port */
 @property (nonatomic) NSInteger port;
-/*&* 用户名*/
+/*&* 用户名 */
 @property (copy, nonatomic) NSString *user;
-/*&* 密码*/
+/*&* 密码 */
 @property (copy, nonatomic) NSString *pass;
-/*&* clientId*/
+/*&* clientId */
 @property (copy, nonatomic) NSString *clientId;
-/*&* 根节点*/
+/*&* 根节点 */
 @property (copy, nonatomic) NSString *rootTopic;
-/*&* 子节点*/
+/*&* 子节点 */
 @property (copy, nonatomic) NSString *nodeId;
-
 @end
 
 @implementation PWProxy
@@ -53,7 +52,6 @@
         _clientId = clientId;
         _rootTopic = rootTopic;
         _nodeId = nodeId;
-        /*&* new MQTTSessionManager*/
         _sessionManager = [MQTTSessionManager new];
         _sessionManager.delegate = self;
         if (nodeId == nil) {

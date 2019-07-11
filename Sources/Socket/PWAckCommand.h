@@ -9,9 +9,9 @@
 
 // ack 回复command
 @interface PWAckCommand : PWCommand <PWCommandSendable, PWCommandReceivable>
-/*&* 消息的MsgId*/
+/*&* 消息的MsgId */
 @property (nonatomic, copy) NSString *sourceMsgId;
-/*&* 消息的MsgType*/
+/*&* 消息的MsgType */
 @property (nonatomic, copy) NSString *sourceMsgType;
 
 /**

@@ -33,7 +33,7 @@
 
 // MQTT Session Object
 @interface PWProxy : NSObject
-/*&* MQTT delegate*/
+/*&* MQTT delegate */
 @property (weak, nonatomic) id<PWProxyDelegate> delegate;
 
 /**
