@@ -266,6 +266,7 @@
 		4031A3B31E88E9750067D8ED /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				48B6DB7C22D6DD2A006C3E37 /* RMQ */,
 				48B6DB7B22D6D927006C3E37 /* Usable */,
 				48B6DB7A22D6D1ED006C3E37 /* Ability */,
 				48B6DB7922D6D1CB006C3E37 /* Bluetooth */,
@@ -441,8 +442,6 @@
 		48B6DB7622D6D020006C3E37 /* MQTT */ = {
 			isa = PBXGroup;
 			children = (
-				48D7494E20562A5C0027BA50 /* PWMQDevice.h */,
-				48D7494F20562A5C0027BA50 /* PWMQDevice.m */,
 				40F5383E1EA6102500B1FDC9 /* PWRemoteDevice.h */,
 				40F5383F1EA6102500B1FDC9 /* PWRemoteDevice.m */,
 				4012FA4F1EA4AAD50080B0DB /* PWProxy.h */,
@@ -502,6 +501,15 @@
 				402E987B1E8BBE5A00946178 /* PWTextCommand.m */,
 			);
 			path = Usable;
+			sourceTree = "<group>";
+		};
+		48B6DB7C22D6DD2A006C3E37 /* RMQ */ = {
+			isa = PBXGroup;
+			children = (
+				48D7494E20562A5C0027BA50 /* PWMQDevice.h */,
+				48D7494F20562A5C0027BA50 /* PWMQDevice.m */,
+			);
+			path = RMQ;
 			sourceTree = "<group>";
 		};
 		48BF357F1F90BE080088B7ED /* Bluetooth */ = {

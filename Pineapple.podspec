@@ -17,10 +17,15 @@ Pod::Spec.new do |spec|
   
   spec.subspec "MQTT" do |ss|
     ss.source_files = "Sources/MQTT/**/*"
+    ss.dependency "MQTTClient", "~> 0.9"
+    ss.dependency "Sources/Device"
   end
   
   spec.subspec "Socket" do |ss|
     ss.source_files = "Sources/Socket/**/*"
+    ss.dependency "CocoaAsyncSocket"
+    ss.dependency "Sources/Commmand"
+    ss.dependency "Sources/Device"
   end
   
   spec.subspec "Device" do |ss|
@@ -33,6 +38,7 @@ Pod::Spec.new do |spec|
   
   spec.subspec "Ability" do |ss|
     ss.source_files = "Sources/Ability/**/*"
+    ss.dependency "Sources/Commmand"
   end
   
   spec.subspec "Usable" do |ss|
@@ -40,8 +46,12 @@ Pod::Spec.new do |spec|
     ss.dependency "Sources/Commmand"
   end
   
+  spec.subspec "RMQ" do |ss|
+    ss.source_files = "Sources/RMQ/**/*"
+    ss.dependency "Sources/Device"
+    ss.dependency "Sources/Ability"
+    ss.dependency "RMQClient"
+  end
+  
   spec.resources = "Sources/*.bundle"
-  spec.dependency "CocoaAsyncSocket"
-  spec.dependency "MQTTClient", "~> 0.9"
-  spec.dependency "RMQClient"
 end
