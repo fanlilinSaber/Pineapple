@@ -11,14 +11,14 @@ Pod::Spec.new do |spec|
   spec.public_header_files = "Sources/Pineapple.h"
   spec.source_files = "Sources/Pineapple.h"
   
-  spec.subspec "Commmand" do |ss|
-    ss.source_files = "Sources/Commmand/**/*"
+  spec.subspec "Command" do |ss|
+    ss.source_files = "Sources/Command/**/*"
   end
   
   spec.subspec "MQTT" do |ss|
     ss.source_files = "Sources/MQTT/**/*"
     ss.dependency "MQTTClient", "~> 0.9"
-    ss.dependency "Pineapple/Commmand"
+    ss.dependency "Pineapple/Command"
     ss.dependency "Pineapple/Device"
     ss.dependency "Pineapple/Ability"
   end
@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   spec.subspec "Socket" do |ss|
     ss.source_files = "Sources/Socket/**/*"
     ss.dependency "CocoaAsyncSocket"
-    ss.dependency "Pineapple/Commmand"
+    ss.dependency "Pineapple/Command"
     ss.dependency "Pineapple/Device"
     ss.dependency "Pineapple/Ability"
   end
@@ -41,12 +41,12 @@ Pod::Spec.new do |spec|
   
   spec.subspec "Ability" do |ss|
     ss.source_files = "Sources/Ability/**/*"
-    ss.dependency "Pineapple/Commmand"
+    ss.dependency "Pineapple/Command"
   end
   
   spec.subspec "Usable" do |ss|
     ss.source_files = "Sources/Usable/**/*"
-    ss.dependency "Pineapple/Commmand"
+    ss.dependency "Pineapple/Command"
   end
   
   spec.subspec "RMQ" do |ss|
