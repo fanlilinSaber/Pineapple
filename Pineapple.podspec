@@ -38,7 +38,7 @@ Pod::Spec.new do |spec|
   
   spec.subspec "Ability" do |ss|
     ss.source_files = "Sources/Ability/**/*"
-    ss.dependency "Pineapple/Commmand"
+    ss.dependency "Commmand"
   end
   
   spec.subspec "Usable" do |ss|
