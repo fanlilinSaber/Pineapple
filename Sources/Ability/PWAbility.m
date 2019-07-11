@@ -13,7 +13,7 @@
 
 @interface PWAbility ()
 /*&* 自定义协议的command class 类 */
-@property (copy, nonatomic) NSDictionary *commands;
+@property (copy, nonatomic, readwrite) NSDictionary *commands;
 @end
 
 @implementation PWAbility
@@ -24,9 +24,9 @@
 {
     self = [super init];
     if (self) {
-        _commands = @{PWTextCommand.msgType: PWTextCommand.class,
-                      PWAckCommand.msgType: PWAckCommand.class
-                      };
+        self.commands = @{PWTextCommand.msgType: PWTextCommand.class,
+                          PWAckCommand.msgType: PWAckCommand.class
+                          };
     }
     return self;
 }

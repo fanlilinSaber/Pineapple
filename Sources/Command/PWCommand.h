@@ -39,7 +39,7 @@
 @property (copy, nonatomic) NSArray *paramsArray;
 /*&* command msgId */
 @property (copy, nonatomic) NSString *msgId;
-/*&* 默认为NO ；自定义command 如需启用ACK机制 设置YES*/
+/*&* 默认为NO ；自定义command 如需启用ACK机制 设置YES */
 @property (nonatomic, assign, getter=isEnabledAck) BOOL enabledAck;
 
 /**

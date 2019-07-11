@@ -11,6 +11,8 @@
 
 // 消息体（command） 解析和转换对应实体对象的关键对象；每一个新的command协议在 通信的 service 初始化前 必须先注册到Ability里面，后续收到的消息才能正确的解析 转换为对应的实体model
 @interface PWAbility : NSObject
+/*&* 自定义协议的command class 类 */
+@property (copy, nonatomic, readonly) NSDictionary *commands;
 
 /**
  解析接收的data消息 转为 command model
