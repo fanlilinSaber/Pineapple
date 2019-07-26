@@ -10,6 +10,15 @@
 
 @implementation PWCommand
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.msgType = [self.class msgType];
+    }
+    return self;
+}
+
 #pragma mark - public Method
 
 - (void)fillPropertiesWithData:(NSDictionary *)data
