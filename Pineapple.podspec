@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "Pineapple"
-  spec.version = "1.3.2"
+  spec.version = "1.3.3"
   spec.summary = "Simplify TCP Socket & MQTT"
   spec.homepage = "http://git.oschina.net/i-focusing-app/Pineapple"
   spec.license = { type: 'MIT', file: 'LICENSE' }

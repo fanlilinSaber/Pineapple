@@ -33,6 +33,8 @@
 @property (copy, nonatomic) NSString *fromId;
 /*&* command 消息目标 id */
 @property (copy, nonatomic) NSString *toId;
+/*&* command 小程序 id；如果没有为nil */
+@property (copy, nonatomic) NSString *mmaId;
 /*&* command 逻辑参数 */
 @property (copy, nonatomic) NSDictionary *params;
 /*&* command 逻辑参数 */
