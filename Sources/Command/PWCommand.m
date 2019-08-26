@@ -26,6 +26,7 @@
     self.msgType = data[@"msgType"];
     self.fromId = data[@"fromId"];
     self.toId = data[@"toId"];
+    self.mmaId = data[@"mmaId"];
     if ([data[@"params"] isKindOfClass:[NSDictionary class]]) {
         self.params = data[@"params"];
     } else {
@@ -42,6 +43,7 @@
     data[@"msgType"] = [self.class msgType];
     data[@"fromId"] = self.fromId;
     data[@"toId"] = self.toId;
+    
     if (self.params) {
         data[@"params"] = self.params;
     } else {
@@ -49,6 +51,9 @@
     }
     if (self.msgId && ![self.msgId isEqualToString:@""]) {
         data[@"msgId"] = self.msgId;
+    }
+    if (self.mmaId) {
+        data[@"mmaId"] = self.mmaId;
     }
     return data;
 }
@@ -79,6 +84,7 @@
     command.paramsArray = self.paramsArray;
     command.msgId = self.msgId;
     command.enabledAck = self.enabledAck;
+    command.mmaId = self.mmaId;
     return command;
 }
 
@@ -92,6 +98,7 @@
     command.paramsArray = self.paramsArray;
     command.msgId = self.msgId;
     command.enabledAck = self.enabledAck;
+    command.mmaId = self.mmaId;
     return command;
 }
 
