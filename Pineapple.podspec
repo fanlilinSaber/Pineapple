@@ -2,12 +2,12 @@ Pod::Spec.new do |spec|
   spec.name = "Pineapple"
   spec.version = "1.3.3"
   spec.summary = "Simplify TCP Socket & MQTT"
-  spec.homepage = "http://git.oschina.net/i-focusing-app/Pineapple"
+  spec.homepage = "http://192.168.0.15/marsdt/marsdt-ios/Pineapple.git"
   spec.license = { type: 'MIT', file: 'LICENSE' }
   spec.authors = { "Fan Li Lin" => 'fanlilin@i-focusing.com' }
   spec.platform = :ios, "8.4"
   spec.requires_arc = true
-  spec.source = { git: "https://git.oschina.net/i-focusing-app/Pineapple.git", tag: spec.version, submodules: true }
+  spec.source = { git: "http://192.168.0.15/marsdt/marsdt-ios/Pineapple.git", tag: spec.version, submodules: true }
   spec.public_header_files = "Sources/Pineapple.h"
   spec.source_files = "Sources/Pineapple.h"
   
